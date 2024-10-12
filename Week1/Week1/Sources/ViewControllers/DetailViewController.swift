@@ -36,7 +36,7 @@ class DetailViewController: UIViewController {
     // 뒤로가기 버튼
     private lazy var backButton: UIButton = {
         let btn = UIButton(type: .system)
-        btn.setTitle("뒤로가기", for: .normal)
+        btn.setTitle("이전 화면으로 데이터 전달", for: .normal)
         btn.setTitleColor(.white, for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         btn.backgroundColor = .systemBlue
@@ -69,7 +69,7 @@ class DetailViewController: UIViewController {
     
     // 텍스트필드, 버튼들 스택뷰
     private lazy var stackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [titleLabel, backButton, textField])
+        let sv = UIStackView(arrangedSubviews: [titleLabel, textField, backButton])
         sv.axis = .vertical
         sv.spacing = 10
         sv.alignment = .fill
@@ -110,10 +110,11 @@ class DetailViewController: UIViewController {
     
     // MARK: - Set up Constraints
     private func setupConstraints() {
+        let stackViewHeight = 20 + 50 + 50 + 50
         stackView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)
             make.centerY.equalToSuperview()
-            make.height.equalTo(20 + 150)
+            make.height.equalTo(stackViewHeight)
         }
     }
     

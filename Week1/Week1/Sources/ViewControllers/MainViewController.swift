@@ -141,6 +141,7 @@ class MainViewController: UIViewController {
     
     // MARK: - Set up Constraints
     private func setupConstraints() {
+        let stackViewHeight = 30 + 50 + 50 + 50 + 50
         mainImageView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).inset(40)
             make.centerX.equalToSuperview().offset(-10)
@@ -162,7 +163,7 @@ class MainViewController: UIViewController {
         stackView.snp.makeConstraints { make in
             make.top.equalTo(mainImageView.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(30 + 50 + 50 + 50 + 50)
+            make.height.equalTo(stackViewHeight)
         }
     }
     
@@ -194,7 +195,8 @@ class MainViewController: UIViewController {
 // MARK: - DetailViewController Delegate
 extension MainViewController: DetailViewControllerDelegate {
     func didSelectBackButton(_ data: String) {
-        print("커스텀 델리게이트 호출: \(data)")
-        self.dataLabel.text = data
+        if !data.isEmpty {
+            self.dataLabel.text = data
+        }
     }
 }
