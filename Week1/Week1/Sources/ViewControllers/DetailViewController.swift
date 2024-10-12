@@ -17,6 +17,8 @@ class DetailViewController: UIViewController {
     // MARK: - Properties
     weak var delegate: DetailViewControllerDelegate?
     
+    var completionHandler: ((String) -> ())?
+    
     // MARK: - UI Components
     private var titleLabel: UILabel = {
         let lb = UILabel()
@@ -123,7 +125,8 @@ class DetailViewController: UIViewController {
     private func didTapBackButton() {
         // 대리자에게 데이터 전달
         if let text = self.textField.text {
-            self.delegate?.didSelectBackButton(text)
+//            self.delegate?.didSelectBackButton(text)
+            completionHandler?(text)
         }
         
         // detailVC에 NavVC가 있다면 pop(네비게이션), 없다면 dismiss(모달)

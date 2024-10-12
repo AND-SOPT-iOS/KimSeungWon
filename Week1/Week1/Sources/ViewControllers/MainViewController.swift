@@ -171,7 +171,15 @@ class MainViewController: UIViewController {
     @objc
     private func didTapNextButton() {
         let detailVC = DetailViewController()
-        detailVC.delegate = self
+        // 커스텀 델리게이트
+//        detailVC.delegate = self
+        
+        // 클로저를 통해 데이터 넘겨받기
+        detailVC.completionHandler = { [weak self] text in
+            guard let self else { return }
+            self.dataLabel.text = text
+        }
+        
         guard let text = mainTextField.text else { return }
         detailVC.dataBinding(text)
         
