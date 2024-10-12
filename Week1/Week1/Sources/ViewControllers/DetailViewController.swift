@@ -8,7 +8,15 @@
 import UIKit
 import SnapKit
 
+// MARK: - Protocol
+protocol DetailViewControllerDelegate: AnyObject {
+    func didSelectBackButton(_ data: String)
+}
+
 class DetailViewController: UIViewController {
+    // MARK: - Properties
+    weak var delegate: DetailViewControllerDelegate?
+    
     // MARK: - UI Components
     private var titleLabel: UILabel = {
         let lb = UILabel()
@@ -38,9 +46,30 @@ class DetailViewController: UIViewController {
         return btn
     }()
     
+    // textField
+    private lazy var textField: UITextField = {
+        let tf = UITextField()
+        tf.placeholder = "이전 화면에 전달할 텍스트를 입력하세요!"
+        tf.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        tf.clearButtonMode = .whileEditing
+        tf.autocapitalizationType = .none
+        tf.autocorrectionType = .no
+        tf.spellCheckingType = .no
+        
+        tf.layer.borderColor = UIColor.lightGray.cgColor
+        tf.layer.borderWidth = 1
+        tf.layer.cornerRadius = 10
+        tf.layer.masksToBounds = true
+        
+        let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
+        tf.leftView = leftView
+        tf.leftViewMode = .always
+        return tf
+    }()
+    
     // 텍스트필드, 버튼들 스택뷰
     private lazy var stackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [titleLabel, backButton])
+        let sv = UIStackView(arrangedSubviews: [titleLabel, backButton, textField])
         sv.axis = .vertical
         sv.spacing = 10
         sv.alignment = .fill
@@ -84,13 +113,18 @@ class DetailViewController: UIViewController {
         stackView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(20)
             make.centerY.equalToSuperview()
-            make.height.equalTo(20 + 100)
+            make.height.equalTo(20 + 150)
         }
     }
     
     // MARK: - Selectors
     @objc
     private func didTapBackButton() {
+        // 대리자에게 데이터 전달
+        if let text = self.textField.text {
+            self.delegate?.didSelectBackButton(text)
+        }
+        
         // detailVC에 NavVC가 있다면 pop(네비게이션), 없다면 dismiss(모달)
         if let navigationVC = self.navigationController {
             navigationVC.popViewController(animated: true)

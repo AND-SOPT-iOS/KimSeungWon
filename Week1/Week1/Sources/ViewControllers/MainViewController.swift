@@ -86,10 +86,26 @@ class MainViewController: UIViewController {
         btn.layer.masksToBounds = true
         return btn
     }()
+
+    // 넘어온 데이터 보여주는 label
+    private let dataLabel: UILabel = {
+        let lb = UILabel()
+        lb.text = "넘어온 데이터가 없습니다."
+        lb.textColor = .black
+        lb.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        lb.textAlignment = .center
+        lb.numberOfLines = 0
+        
+        lb.layer.borderColor = UIColor.lightGray.cgColor
+        lb.layer.borderWidth = 1
+        lb.layer.cornerRadius = 10
+        lb.layer.masksToBounds = true
+        return lb
+    }()
     
     // 텍스트필드, 버튼들 스택뷰
     private lazy var stackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [mainTextField, nextButton, changeButton])
+        let sv = UIStackView(arrangedSubviews: [mainTextField, nextButton, changeButton, dataLabel])
         sv.axis = .vertical
         sv.spacing = 10
         sv.alignment = .fill
@@ -146,7 +162,7 @@ class MainViewController: UIViewController {
         stackView.snp.makeConstraints { make in
             make.top.equalTo(mainImageView.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(20 + 50 + 50 + 50)
+            make.height.equalTo(30 + 50 + 50 + 50 + 50)
         }
     }
     
@@ -154,6 +170,7 @@ class MainViewController: UIViewController {
     @objc
     private func didTapNextButton() {
         let detailVC = DetailViewController()
+        detailVC.delegate = self
         guard let text = mainTextField.text else { return }
         detailVC.dataBinding(text)
         
@@ -174,3 +191,10 @@ class MainViewController: UIViewController {
     }
 }
 
+// MARK: - DetailViewController Delegate
+extension MainViewController: DetailViewControllerDelegate {
+    func didSelectBackButton(_ data: String) {
+        print("커스텀 델리게이트 호출: \(data)")
+        self.dataLabel.text = data
+    }
+}
