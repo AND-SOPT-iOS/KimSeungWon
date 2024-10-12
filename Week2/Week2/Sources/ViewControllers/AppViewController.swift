@@ -14,9 +14,8 @@ class AppViewController: UIViewController {
         let iv = UIImageView()
         iv.image = UIImage(named: "appIcon")
         iv.contentMode = .scaleAspectFill
-//        iv.layer.borderWidth = 1
-        iv.layer.cornerRadius = 10
-        iv.layer.masksToBounds = true
+        iv.layer.cornerRadius = 15
+        iv.setShadow(opacity: 1, Radius: 5, offSet: CGSize(width: 0, height: 0))
         return iv
     }()
     
