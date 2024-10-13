@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class AppView: UIView {
     // MARK: - UI Components
@@ -17,7 +18,7 @@ class AppView: UIView {
         iv.layer.masksToBounds = true
         iv.layer.cornerRadius = 15
         iv.layer.borderWidth = 1
-        iv.layer.borderColor = UIColor.systemGray4.cgColor
+        iv.layer.borderColor = UIColor.systemGray5.cgColor
         return iv
     }()
     
@@ -73,6 +74,7 @@ class AppView: UIView {
     
     // MARK: - Set up UI
     private func setupUI() {
+        self.backgroundColor = .systemBackground
         self.addSubviews(mainStackView)
         
         setupConstraints()
