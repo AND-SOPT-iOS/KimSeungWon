@@ -23,24 +23,10 @@ class AppView: UIView {
     }()
     
     // 앱 이름
-    private let appNameLabel: UILabel = {
-        let lb = UILabel()
-        lb.text = "토스"
-        lb.font = .systemFont(ofSize: 16, weight: .regular)
-        lb.textColor = .label
-        lb.textAlignment = .left
-        return lb
-    }()
+    private let appNameLabel = customLabel(text: "토스", color: .label, fontSize: 18)
     
     // 앱 부제
-    private let appSubTitleLabel: UILabel = {
-        let lb = UILabel()
-        lb.text = "금융이 쉬워진다"
-        lb.font = .systemFont(ofSize: 12, weight: .regular)
-        lb.textColor = .secondaryLabel
-        lb.textAlignment = .left
-        return lb
-    }()
+    private let appSubTitleLabel = customLabel(text: "금융이 쉬워진다", color: .secondaryLabel, fontSize: 12)
     
     // 이름, 부제 스택 뷰
     private lazy var titlestackView: UIStackView = {
