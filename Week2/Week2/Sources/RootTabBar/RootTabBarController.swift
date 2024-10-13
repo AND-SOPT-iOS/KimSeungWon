@@ -36,7 +36,7 @@ class RootTabBarController: UITabBarController {
          tag는 탭 바의 탭을 구분하기 위한 요소(고유 번호, 고유 ID)
          */
         
-        self.tabBar.backgroundColor = .white // 탭바의 배경색 설정
+//        self.tabBar.backgroundColor = .white // 탭바의 배경색 설정
 //        self.tabBar.isTranslucent = true
         
         // 탭바가 관리하는 ViewController들 설정

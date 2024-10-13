@@ -16,13 +16,4 @@ extension UIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
     }
-    
-    // 그림자 함수
-    func setShadow(opacity: Float, Radius: CGFloat, offSet: CGSize) {
-      self.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1).cgColor
-      self.layer.shadowOpacity = opacity
-      self.layer.shadowRadius = Radius / 2  //반경 (피그마랑 비슷하게 가려면 절반을 나눠야 함..)
-      self.layer.shadowOffset = offSet
-      self.layer.masksToBounds = false
-    }
 }
