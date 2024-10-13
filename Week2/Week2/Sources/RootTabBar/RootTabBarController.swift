@@ -30,16 +30,7 @@ class RootTabBarController: UITabBarController {
         appViewController.tabBarItem = UITabBarItem(title: "앱", image: UIImage(systemName: "square.stack.3d.up.fill"), tag: 2)
         arcadeViewController.tabBarItem = UITabBarItem(title: "Arcade", image: UIImage(systemName: "bookmark"), tag: 3)
         searchViewController.tabBarItem = UITabBarItem(title: "검색", image: UIImage(systemName: "magnifyingglass"), tag: 4)
-        /*
-         tag는 뭔가요?
-         
-         tag는 탭 바의 탭을 구분하기 위한 요소(고유 번호, 고유 ID)
-         */
         
-//        self.tabBar.backgroundColor = .white // 탭바의 배경색 설정
-//        self.tabBar.isTranslucent = true
-        
-        // 탭바가 관리하는 ViewController들 설정
         self.viewControllers = [todayViewController, gameViewController, appViewController, arcadeViewController, searchViewController]
     }
 }
