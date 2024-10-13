@@ -16,22 +16,29 @@ class AppViewController: UIViewController {
         self.view = appView
     }
     
+    // view will appear
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setupNavigationBar()
+    }
+    
+    // view did load
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setNavigationBar()
-        setGesture()
+        
+        setupGesture()
     }
     
     // MARK: - Set Gesture
-    private func setGesture() {
+    private func setupGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapMainStackView))
         appView.mainStackView.addGestureRecognizer(tapGesture)
         appView.isUserInteractionEnabled = true
     }
     
-    // MARK: - Set NavigationBar
-    private func setNavigationBar() {
+    // MARK: - Set up NavigationBar
+    private func setupNavigationBar() {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.title = "앱"
     }
