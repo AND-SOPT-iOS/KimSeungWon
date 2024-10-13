@@ -1,5 +1,5 @@
 //
-//  customLabel.swift
+//  CustomLabel.swift
 //  Week2
 //
 //  Created by 김승원 on 10/14/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class customLabel: UILabel {
+class CustomLabel: UILabel {
     // MARK: - Properties
     let labelText: String
     let labelTextColor: UIColor
@@ -33,10 +33,10 @@ class customLabel: UILabel {
     
     // MARK: - Set up Label
     private func setupLabel() {
-        text = labelText
-        font = UIFont.systemFont(ofSize: labelFontSize,
+        self.text = labelText
+        self.font = UIFont.systemFont(ofSize: labelFontSize,
                                  weight: labelFontWeight)
-        textColor = labelTextColor
-        textAlignment = .left
+        self.textColor = labelTextColor
+        self.textAlignment = .left
     }
 }
