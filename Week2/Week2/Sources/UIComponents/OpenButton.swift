@@ -16,11 +16,11 @@ class OpenButton: UIButton {
         setupButton()
     }
     
-    // 모서리 둥글게 자르기
     override func layoutSubviews() {
         super.layoutSubviews()
         self.layer.cornerRadius = self.frame.height / 2
         self.layer.masksToBounds = true
+        self.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
     }
     
     required init?(coder: NSCoder) {
@@ -31,9 +31,6 @@ class OpenButton: UIButton {
     private func setupButton() {
         self.backgroundColor = .systemBlue
         self.setTitle("열기", for: .normal)
-        self.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         self.setTitleColor(.white, for: .normal)
     }
-    
-    
 }

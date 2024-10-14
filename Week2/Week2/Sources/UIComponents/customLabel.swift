@@ -40,5 +40,6 @@ class CustomLabel: UILabel {
                                  weight: labelFontWeight)
         self.textColor = labelTextColor
         self.textAlignment = labelAlignment
+        self.numberOfLines = 0
     }
 }

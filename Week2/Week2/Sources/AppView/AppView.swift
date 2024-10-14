@@ -23,10 +23,10 @@ class AppView: UIView {
     }()
     
     // 앱 이름
-    private let appNameLabel = customLabel(text: "토스", color: .label, fontSize: 18)
+    private let appNameLabel = CustomLabel(text: "토스", color: .label, fontSize: 18)
     
     // 앱 부제
-    private let appSubTitleLabel = customLabel(text: "금융이 쉬워진다", color: .secondaryLabel, fontSize: 12)
+    private let appSubTitleLabel = CustomLabel(text: "금융이 쉬워진다", color: .secondaryLabel, fontSize: 12)
     
     // 이름, 부제 스택 뷰
     private lazy var titlestackView: UIStackView = {
@@ -52,6 +52,7 @@ class AppView: UIView {
         super.init(frame: frame)
         
         setupUI()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -62,8 +63,6 @@ class AppView: UIView {
     private func setupUI() {
         self.backgroundColor = .systemBackground
         self.addSubviews(mainStackView)
-        
-        setupConstraints()
     }
     
     // MARK: - Set up Constraints
