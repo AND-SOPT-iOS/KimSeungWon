@@ -13,14 +13,16 @@ class CustomLabel: UILabel {
     let labelTextColor: UIColor
     let labelFontSize: CGFloat
     let labelFontWeight: UIFont.Weight
+    let labelAlignment: NSTextAlignment
 
     // MARK: - Init
-    init(text labelText: String, color labelTextColor: UIColor, fontSize labelFontSize: CGFloat, fontWeight labelFontWeight: UIFont.Weight = .regular) {
+    init(text: String, color: UIColor, fontSize: CGFloat, fontWeight: UIFont.Weight = .regular, alignment: NSTextAlignment = .left) {
         
-        self.labelText = labelText
-        self.labelTextColor = labelTextColor
-        self.labelFontSize = labelFontSize
-        self.labelFontWeight = labelFontWeight
+        self.labelText = text
+        self.labelTextColor = color
+        self.labelFontSize = fontSize
+        self.labelFontWeight = fontWeight
+        self.labelAlignment = alignment
         
         super.init(frame: .zero)
         
@@ -37,6 +39,6 @@ class CustomLabel: UILabel {
         self.font = UIFont.systemFont(ofSize: labelFontSize,
                                  weight: labelFontWeight)
         self.textColor = labelTextColor
-        self.textAlignment = .left
+        self.textAlignment = labelAlignment
     }
 }
