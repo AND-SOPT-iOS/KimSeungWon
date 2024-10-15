@@ -2,8 +2,9 @@
 //  DetailView.swift
 //  Week2
 //
-//  Created by 김승원 on 10/13/24.
+//  Created by 김승원 on 10/15/24.
 //
+
 
 import UIKit
 import SnapKit
@@ -64,25 +65,31 @@ class DetailView: UIView {
     private let secondEvalLabel = CustomLabel(text: "4.5", color: .secondaryLabel, fontSize: 20, fontWeight: .bold, alignment: .center)
     
     // 별 그림
-    private lazy var starStackView: UIStackView = {
-        let sv = UIStackView()
-        sv.axis = .horizontal
-        sv.alignment = .center
-        sv.distribution = .fillEqually
-        sv.spacing = 0
-        
-        // starImageView 5개 추가
-        for index in 0..<5 {
-            if index <= 3 {
-                let starImageView = StarImageView(.filled)
-                sv.addArrangedSubview(starImageView)
-            } else {
-                let starImageView = StarImageView(.halfFilled)
-                sv.addArrangedSubview(starImageView)
-            }
-        }
-        
-        return sv
+//    private lazy var starStackView: UIStackView = {
+//        let sv = UIStackView()
+//        sv.axis = .horizontal
+//        sv.alignment = .center
+//        sv.distribution = .fillEqually
+//        sv.spacing = 0
+//        
+//        // starImageView 5개 추가
+//        for index in 0..<5 {
+//            if index <= 3 {
+//                let starImageView = StarImageView(.filled)
+//                sv.addArrangedSubview(starImageView)
+//            } else {
+//                let starImageView = StarImageView(.halfFilled)
+//                sv.addArrangedSubview(starImageView)
+//            }
+//        }
+//        
+//        return sv
+//    }()
+    
+    private lazy var starStackView: FiveStarView = {
+        let view = FiveStarView()
+        view.setupStars(4.5)
+        return view
     }()
     
     // 평가 스택뷰
@@ -147,7 +154,7 @@ class DetailView: UIView {
     private let newsLabel = CustomLabel(text: "새로운 소식", color: .label, fontSize: 20, fontWeight: .semibold)
     
     // chevron.right 버튼
-    private lazy var newsButton: UIButton = {
+    private lazy var newsChevronButton: UIButton = {
         let btn = UIButton(type: .system)
         
         let configuration = UIImage.SymbolConfiguration(weight: .heavy)
@@ -159,14 +166,14 @@ class DetailView: UIView {
     }()
     
     // 버전 5.184.0
-    private let versionLabel = CustomLabel(text: "버전 5.184.0", color: .secondaryLabel, fontSize: 12)
+    private let versionLabel = CustomLabel(text: "버전 5.184.0", color: .secondaryLabel, fontSize: 13)
     
     // 2일전
-    private let dateLabel = CustomLabel(text: "2일 전", color: .secondaryLabel, fontSize: 12, alignment: .right)
+    private let dateLabel = CustomLabel(text: "2일 전", color: .secondaryLabel, fontSize: 13, alignment: .right)
     
     // 설명
     private let descriptionLabel: CustomLabel = {
-        let lb = CustomLabel(text: "구석구석 숨어있던 버그들을 잡았어요. 또 다른 버그가 나타나면 AND SOPT 위아요를 찾아주세요. 늘 열려있답니다. 365일 24시간 언제든지요. 안녕하세요 저는 김승원입니다. 아 그러시구나", color: .label, fontSize: 12)
+        let lb = CustomLabel(text: "• 구석구석 숨어있던 버그들을 잡았어요. 또 다른 버그가 나타나면 AND SOPT 위아요를 찾아주세요. 늘 열려있답니다. 365일 24시간 언제든지요. 안녕하세요 저는 김승원입니다. 아 그러시구나", color: .label, fontSize: 13)
         lb.setLineSpacing(7)
         return lb
     }()
@@ -209,10 +216,69 @@ class DetailView: UIView {
     }()
     
     // 아이폰 레이블
-    private let iphoneLabel = CustomLabel(text: "iPhone", color: .secondaryLabel, fontSize: 12, fontWeight: .medium)
+    private let iphoneLabel = CustomLabel(text: "iPhone", color: .secondaryLabel, fontSize: 13, fontWeight: .medium)
     
     // 구분선 3
     private let separatorView3 = SeparatorView()
+    
+    // MARK: - 평가 및 리뷰
+    
+    // 추가 설명 label
+    private let additionalDescriptionLabel: CustomLabel = {
+        let lb = CustomLabel(text: "토스뱅크, 토스증권 서비스를 이용하시려면 토스 앱 설치를 해야겠지? 앤솝 35기 위아요 파이팅 야호~\n● 내 금융 현황을 한눈에, 뭐시기", color: .label, fontSize: 13)
+        lb.setLineSpacing(7)
+        return lb
+    }()
+    
+    // 더보기 label (원래 버튼인데 동작은 구현하지 않기 때문에 레이블로 구현했습니다.)
+    private let moreLabel = CustomLabel(text: "더 보기", color: .systemBlue, fontSize: 13, alignment: .right)
+    
+    // 개발자 이름 AND SOPT 35
+    private let developerNameLabel = CustomLabel(text: "AND SOPT 35", color: .systemBlue, fontSize: 13)
+    
+    // 개발자 label
+    private let developerLabel = CustomLabel(text: "개발자", color: .secondaryLabel, fontSize: 13)
+    
+    // 개발자 이름 스택뷰
+    private lazy var developerStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [developerNameLabel, developerLabel])
+        sv.axis = .vertical
+        sv.spacing = 0
+        sv.alignment = .leading
+        sv.distribution = .fillEqually
+        return sv
+    }()
+    
+    // 개발자 chevron.right 버튼
+    private lazy var developerChevronButton: UIButton = {
+        let btn = UIButton(type: .system)
+        
+        let configuration = UIImage.SymbolConfiguration(weight: .medium)
+        btn.setImage(UIImage(systemName: "chevron.right", withConfiguration: configuration), for: .normal)
+        
+        btn.tintColor = .secondaryLabel
+        btn.imageView?.contentMode = .scaleAspectFit
+        return btn
+    }()
+    
+    // 평가 및 리뷰
+    private let reviewLabel = CustomLabel(text: "평가 및 리뷰", color: .label, fontSize: 20, fontWeight: .semibold)
+    
+    // chevron.right 버튼
+    private lazy var reviewChevronButton: UIButton = {
+        let btn = UIButton(type: .system)
+        
+        let configuration = UIImage.SymbolConfiguration(weight: .heavy)
+        btn.setImage(UIImage(systemName: "chevron.right", withConfiguration: configuration), for: .normal)
+        
+        btn.tintColor = .secondaryLabel
+        btn.imageView?.contentMode = .scaleAspectFit
+        return btn
+    }()
+    
+    // 별점
+    private let rateNumberLabel = CustomLabel(text: "4.5", color: .label, fontSize: 60, fontWeight: .black)
+    
 
     // MARK: - Init
     override init(frame: CGRect) {
@@ -234,7 +300,8 @@ class DetailView: UIView {
         scrollView.addSubviews(contentView)
         contentView.addSubviews(appImageView, titleStackView, openButton, shareButton, separatorView1)
         contentView.addSubviews(evalStackView, horizontalSeparatorView1, awardStackView, horizontalSeparatorView2, ageStackView, separatorView2)
-        contentView.addSubviews(newsLabel, newsButton, versionLabel, dateLabel, descriptionLabel, previewLabel, previewImageView1, previewImageView2, iphoneIconImageView, iphoneLabel, separatorView3)
+        contentView.addSubviews(newsLabel, newsChevronButton, versionLabel, dateLabel, descriptionLabel, previewLabel, previewImageView1, previewImageView2, iphoneIconImageView, iphoneLabel, separatorView3)
+        contentView.addSubviews(additionalDescriptionLabel, moreLabel, developerStackView, developerChevronButton, reviewLabel, reviewChevronButton, rateNumberLabel)
     }
     
     // MARK: - Set Top Views Alpha
@@ -299,7 +366,6 @@ class DetailView: UIView {
         
         // 평가 스택뷰
         evalStackView.snp.makeConstraints {
-//            $0.leading.equalToSuperview().inset(20)
             $0.centerX.equalToSuperview().multipliedBy(0.333)
             $0.top.equalTo(separatorView1.snp.bottom).offset(15)
             $0.height.equalTo(60)
@@ -352,10 +418,10 @@ class DetailView: UIView {
             $0.leading.equalToSuperview().inset(20)
         }
         
-        // chevron.right 버튼
-        newsButton.snp.makeConstraints {
+        // 새로운 소식 chevron.right 버튼
+        newsChevronButton.snp.makeConstraints {
             $0.leading.equalTo(newsLabel.snp.trailing).offset(2)
-            $0.size.equalTo(20)
+            $0.size.equalTo(18)
             $0.centerY.equalTo(newsLabel)
         }
         
@@ -416,9 +482,55 @@ class DetailView: UIView {
         // 구분선 3
         separatorView3.snp.makeConstraints {
             $0.top.equalTo(iphoneIconImageView.snp.bottom).offset(20)
-            $0.leading.equalToSuperview().inset(20)
-            $0.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(0.3)
+        }
+        
+        // 추가 설명 label
+        additionalDescriptionLabel.snp.makeConstraints {
+            $0.top.equalTo(separatorView3.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().inset(20)
+            $0.trailing.equalTo(moreLabel.snp.leading)
+        }
+        
+        // 더보기 label
+        moreLabel.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalTo(additionalDescriptionLabel)
+            $0.width.equalTo(40)
+        }
+        
+        // 개발자 이름 스택뷰
+        developerStackView.snp.makeConstraints {
+            $0.top.equalTo(additionalDescriptionLabel.snp.bottom).offset(30)
+            $0.leading.equalToSuperview().inset(20)
+            $0.height.equalTo(35)
+        }
+        
+        // 개발자 옆 chevron.right 버튼
+        developerChevronButton.snp.makeConstraints {
+            $0.centerY.equalTo(developerStackView)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.size.equalTo(18)
+        }
+        
+        // 새로운 소식
+        reviewLabel.snp.makeConstraints {
+            $0.top.equalTo(developerStackView.snp.bottom).offset(48)
+            $0.leading.equalToSuperview().inset(20)
+        }
+        
+        // 새로운 소식 chevron.right 버튼
+        reviewChevronButton.snp.makeConstraints {
+            $0.leading.equalTo(reviewLabel.snp.trailing).offset(2)
+            $0.size.equalTo(18)
+            $0.centerY.equalTo(reviewLabel)
+        }
+        
+        rateNumberLabel.snp.makeConstraints {
+            $0.top.equalTo(reviewLabel.snp.bottom).offset(16)
+            $0.leading.equalToSuperview().inset(20)
+            
         }
     }
 }

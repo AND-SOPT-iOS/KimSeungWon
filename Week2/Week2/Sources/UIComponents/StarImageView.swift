@@ -15,13 +15,11 @@ class StarImageView: UIImageView {
         case halfFilled = "star.leadinghalf.filled"
     }
     
-    private let isFilled: IsFilled
+    private var isFilled: IsFilled = .notFilled
 
     // MARK: - Init
-    init(_ isFilled: IsFilled) {
-        self.isFilled = isFilled
+    init() {
         super.init(frame: .zero)
-        
         setupImageView()
     }
     
@@ -29,11 +27,17 @@ class StarImageView: UIImageView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - set up ImageView
+    // MARK: - Set up ImageView
     private func setupImageView() {
         self.image = UIImage(systemName: self.isFilled.rawValue)
         self.contentMode = .scaleAspectFit
         self.tintColor = .secondaryLabel
     }
     
+    // MARK: - ChangeFills
+    func changeFills(_ isFilled: IsFilled) {
+        self.isFilled = isFilled
+        self.image = UIImage(systemName: self.isFilled.rawValue)
+        self.layoutIfNeeded()
+    }
 }
