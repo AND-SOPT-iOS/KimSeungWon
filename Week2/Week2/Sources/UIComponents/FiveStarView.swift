@@ -11,6 +11,7 @@ import SnapKit
 class FiveStarView: UIView {
     // MARK: - Properties
     private var starArray: [StarImageView] = []
+    private var starColor: UIColor
     
     // MARK: - UI Components
     private var starStackView: UIStackView = {
@@ -23,9 +24,10 @@ class FiveStarView: UIView {
     }()
     
     // MARK: - Init
-    init() {
+    init(color: UIColor) {
+        self.starColor = color
         super.init(frame: .zero)
-        addArrangedSubviewsToStackView()
+        setupStarUI()
         setupStackViewConstraints()
     }
     
@@ -34,8 +36,9 @@ class FiveStarView: UIView {
     }
     
     // MARK: - Add arranged subviews to StackView
-    private func addArrangedSubviewsToStackView() {
+    private func setupStarUI() {
         self.addSubview(starStackView)
+        starStackView.tintColor = starColor
         
         for _ in 0..<5 {
             let starImageView = StarImageView()
@@ -52,7 +55,7 @@ class FiveStarView: UIView {
     }
     
     // MARK: - Set up Stars
-    func setupStars(_ numberOfStars: Float) { // double만큼은 필요 없기 때문에 float 사용
+    func setupStars(_ numberOfStars: Double) {
         let fullStars = Int(numberOfStars)
         let hasHalfStar = numberOfStars.truncatingRemainder(dividingBy: 1) > 0 // 나머지가 존재하면 반개짜리 별 그리기
         

@@ -64,45 +64,22 @@ class DetailView: UIView {
     // 4.4
     private let secondEvalLabel = CustomLabel(text: "4.5", color: .secondaryLabel, fontSize: 20, fontWeight: .bold, alignment: .center)
     
-    // 별 그림
-//    private lazy var starStackView: UIStackView = {
-//        let sv = UIStackView()
-//        sv.axis = .horizontal
-//        sv.alignment = .center
-//        sv.distribution = .fillEqually
-//        sv.spacing = 0
-//        
-//        // starImageView 5개 추가
-//        for index in 0..<5 {
-//            if index <= 3 {
-//                let starImageView = StarImageView(.filled)
-//                sv.addArrangedSubview(starImageView)
-//            } else {
-//                let starImageView = StarImageView(.halfFilled)
-//                sv.addArrangedSubview(starImageView)
-//            }
-//        }
-//        
-//        return sv
-//    }()
-    
-    private lazy var starStackView: FiveStarView = {
-        let view = FiveStarView()
+    // 별
+    private lazy var evalFiveStarView: FiveStarView = {
+        let view = FiveStarView(color: .secondaryLabel)
         view.setupStars(4.5)
         return view
     }()
     
     // 평가 스택뷰
     private lazy var evalStackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [firstEvalLabel, secondEvalLabel, starStackView])
+        let sv = UIStackView(arrangedSubviews: [firstEvalLabel, secondEvalLabel, evalFiveStarView])
         sv.axis = .vertical
         sv.spacing = 5
         sv.alignment = .fill
         sv.distribution = .fillEqually
         return sv
     }()
-    
-    
     
     // 세로 구분선1
     private let horizontalSeparatorView1 = SeparatorView()
@@ -279,6 +256,19 @@ class DetailView: UIView {
     // 별점
     private let rateNumberLabel = CustomLabel(text: "4.5", color: .label, fontSize: 60, fontWeight: .black)
     
+    // 평가 및 리뷰 별
+    private lazy var rateFiveStarView: FiveStarView = {
+        let view = FiveStarView(color: .label)
+        view.setupStars(4.5)
+        return view
+    }()
+    
+    // 8.4만개의 평가
+    private let howManyRateLabel = CustomLabel(text: "8.4만개의 평가", color: .secondaryLabel, fontSize: 14, fontWeight: .semibold, alignment: .right)
+    
+    // 가장 도움이 되는 리뷰
+    private let mostHelpfulReviewLabel = CustomLabel(text: "가장 도움이 되는 리뷰", color: .label, fontSize: 14, fontWeight: .semibold)
+    
 
     // MARK: - Init
     override init(frame: CGRect) {
@@ -301,7 +291,7 @@ class DetailView: UIView {
         contentView.addSubviews(appImageView, titleStackView, openButton, shareButton, separatorView1)
         contentView.addSubviews(evalStackView, horizontalSeparatorView1, awardStackView, horizontalSeparatorView2, ageStackView, separatorView2)
         contentView.addSubviews(newsLabel, newsChevronButton, versionLabel, dateLabel, descriptionLabel, previewLabel, previewImageView1, previewImageView2, iphoneIconImageView, iphoneLabel, separatorView3)
-        contentView.addSubviews(additionalDescriptionLabel, moreLabel, developerStackView, developerChevronButton, reviewLabel, reviewChevronButton, rateNumberLabel)
+        contentView.addSubviews(additionalDescriptionLabel, moreLabel, developerStackView, developerChevronButton, reviewLabel, reviewChevronButton, rateNumberLabel, rateFiveStarView, howManyRateLabel, mostHelpfulReviewLabel)
     }
     
     // MARK: - Set Top Views Alpha
@@ -527,10 +517,31 @@ class DetailView: UIView {
             $0.centerY.equalTo(reviewLabel)
         }
         
+        // 큰 4.5
         rateNumberLabel.snp.makeConstraints {
-            $0.top.equalTo(reviewLabel.snp.bottom).offset(16)
+            $0.top.equalTo(reviewLabel.snp.bottom).offset(13)
             $0.leading.equalToSuperview().inset(20)
             
+        }
+        
+        // 평가 및 리뷰 별
+        rateFiveStarView.snp.makeConstraints {
+            $0.centerY.equalTo(rateNumberLabel).offset(-10)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.height.equalTo(20)
+            $0.width.equalTo(110)
+        }
+        
+        // 8.4만개의 평가
+        howManyRateLabel.snp.makeConstraints {
+            $0.top.equalTo(rateFiveStarView.snp.bottom).offset(5)
+            $0.trailing.equalToSuperview().inset(20)
+        }
+        
+        // 가장 도움이 되는 리뷰
+        mostHelpfulReviewLabel.snp.makeConstraints {
+            $0.top.equalTo(rateNumberLabel.snp.bottom).offset(13)
+            $0.leading.equalToSuperview().inset(20)
         }
     }
 }

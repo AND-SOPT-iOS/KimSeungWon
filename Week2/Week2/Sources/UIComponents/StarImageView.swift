@@ -31,7 +31,6 @@ class StarImageView: UIImageView {
     private func setupImageView() {
         self.image = UIImage(systemName: self.isFilled.rawValue)
         self.contentMode = .scaleAspectFit
-        self.tintColor = .secondaryLabel
     }
     
     // MARK: - ChangeFills
