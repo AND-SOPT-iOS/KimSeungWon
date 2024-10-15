@@ -61,17 +61,41 @@ class DetailView: UIView {
     private let firstEvalLabel = CustomLabel(text: "8.4만개의 평가", color: .secondaryLabel, fontSize: 12, fontWeight: .medium, alignment: .center)
     
     // 4.4
-    private let secondEvalLabel = CustomLabel(text: "4.4", color: .secondaryLabel, fontSize: 20, fontWeight: .bold, alignment: .center)
+    private let secondEvalLabel = CustomLabel(text: "4.5", color: .secondaryLabel, fontSize: 20, fontWeight: .bold, alignment: .center)
+    
+    // 별 그림
+    private lazy var starStackView: UIStackView = {
+        let sv = UIStackView()
+        sv.axis = .horizontal
+        sv.alignment = .center
+        sv.distribution = .fillEqually
+        sv.spacing = 0
+        
+        // starImageView 5개 추가
+        for index in 0..<5 {
+            if index <= 3 {
+                let starImageView = StarImageView(.filled)
+                sv.addArrangedSubview(starImageView)
+            } else {
+                let starImageView = StarImageView(.halfFilled)
+                sv.addArrangedSubview(starImageView)
+            }
+        }
+        
+        return sv
+    }()
     
     // 평가 스택뷰
     private lazy var evalStackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [firstEvalLabel, secondEvalLabel])
+        let sv = UIStackView(arrangedSubviews: [firstEvalLabel, secondEvalLabel, starStackView])
         sv.axis = .vertical
         sv.spacing = 5
         sv.alignment = .fill
         sv.distribution = .fillEqually
         return sv
     }()
+    
+    
     
     // 세로 구분선1
     private let horizontalSeparatorView1 = SeparatorView()
@@ -275,10 +299,11 @@ class DetailView: UIView {
         
         // 평가 스택뷰
         evalStackView.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(20)
+//            $0.leading.equalToSuperview().inset(20)
+            $0.centerX.equalToSuperview().multipliedBy(0.333)
             $0.top.equalTo(separatorView1.snp.bottom).offset(15)
             $0.height.equalTo(60)
-            $0.width.equalTo(100)
+            $0.width.equalTo(80)
         }
         
         // 세로 구분선 1
@@ -307,7 +332,7 @@ class DetailView: UIView {
         
         // 연령 스택뷰
         ageStackView.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(20)
+            $0.centerX.equalToSuperview().multipliedBy(1.666)
             $0.top.equalTo(separatorView1.snp.bottom).offset(15)
             $0.height.equalTo(60)
             $0.width.equalTo(100)
