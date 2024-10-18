@@ -127,20 +127,22 @@ class DetailView: UIView {
     private let separatorView2 = SeparatorView()
     
     // MARK: - 새로운 소식
-    // 새로운 소식
-    private let newsLabel = CustomLabel(text: "새로운 소식", color: .label, fontSize: 20, fontWeight: .semibold)
+//    // 새로운 소식
+//    private let newsLabel = CustomLabel(text: "새로운 소식", color: .label, fontSize: 20, fontWeight: .semibold)
+//    
+//    // chevron.right 버튼
+//    private lazy var newsChevronButton: UIButton = {
+//        let btn = UIButton(type: .system)
+//        
+//        let configuration = UIImage.SymbolConfiguration(weight: .heavy)
+//        btn.setImage(UIImage(systemName: "chevron.right", withConfiguration: configuration), for: .normal)
+//        
+//        btn.tintColor = .secondaryLabel
+//        btn.imageView?.contentMode = .scaleAspectFit
+//        return btn
+//    }()
     
-    // chevron.right 버튼
-    private lazy var newsChevronButton: UIButton = {
-        let btn = UIButton(type: .system)
-        
-        let configuration = UIImage.SymbolConfiguration(weight: .heavy)
-        btn.setImage(UIImage(systemName: "chevron.right", withConfiguration: configuration), for: .normal)
-        
-        btn.tintColor = .secondaryLabel
-        btn.imageView?.contentMode = .scaleAspectFit
-        return btn
-    }()
+    private lazy var newsTitleView = SemiBoldTitleWithButtonView(title: "새로운 소식")
     
     // 버전 5.184.0
     private let versionLabel = CustomLabel(text: "버전 5.184.0", color: .secondaryLabel, fontSize: 13)
@@ -238,21 +240,9 @@ class DetailView: UIView {
         return btn
     }()
     
-    // 평가 및 리뷰
-    private let reviewLabel = CustomLabel(text: "평가 및 리뷰", color: .label, fontSize: 20, fontWeight: .semibold)
-    
-    // chevron.right 버튼
-    private lazy var reviewChevronButton: UIButton = {
-        let btn = UIButton(type: .system)
-        
-        let configuration = UIImage.SymbolConfiguration(weight: .heavy)
-        btn.setImage(UIImage(systemName: "chevron.right", withConfiguration: configuration), for: .normal)
-        
-        btn.tintColor = .secondaryLabel
-        btn.imageView?.contentMode = .scaleAspectFit
-        return btn
-    }()
-    
+    // 평가 및 리뷰, chevron.right
+    private lazy var reviewtitleView = SemiBoldTitleWithButtonView(title: "평가 및 리뷰")
+
     // 별점
     private let rateNumberLabel = CustomLabel(text: "4.5", color: .label, fontSize: 60, fontWeight: .black)
     
@@ -269,6 +259,9 @@ class DetailView: UIView {
     // 가장 도움이 되는 리뷰
     private let mostHelpfulReviewLabel = CustomLabel(text: "가장 도움이 되는 리뷰", color: .label, fontSize: 14, fontWeight: .semibold)
     
+    // MARK: - Temp
+    private let tempView = SemiBoldTitleWithButtonView(title: "새로운 소식")
+    
 
     // MARK: - Init
     override init(frame: CGRect) {
@@ -282,6 +275,7 @@ class DetailView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     // MARK: - Set up UI
     private func setupUI () {
         self.backgroundColor = .systemBackground
@@ -290,8 +284,9 @@ class DetailView: UIView {
         scrollView.addSubviews(contentView)
         contentView.addSubviews(appImageView, titleStackView, openButton, shareButton, separatorView1)
         contentView.addSubviews(evalStackView, horizontalSeparatorView1, awardStackView, horizontalSeparatorView2, ageStackView, separatorView2)
-        contentView.addSubviews(newsLabel, newsChevronButton, versionLabel, dateLabel, descriptionLabel, previewLabel, previewImageView1, previewImageView2, iphoneIconImageView, iphoneLabel, separatorView3)
-        contentView.addSubviews(additionalDescriptionLabel, moreLabel, developerStackView, developerChevronButton, reviewLabel, reviewChevronButton, rateNumberLabel, rateFiveStarView, howManyRateLabel, mostHelpfulReviewLabel)
+        contentView.addSubviews(newsTitleView, versionLabel, dateLabel, descriptionLabel, previewLabel, previewImageView1, previewImageView2, iphoneIconImageView, iphoneLabel, separatorView3)
+        contentView.addSubviews(additionalDescriptionLabel, moreLabel, developerStackView, developerChevronButton, reviewtitleView,rateNumberLabel, rateFiveStarView, howManyRateLabel, mostHelpfulReviewLabel)
+        contentView.addSubviews(tempView)
     }
     
     // MARK: - Set Top Views Alpha
@@ -402,28 +397,22 @@ class DetailView: UIView {
             $0.height.equalTo(0.3)
         }
         
-        // 새로운 소식
-        newsLabel.snp.makeConstraints {
-            $0.top.equalTo(separatorView2.snp.bottom).offset(15)
-            $0.leading.equalToSuperview().inset(20)
-        }
-        
-        // 새로운 소식 chevron.right 버튼
-        newsChevronButton.snp.makeConstraints {
-            $0.leading.equalTo(newsLabel.snp.trailing).offset(2)
-            $0.size.equalTo(18)
-            $0.centerY.equalTo(newsLabel)
+        // 새로운 소식 타이틀, chevron.right
+        newsTitleView.snp.makeConstraints {
+            $0.top.equalTo(separatorView2.snp.bottom)
+            $0.horizontalEdges.equalToSuperview().inset(20)
+            $0.height.equalTo(58)
         }
         
         // 버전
         versionLabel.snp.makeConstraints {
-            $0.top.equalTo(newsLabel.snp.bottom).offset(18)
+            $0.top.equalTo(newsTitleView.snp.bottom)
             $0.leading.equalToSuperview().inset(20)
         }
         
         // 2일전
         dateLabel.snp.makeConstraints {
-            $0.top.equalTo(newsLabel.snp.bottom).offset(18)
+            $0.top.equalTo(newsTitleView.snp.bottom).offset(18)
             $0.trailing.equalToSuperview().inset(20)
         }
         
@@ -503,25 +492,18 @@ class DetailView: UIView {
             $0.trailing.equalToSuperview().inset(20)
             $0.size.equalTo(18)
         }
-        
-        // 새로운 소식
-        reviewLabel.snp.makeConstraints {
-            $0.top.equalTo(developerStackView.snp.bottom).offset(48)
-            $0.leading.equalToSuperview().inset(20)
-        }
-        
-        // 새로운 소식 chevron.right 버튼
-        reviewChevronButton.snp.makeConstraints {
-            $0.leading.equalTo(reviewLabel.snp.trailing).offset(2)
-            $0.size.equalTo(18)
-            $0.centerY.equalTo(reviewLabel)
+
+        // 평가 및 리뷰, chevron.right
+        reviewtitleView.snp.makeConstraints {
+            $0.top.equalTo(developerStackView.snp.bottom).offset(20)
+            $0.horizontalEdges.equalToSuperview().inset(20)
+            $0.height.equalTo(58)
         }
         
         // 큰 4.5
         rateNumberLabel.snp.makeConstraints {
-            $0.top.equalTo(reviewLabel.snp.bottom).offset(13)
+            $0.top.equalTo(reviewtitleView.snp.bottom)
             $0.leading.equalToSuperview().inset(20)
-            
         }
         
         // 평가 및 리뷰 별
@@ -542,6 +524,13 @@ class DetailView: UIView {
         mostHelpfulReviewLabel.snp.makeConstraints {
             $0.top.equalTo(rateNumberLabel.snp.bottom).offset(13)
             $0.leading.equalToSuperview().inset(20)
+        }
+        
+        // temp
+        tempView.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview().inset(20)
+            $0.height.equalTo(100)
+            $0.top.equalTo(mostHelpfulReviewLabel.snp.bottom).offset(20)
         }
     }
 }
