@@ -127,21 +127,7 @@ class DetailView: UIView {
     private let separatorView2 = SeparatorView()
     
     // MARK: - 새로운 소식
-//    // 새로운 소식
-//    private let newsLabel = CustomLabel(text: "새로운 소식", color: .label, fontSize: 20, fontWeight: .semibold)
-//    
-//    // chevron.right 버튼
-//    private lazy var newsChevronButton: UIButton = {
-//        let btn = UIButton(type: .system)
-//        
-//        let configuration = UIImage.SymbolConfiguration(weight: .heavy)
-//        btn.setImage(UIImage(systemName: "chevron.right", withConfiguration: configuration), for: .normal)
-//        
-//        btn.tintColor = .secondaryLabel
-//        btn.imageView?.contentMode = .scaleAspectFit
-//        return btn
-//    }()
-    
+    // 새로운 소식
     private lazy var newsTitleView = SemiBoldTitleWithButtonView(title: "새로운 소식")
     
     // 버전 5.184.0
@@ -254,13 +240,14 @@ class DetailView: UIView {
     }()
     
     // 8.4만개의 평가
-    private let howManyRateLabel = CustomLabel(text: "8.4만개의 평가", color: .secondaryLabel, fontSize: 14, fontWeight: .semibold, alignment: .right)
+    private let howManyRateLabel = CustomLabel(text: "8.4만개의 평가", color: .secondaryLabel, fontSize: 15, fontWeight: .semibold, alignment: .right)
     
     // 가장 도움이 되는 리뷰
-    private let mostHelpfulReviewLabel = CustomLabel(text: "가장 도움이 되는 리뷰", color: .label, fontSize: 14, fontWeight: .semibold)
+    private let mostHelpfulReviewLabel = CustomLabel(text: "가장 도움이 되는 리뷰", color: .label, fontSize: 15, fontWeight: .semibold)
     
-    // MARK: - Temp
-    private let tempView = SemiBoldTitleWithButtonView(title: "새로운 소식")
+    // 리뷰 뷰
+    private let reviewView = ReviewView()
+    
     
 
     // MARK: - Init
@@ -285,8 +272,7 @@ class DetailView: UIView {
         contentView.addSubviews(appImageView, titleStackView, openButton, shareButton, separatorView1)
         contentView.addSubviews(evalStackView, horizontalSeparatorView1, awardStackView, horizontalSeparatorView2, ageStackView, separatorView2)
         contentView.addSubviews(newsTitleView, versionLabel, dateLabel, descriptionLabel, previewLabel, previewImageView1, previewImageView2, iphoneIconImageView, iphoneLabel, separatorView3)
-        contentView.addSubviews(additionalDescriptionLabel, moreLabel, developerStackView, developerChevronButton, reviewtitleView,rateNumberLabel, rateFiveStarView, howManyRateLabel, mostHelpfulReviewLabel)
-        contentView.addSubviews(tempView)
+        contentView.addSubviews(additionalDescriptionLabel, moreLabel, developerStackView, developerChevronButton, reviewtitleView,rateNumberLabel, rateFiveStarView, howManyRateLabel, mostHelpfulReviewLabel, reviewView)
     }
     
     // MARK: - Set Top Views Alpha
@@ -412,7 +398,7 @@ class DetailView: UIView {
         
         // 2일전
         dateLabel.snp.makeConstraints {
-            $0.top.equalTo(newsTitleView.snp.bottom).offset(18)
+            $0.centerY.equalTo(versionLabel)
             $0.trailing.equalToSuperview().inset(20)
         }
         
@@ -526,11 +512,11 @@ class DetailView: UIView {
             $0.leading.equalToSuperview().inset(20)
         }
         
-        // temp
-        tempView.snp.makeConstraints {
+        // 리뷰 뷰
+        reviewView.snp.makeConstraints {
+            $0.top.equalTo(mostHelpfulReviewLabel.snp.bottom).offset(18)
             $0.horizontalEdges.equalToSuperview().inset(20)
-            $0.height.equalTo(100)
-            $0.top.equalTo(mostHelpfulReviewLabel.snp.bottom).offset(20)
+            $0.height.equalTo(185)
         }
     }
 }
