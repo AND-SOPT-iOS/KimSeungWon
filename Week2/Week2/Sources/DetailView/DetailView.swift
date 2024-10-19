@@ -316,8 +316,7 @@ class DetailView: UIView {
         contentView.snp.makeConstraints {
             $0.edges.equalTo(scrollView)
             $0.width.equalTo(scrollView)
-            $0.height.equalTo(4000)
-//            $0.height.greaterThanOrEqualTo(scrollView).priority(.low)
+            $0.height.greaterThanOrEqualTo(scrollView).priority(.low)
         }
         
         // 앱 이미지
@@ -560,6 +559,7 @@ class DetailView: UIView {
             $0.top.equalTo(tapFiveStarView.snp.bottom).offset(18)
             $0.horizontalEdges.equalToSuperview().inset(20)
             $0.height.equalTo(50)
+            $0.bottom.equalToSuperview().inset(20)
         }
     }
 }
