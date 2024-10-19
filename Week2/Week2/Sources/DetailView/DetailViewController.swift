@@ -93,3 +93,4 @@ extension DetailViewController: UIScrollViewDelegate {
         }
     }
 }
+

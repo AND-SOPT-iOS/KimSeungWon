@@ -248,6 +248,29 @@ class DetailView: UIView {
     // 리뷰 뷰
     private let reviewView = ReviewView()
     
+    // 탭하여 평가하기
+    private let tapToRateLabel = CustomLabel(text: "탭하여 평가하기", color: .label, fontSize: 15, fontWeight: .bold, alignment: .center)
+    
+    private let tapFiveStarView: FiveStarView = {
+        let view = FiveStarView(color: .systemBlue)
+        return view
+    }()
+    
+    // 리뷰 작성 버튼
+    private lazy var reviewButton = BackgroundButton(buttonType: .review)
+    
+    // 앱 지원 버튼
+    private lazy var appSupportButton = BackgroundButton(buttonType: .appSupport)
+    
+    // 버튼 스택뷰
+    private lazy var buttonStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [reviewButton, appSupportButton])
+        sv.spacing = 14
+        sv.alignment = .fill
+        sv.distribution = .fillEqually
+        sv.axis = .horizontal
+        return sv
+    }()
     
 
     // MARK: - Init
@@ -272,7 +295,7 @@ class DetailView: UIView {
         contentView.addSubviews(appImageView, titleStackView, openButton, shareButton, separatorView1)
         contentView.addSubviews(evalStackView, horizontalSeparatorView1, awardStackView, horizontalSeparatorView2, ageStackView, separatorView2)
         contentView.addSubviews(newsTitleView, versionLabel, dateLabel, descriptionLabel, previewLabel, previewImageView1, previewImageView2, iphoneIconImageView, iphoneLabel, separatorView3)
-        contentView.addSubviews(additionalDescriptionLabel, moreLabel, developerStackView, developerChevronButton, reviewtitleView,rateNumberLabel, rateFiveStarView, howManyRateLabel, mostHelpfulReviewLabel, reviewView)
+        contentView.addSubviews(additionalDescriptionLabel, moreLabel, developerStackView, developerChevronButton, reviewtitleView,rateNumberLabel, rateFiveStarView, howManyRateLabel, mostHelpfulReviewLabel, reviewView, tapToRateLabel, tapFiveStarView, buttonStackView)
     }
     
     // MARK: - Set Top Views Alpha
@@ -517,6 +540,26 @@ class DetailView: UIView {
             $0.top.equalTo(mostHelpfulReviewLabel.snp.bottom).offset(18)
             $0.horizontalEdges.equalToSuperview().inset(20)
             $0.height.equalTo(185)
+        }
+        
+        // 탭하여 평가하기
+        tapToRateLabel.snp.makeConstraints {
+            $0.top.equalTo(reviewView.snp.bottom).offset(22)
+            $0.leading.trailing.equalToSuperview().inset(20)
+        }
+    
+        tapFiveStarView.snp.makeConstraints {
+            $0.top.equalTo(tapToRateLabel.snp.bottom).offset(11)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(176)
+            $0.height.equalTo(24)
+        }
+        
+        // 버튼 스택뷰
+        buttonStackView.snp.makeConstraints {
+            $0.top.equalTo(tapFiveStarView.snp.bottom).offset(18)
+            $0.horizontalEdges.equalToSuperview().inset(20)
+            $0.height.equalTo(50)
         }
     }
 }
