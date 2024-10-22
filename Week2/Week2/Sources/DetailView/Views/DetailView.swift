@@ -128,7 +128,7 @@ class DetailView: UIView {
     
     // MARK: - 새로운 소식
     // 새로운 소식
-    private lazy var newsTitleView = SemiBoldTitleWithButtonView(title: "새로운 소식")
+    lazy var newsTitleView = SemiBoldTitleWithButtonView(title: "새로운 소식")
     
     // 버전 5.184.0
     private let versionLabel = CustomLabel(text: "버전 5.184.0", color: .secondaryLabel, fontSize: 13)
@@ -227,7 +227,7 @@ class DetailView: UIView {
     }()
     
     // 평가 및 리뷰, chevron.right
-    private lazy var reviewtitleView = SemiBoldTitleWithButtonView(title: "평가 및 리뷰")
+    lazy var reviewTitleView = SemiBoldTitleWithButtonView(title: "평가 및 리뷰")
 
     // 별점
     private let rateNumberLabel = CustomLabel(text: "4.5", color: .label, fontSize: 60, fontWeight: .black)
@@ -257,10 +257,10 @@ class DetailView: UIView {
     }()
     
     // 리뷰 작성 버튼
-    private lazy var reviewButton = BackgroundButton(buttonType: .review)
+    lazy var reviewButton = BackgroundButton(buttonType: .review)
     
     // 앱 지원 버튼
-    private lazy var appSupportButton = BackgroundButton(buttonType: .appSupport)
+    lazy var appSupportButton = BackgroundButton(buttonType: .appSupport)
     
     // 버튼 스택뷰
     private lazy var buttonStackView: UIStackView = {
@@ -295,7 +295,7 @@ class DetailView: UIView {
         contentView.addSubviews(appImageView, titleStackView, openButton, shareButton, separatorView1)
         contentView.addSubviews(evalStackView, horizontalSeparatorView1, awardStackView, horizontalSeparatorView2, ageStackView, separatorView2)
         contentView.addSubviews(newsTitleView, versionLabel, dateLabel, descriptionLabel, previewLabel, previewImageView1, previewImageView2, iphoneIconImageView, iphoneLabel, separatorView3)
-        contentView.addSubviews(additionalDescriptionLabel, moreLabel, developerStackView, developerChevronButton, reviewtitleView,rateNumberLabel, rateFiveStarView, howManyRateLabel, mostHelpfulReviewLabel, reviewView, tapToRateLabel, tapFiveStarView, buttonStackView)
+        contentView.addSubviews(additionalDescriptionLabel, moreLabel, developerStackView, developerChevronButton, reviewTitleView,rateNumberLabel, rateFiveStarView, howManyRateLabel, mostHelpfulReviewLabel, reviewView, tapToRateLabel, tapFiveStarView, buttonStackView)
     }
     
     // MARK: - Set Top Views Alpha
@@ -502,7 +502,7 @@ class DetailView: UIView {
         }
 
         // 평가 및 리뷰, chevron.right
-        reviewtitleView.snp.makeConstraints {
+        reviewTitleView.snp.makeConstraints {
             $0.top.equalTo(developerStackView.snp.bottom).offset(20)
             $0.horizontalEdges.equalToSuperview().inset(20)
             $0.height.equalTo(58)
@@ -510,7 +510,7 @@ class DetailView: UIView {
         
         // 큰 4.5
         rateNumberLabel.snp.makeConstraints {
-            $0.top.equalTo(reviewtitleView.snp.bottom)
+            $0.top.equalTo(reviewTitleView.snp.bottom)
             $0.leading.equalToSuperview().inset(20)
         }
         

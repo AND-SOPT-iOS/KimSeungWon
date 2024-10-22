@@ -29,6 +29,21 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         
         setupScrollView()
+        setupActions()
+    }
+    
+    // MARK: - Set up Actions
+    private func setupActions() {
+        // 새로운 소식
+        detailView.newsTitleView.isUserInteractionEnabled = true
+        detailView.newsTitleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapNewsTitleView)))
+        
+        // 평가 및 리뷰 (버전 기록)
+        detailView.reviewTitleView.isUserInteractionEnabled = true
+        detailView.reviewTitleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapReviewTitleView)))
+        
+        // 리뷰 작성
+        detailView.reviewButton.addTarget(self, action: #selector(didTapReviewButton), for: .touchUpInside)
     }
     
     // MARK: - Set up ScrollView
@@ -41,6 +56,30 @@ class DetailViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.titleView = nil
         navigationItem.rightBarButtonItem = nil
+    }
+    
+    // MARK: - Selectors
+    // 새로운 소식 > 누르면
+    @objc
+    private func didTapNewsTitleView() {
+        let newsVC = NewsViewController()
+        self.navigationController?.pushViewController(newsVC, animated: true)
+    }
+    
+    // 평가 및 리뷰 > 누르면
+    @objc
+    private func didTapReviewTitleView() {
+        let allReviewVC = AllReviewViewController()
+        self.navigationController?.pushViewController(allReviewVC, animated: true)
+    }
+    
+    // 리뷰 작성 누르면
+    @objc
+    private func didTapReviewButton() {
+        let writeReviewVC = WriteReviewViewController()
+        writeReviewVC.delegate = self
+        let navVC = UINavigationController(rootViewController: writeReviewVC)
+        self.present(navVC, animated: true, completion: nil)
     }
 }
 
@@ -94,3 +133,9 @@ extension DetailViewController: UIScrollViewDelegate {
     }
 }
 
+extension DetailViewController: WriteReviewViewControllerDelegate {
+    func didSubmitReview(_ reviewModel: ReviewModel) {
+        print("시점 전달받음")
+        dump(reviewModel)
+    }
+}
