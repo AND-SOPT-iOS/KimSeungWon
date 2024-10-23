@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// 배경이 있는 버튼 컴포넌트입니다.
 class BackgroundButton: UIButton {
     // MARK: - Properties
     enum BackgroundButtonType: String {
@@ -15,8 +16,6 @@ class BackgroundButton: UIButton {
     }
     
     var backgroundButtonType: BackgroundButtonType
-    
-    // MARK: - UI Components
 
     // MARK: - Init
     init(buttonType: BackgroundButtonType) {

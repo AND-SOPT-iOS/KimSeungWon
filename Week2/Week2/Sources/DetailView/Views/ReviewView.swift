@@ -10,10 +10,10 @@ import SnapKit
 
 class ReviewView: UIView {
     // MARK: - UIComponents
-    private let titleLabel = CustomLabel(text: "김승원 조금만 더 긴 타이틀", color: .label, fontSize: 15, fontWeight: .semibold)
+    let titleLabel = CustomLabel(text: "김승원 조금만 더 긴 타이틀", color: .label, fontSize: 15, fontWeight: .semibold)
     
     // 별
-    private let fiveStarView: FiveStarView = {
+    let fiveStarView: FiveStarView = {
         let sv = FiveStarView(color: .label)
         sv.setupStars(5)
         return sv
@@ -26,7 +26,7 @@ class ReviewView: UIView {
     private let writerLabel = CustomLabel(text: "INFP", color: .secondaryLabel, fontSize: 13)
     
     // 본문
-    private let bodyLabel = CustomLabel(text: "동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리 나라만세 무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세.", color: .secondaryLabel, fontSize: 13)
+    let bodyLabel = CustomLabel(text: "동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리 나라만세 무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세.", color: .secondaryLabel, fontSize: 13)
 
     // MARK: - Init
     override init(frame: CGRect) {

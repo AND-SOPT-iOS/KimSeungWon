@@ -16,14 +16,12 @@ class AppViewController: UIViewController {
         self.view = appView
     }
     
-    // view will appear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         setupNavigationBar()
     }
     
-    // view did load
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,6 +30,7 @@ class AppViewController: UIViewController {
     
     // MARK: - Set Gesture
     private func setupGesture() {
+        // 토스 앱 터치하면 DetailView로 이동
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapMainStackView))
         appView.mainStackView.addGestureRecognizer(tapGesture)
         appView.isUserInteractionEnabled = true

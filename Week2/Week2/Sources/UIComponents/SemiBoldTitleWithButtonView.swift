@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 
+/// semibold체 타이틀과 chevron버튼이 있는 컴포넌트입니다.
 class SemiBoldTitleWithButtonView: UIView {
     // MARK: - Properties
     var title: String

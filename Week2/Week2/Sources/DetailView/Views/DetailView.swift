@@ -10,6 +10,22 @@ import UIKit
 import SnapKit
 
 class DetailView: UIView {
+    // MARK: - Properties
+    var reviewModel: ReviewModel? {
+        didSet {
+            // detailVC에서 reviewModel을 받으면 UI 재설정
+            guard let reviewModel else { return }
+            self.reviewView.titleLabel.text = reviewModel.title
+            self.reviewView.bodyLabel.text = reviewModel.contents
+            
+            if let starCount = reviewModel.starCount {
+                self.rateNumberLabel.text = String(starCount)
+                self.reviewView.fiveStarView.setupStars(starCount)
+                self.rateFiveStarView.setupStars(starCount)
+            }
+        }
+    }
+    
     // MARK: - 토스 메인 타이틀
     // 스크롤 뷰, 콘텐트 뷰
     let scrollView = UIScrollView()
@@ -299,6 +315,8 @@ class DetailView: UIView {
     }
     
     // MARK: - Set Top Views Alpha
+    // 스크롤할 경우에 앱 이미지, 타이틀, 버튼의 알파값을 조절하는 함수입니다.
+    // UI와 관련된 코드라고 생각하여 ViewController에 정의하지 않고 View에 정의하고 ViewController에서 호출합니다.
     func setTopViewsAlpha(_ alpha: CGFloat) {
         appImageView.alpha = alpha
         titleStackView.alpha = alpha

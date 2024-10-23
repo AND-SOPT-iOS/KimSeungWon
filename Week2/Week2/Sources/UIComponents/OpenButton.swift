@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// 파란색 배경의 열기 버튼 컴포넌트입니다.
 class OpenButton: UIButton {
 
     // MARK: - Init

@@ -8,6 +8,8 @@
 import UIKit
 import SnapKit
 
+/// 별 5개 컴포넌트입니다.
+/// setupStars()를 통해 색칠된 별의 개수를 정할 수 있습니다.
 class FiveStarView: UIView {
     // MARK: - Properties
     private var starArray: [StarImageView] = []
@@ -55,9 +57,11 @@ class FiveStarView: UIView {
     }
     
     // MARK: - Set up Stars
+    /// 별 개수를 지정하는 함수입니다.
+    /// - Parameter numberOfStars: 별 개수를 Double형으로 받습니다. 소수점 이하는 반올림하여 반개짜리 별로 표시합니다.
     func setupStars(_ numberOfStars: Double) {
         let fullStars = Int(numberOfStars)
-        let hasHalfStar = numberOfStars.truncatingRemainder(dividingBy: 1) > 0 // 나머지가 존재하면 반개짜리 별 그리기
+        let hasHalfStar = numberOfStars.truncatingRemainder(dividingBy: 1) > 0.4 // 나머지가 존재하면 반개짜리 별 그리기
         
         for (index, star) in starArray.enumerated() {
             if index < fullStars {

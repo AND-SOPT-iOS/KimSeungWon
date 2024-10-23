@@ -42,16 +42,25 @@ class WriteReviewViewController: UIViewController {
     }
     
     // MARK: - Selectors
+    // 제출 버튼
     @objc
     private func didTapSubmitButton() {
         print(#function)
         self.dismiss(animated: true, completion: nil)
-        reviewModel = ReviewModel(starCount: 5, title: "임시 전달", contents: "안녕하세요오오오오오")
+        
+        let starCount = Double(writeReviewView.starTextfield.text ?? "0")
+        let title = writeReviewView.titleTextField.text ?? ""
+        let contents = writeReviewView.reviewTextField.text ?? ""
+        
+        // writeView의 textField에 작성된 text값으로 reviewModel을 만들어 대리자에게 전달합니다.
+        reviewModel = ReviewModel(starCount: starCount, title: title, contents: contents)
+        
         if let reviewModel = self.reviewModel {
             delegate?.didSubmitReview(reviewModel)
         }
     }
     
+    // 취소 버튼
     @objc
     private func didTapCancelButton() {
         print(#function)

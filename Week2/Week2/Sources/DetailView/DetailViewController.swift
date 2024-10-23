@@ -11,6 +11,14 @@ import SnapKit
 class DetailViewController: UIViewController {
     // MARK: - Properties
     private let detailView = DetailView()
+    
+    var reviewModel: ReviewModel? {
+        // writeReviewVC에서 델리게이트로 받아온 review모델을 받아서 detailView로 모델을 넘겨줍니다.
+        didSet {
+            guard let reviewModel else { return }
+            detailView.reviewModel = reviewModel
+        }
+    }
 
     // MARK: - Life Cycle
     override func loadView() {
@@ -133,9 +141,11 @@ extension DetailViewController: UIScrollViewDelegate {
     }
 }
 
+// MARK: - WriteReviewViewController Delegate
 extension DetailViewController: WriteReviewViewControllerDelegate {
+    // writeReviewVC에게 "제출"버튼이 눌린 시점에 reviewModel을 받아옵니다.
     func didSubmitReview(_ reviewModel: ReviewModel) {
         print("시점 전달받음")
-        dump(reviewModel)
+        self.reviewModel = reviewModel
     }
 }

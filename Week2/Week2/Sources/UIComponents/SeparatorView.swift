@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// 구분선 컴포넌트입니다.
 class SeparatorView: UIView {
 
     // MARK: - Init

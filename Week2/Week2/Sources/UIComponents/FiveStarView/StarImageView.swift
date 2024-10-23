@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// 한 개짜리 별 UIImageView 컴포넌트입니다.
 class StarImageView: UIImageView {
     // MARK: - Properties
     enum IsFilled: String {

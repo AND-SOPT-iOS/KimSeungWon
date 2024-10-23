@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// UILabel를 쉽게 생성하기 위한 컴포넌트입니다.
 class CustomLabel: UILabel {
     // MARK: - Properties
     let labelText: String
