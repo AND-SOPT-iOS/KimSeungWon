@@ -60,7 +60,11 @@ class DetailView: UIView {
     }()
     
     // 열기 버튼
-    lazy var openButton = OpenButton(type: .system)
+    lazy var openButton: OpenButton = {
+        let btn = OpenButton(type: .system)
+        btn.setTitleFont(.bold)
+        return btn
+    }()
     
     // 내보내기 버튼
     lazy var shareButton: UIButton = {

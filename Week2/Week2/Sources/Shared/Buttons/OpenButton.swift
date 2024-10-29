@@ -17,13 +17,6 @@ class OpenButton: UIButton {
         setupButton()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        self.layer.cornerRadius = self.frame.height / 2
-        self.layer.masksToBounds = true
-        self.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
-    }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -33,5 +26,13 @@ class OpenButton: UIButton {
         self.backgroundColor = .systemBlue
         self.setTitle("열기", for: .normal)
         self.setTitleColor(.white, for: .normal)
+        
+        self.layer.cornerRadius = 15
+        self.layer.masksToBounds = true
+    }
+    
+    // MARK: - Set title font
+    func setTitleFont(_ font: UIFont.Weight) {
+        self.titleLabel?.font = .systemFont(ofSize: 16, weight: font)
     }
 }
