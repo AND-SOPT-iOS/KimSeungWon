@@ -29,7 +29,7 @@ class AppView: UIView {
     private let appSubTitleLabel = CustomLabel(text: "금융이 쉬워진다", color: .secondaryLabel, fontSize: 12)
     
     // 이름, 부제 스택 뷰
-    private lazy var titlestackView: UIStackView = {
+    private lazy var titleStackView: UIStackView = {
         let sv = UIStackView(arrangedSubviews: [appNameLabel, appSubTitleLabel])
         sv.axis = .vertical
         sv.alignment = .leading
@@ -39,7 +39,7 @@ class AppView: UIView {
     
     // 전체 스택뷰
     lazy var mainStackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [appImageView, titlestackView])
+        let sv = UIStackView(arrangedSubviews: [appImageView, titleStackView])
         sv.axis = .horizontal
         sv.spacing = 10
         sv.alignment = .center
@@ -73,7 +73,7 @@ class AppView: UIView {
         }
         
         // 앱 이름, 부제 스택 뷰
-        titlestackView.snp.makeConstraints {
+        titleStackView.snp.makeConstraints {
             $0.height.equalTo(40)
         }
         

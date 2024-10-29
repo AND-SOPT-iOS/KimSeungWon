@@ -8,12 +8,44 @@
 import UIKit
 
 class RootTabBarController: UITabBarController {
-    // MARK: - Properties
-    let todayViewController = UIViewController()
-    let gameViewController = UIViewController()
-    let appViewController = UINavigationController(rootViewController: AppViewController())
-    let arcadeViewController = UIViewController()
-    let searchViewController = UIViewController()
+    // MARK: - Tabs Enum
+    enum Tab: Int, CaseIterable {
+        case today
+        case game
+        case app
+        case arcade
+        case search
+        
+        var title: String {
+            switch self {
+            case .today: return "투데이"
+            case .game: return "게임"
+            case .app: return "앱"
+            case .arcade: return "Arcade"
+            case .search: return "검색"
+            }
+        }
+        
+        var image: UIImage? {
+            switch self {
+            case .today: return UIImage(systemName: "text.rectangle.page")
+            case .game: return UIImage(systemName: "bookmark")
+            case .app: return UIImage(systemName: "square.stack.3d.up.fill")
+            case .arcade: return UIImage(systemName: "bookmark")
+            case .search: return UIImage(systemName: "magnifyingglass")
+            }
+        }
+        
+        func viewController() -> UIViewController {
+            switch self {
+            case .today: return UIViewController()
+            case .game: return UIViewController()
+            case .app: return UINavigationController(rootViewController: AppViewController())
+            case .arcade: return UIViewController()
+            case .search: return UIViewController()
+            }
+        }
+    }
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -24,13 +56,12 @@ class RootTabBarController: UITabBarController {
     
     // MARK: - Set up Tab Bar
     private func setupTabBar() {
-        // 각 ViewController의 tabBarItem과 tag를 설정
-        todayViewController.tabBarItem = UITabBarItem(title: "투데이", image: UIImage(systemName: "text.rectangle.page"), tag: 0)
-        gameViewController.tabBarItem = UITabBarItem(title: "게임", image: UIImage(systemName: "bookmark"), tag: 1)
-        appViewController.tabBarItem = UITabBarItem(title: "앱", image: UIImage(systemName: "square.stack.3d.up.fill"), tag: 2)
-        arcadeViewController.tabBarItem = UITabBarItem(title: "Arcade", image: UIImage(systemName: "bookmark"), tag: 3)
-        searchViewController.tabBarItem = UITabBarItem(title: "검색", image: UIImage(systemName: "magnifyingglass"), tag: 4)
+        let viewControllers = Tab.allCases.map { tab -> UIViewController in
+            let viewController = tab.viewController()
+            viewController.tabBarItem = UITabBarItem(title: tab.title, image: tab.image, tag: tab.rawValue)
+            return viewController
+        }
         
-        self.viewControllers = [todayViewController, gameViewController, appViewController, arcadeViewController, searchViewController]
+        self.viewControllers = viewControllers
     }
 }
