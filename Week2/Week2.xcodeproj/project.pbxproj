@@ -34,10 +34,28 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		E30A95282CD13A4F00671330 /* Exceptions for "Week2" folder in "Week2Tests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Tests/Week2Tests/Week2Tests.swift,
+			);
+			target = E3564D502CBA5C2200AC22C0 /* Week2Tests */;
+		};
+		E30A95292CD13A4F00671330 /* Exceptions for "Week2" folder in "Week2UITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Tests/Week2UITests/Week2UITests.swift,
+				Tests/Week2UITests/Week2UITestsLaunchTests.swift,
+			);
+			target = E3564D5A2CBA5C2200AC22C0 /* Week2UITests */;
+		};
 		E3564D632CBA5C2200AC22C0 /* Exceptions for "Week2" folder in "Week2" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
+				Tests/Week2Tests/Week2Tests.swift,
+				Tests/Week2UITests/Week2UITests.swift,
+				Tests/Week2UITests/Week2UITestsLaunchTests.swift,
 			);
 			target = E3564D3A2CBA5C2000AC22C0 /* Week2 */;
 		};
@@ -48,18 +66,10 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				E3564D632CBA5C2200AC22C0 /* Exceptions for "Week2" folder in "Week2" target */,
+				E30A95282CD13A4F00671330 /* Exceptions for "Week2" folder in "Week2Tests" target */,
+				E30A95292CD13A4F00671330 /* Exceptions for "Week2" folder in "Week2UITests" target */,
 			);
 			path = Week2;
-			sourceTree = "<group>";
-		};
-		E3564D542CBA5C2200AC22C0 /* Week2Tests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Week2Tests;
-			sourceTree = "<group>";
-		};
-		E3564D5E2CBA5C2200AC22C0 /* Week2UITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Week2UITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -94,8 +104,6 @@
 			isa = PBXGroup;
 			children = (
 				E3564D3D2CBA5C2000AC22C0 /* Week2 */,
-				E3564D542CBA5C2200AC22C0 /* Week2Tests */,
-				E3564D5E2CBA5C2200AC22C0 /* Week2UITests */,
 				E3564D3C2CBA5C2000AC22C0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -149,9 +157,6 @@
 			dependencies = (
 				E3564D532CBA5C2200AC22C0 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				E3564D542CBA5C2200AC22C0 /* Week2Tests */,
-			);
 			name = Week2Tests;
 			packageProductDependencies = (
 			);
@@ -171,9 +176,6 @@
 			);
 			dependencies = (
 				E3564D5D2CBA5C2200AC22C0 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				E3564D5E2CBA5C2200AC22C0 /* Week2UITests */,
 			);
 			name = Week2UITests;
 			packageProductDependencies = (
