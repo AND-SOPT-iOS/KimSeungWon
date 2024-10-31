@@ -10,22 +10,6 @@ import UIKit
 import SnapKit
 
 class DetailView: UIView {
-    // MARK: - Properties
-    var reviewModel: ReviewModel? {
-        didSet {
-            // detailVC에서 reviewModel을 받으면 UI 재설정
-            guard let reviewModel else { return }
-            self.reviewView.titleLabel.text = reviewModel.title
-            self.reviewView.bodyLabel.text = reviewModel.contents
-            
-            if let starCount = reviewModel.starCount {
-                self.rateNumberLabel.text = String(starCount)
-                self.reviewView.fiveStarView.setupStars(starCount)
-                self.rateFiveStarView.setupStars(starCount)
-            }
-        }
-    }
-    
     // MARK: - 토스 메인 타이틀
     // 스크롤 뷰, 콘텐트 뷰
     let scrollView = UIScrollView()
@@ -255,7 +239,32 @@ class DetailView: UIView {
     private let mostHelpfulReviewLabel = CustomLabel(text: "가장 도움이 되는 리뷰", color: .label, fontSize: 15, fontWeight: .semibold)
     
     // 리뷰 뷰
-    private let reviewView = ReviewView()
+//    private let reviewView = ReviewView()
+    
+    // 리뷰 CollectionView
+    lazy var reviewCollectionView: UICollectionView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.minimumLineSpacing = 10
+        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        cv.showsHorizontalScrollIndicator = false
+        cv.backgroundColor = .clear
+        cv.setShadow(opacity: 1, Radius: 7, offSet: CGSize(width: 0, height: 0))
+        return cv
+    }()
+    /*
+     
+     let flowLayout = SnapLeadingFlowLayout()
+     flowLayout.scrollDirection = .horizontal
+     flowLayout.minimumLineSpacing = 10
+     flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+     let cv = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+     cv.showsHorizontalScrollIndicator = false
+     cv.decelerationRate = .fast
+     cv.isPagingEnabled = false
+     return cv
+     */
     
     
     // 탭하여 평가하기
@@ -305,7 +314,7 @@ class DetailView: UIView {
         contentView.addSubviews(appImageView, titleStackView, openButton, shareButton, separatorView1)
         contentView.addSubviews(evalStackView, horizontalSeparatorView1, awardStackView, horizontalSeparatorView2, ageStackView, separatorView2)
         contentView.addSubviews(newsTitleView, versionLabel, dateLabel, descriptionLabel, previewLabel, previewCollectionView, iphoneIconImageView, iphoneLabel, separatorView3)
-        contentView.addSubviews(additionalDescriptionLabel, moreLabel, developerStackView, developerChevronButton, reviewTitleView,rateNumberLabel, rateFiveStarView, howManyRateLabel, mostHelpfulReviewLabel, reviewView, tapToRateLabel, tapFiveStarView, buttonStackView)
+        contentView.addSubviews(additionalDescriptionLabel, moreLabel, developerStackView, developerChevronButton, reviewTitleView,rateNumberLabel, rateFiveStarView, howManyRateLabel, mostHelpfulReviewLabel, reviewCollectionView, tapToRateLabel, tapFiveStarView, buttonStackView)
     }
     
     // MARK: - Set Top Views Alpha
@@ -538,15 +547,21 @@ class DetailView: UIView {
         }
         
         // 리뷰 뷰
-        reviewView.snp.makeConstraints {
+//        reviewView.snp.makeConstraints {
+//            $0.top.equalTo(mostHelpfulReviewLabel.snp.bottom).offset(18)
+//            $0.horizontalEdges.equalToSuperview().inset(20)
+//            $0.height.equalTo(185)
+//        }
+        
+        reviewCollectionView.snp.makeConstraints {
             $0.top.equalTo(mostHelpfulReviewLabel.snp.bottom).offset(18)
-            $0.horizontalEdges.equalToSuperview().inset(20)
+            $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(185)
         }
         
         // 탭하여 평가하기
         tapToRateLabel.snp.makeConstraints {
-            $0.top.equalTo(reviewView.snp.bottom).offset(22)
+            $0.top.equalTo(reviewCollectionView.snp.bottom).offset(22)
             $0.leading.trailing.equalToSuperview().inset(20)
         }
     

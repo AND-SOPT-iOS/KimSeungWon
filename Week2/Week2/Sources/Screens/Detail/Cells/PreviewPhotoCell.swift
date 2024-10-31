@@ -45,9 +45,8 @@ class PreviewPhotoCell: UICollectionViewCell {
         }
     }
     
+    // MARK: - Configure
     public func configure(_ previewModel: PreviewModel) {
         self.photoImageView.image = previewModel.previewPhotoImage
     }
-
-    
 }

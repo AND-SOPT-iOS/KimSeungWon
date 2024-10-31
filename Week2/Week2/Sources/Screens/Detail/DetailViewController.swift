@@ -11,14 +11,6 @@ import SnapKit
 class DetailViewController: UIViewController {
     // MARK: - Properties
     private let detailView = DetailView()
-    
-    var reviewModel: ReviewModel? {
-        // writeReviewVC에서 델리게이트로 받아온 review모델을 받아서 detailView로 모델을 넘겨줍니다.
-        didSet {
-            guard let reviewModel else { return }
-            detailView.reviewModel = reviewModel
-        }
-    }
 
     // MARK: - Life Cycle
     override func loadView() {
@@ -46,9 +38,12 @@ class DetailViewController: UIViewController {
         // delegate
         detailView.previewCollectionView.dataSource = self
         detailView.previewCollectionView.delegate = self
+        detailView.reviewCollectionView.dataSource = self
+        detailView.reviewCollectionView.delegate = self
         
         // register cells
         detailView.previewCollectionView.register(PreviewPhotoCell.self, forCellWithReuseIdentifier: PreviewPhotoCell.cellIdentifier)
+        detailView.reviewCollectionView.register(ReviewCell.self, forCellWithReuseIdentifier: ReviewCell.cellIdentifier)
     }
     
     // MARK: - Set up Actions
@@ -96,7 +91,6 @@ class DetailViewController: UIViewController {
     @objc
     private func didTapReviewButton() {
         let writeReviewVC = WriteReviewViewController()
-        writeReviewVC.delegate = self
         let navVC = UINavigationController(rootViewController: writeReviewVC)
         self.present(navVC, animated: true, completion: nil)
     }
@@ -158,28 +152,45 @@ extension DetailViewController: UIScrollViewDelegate {
 // MARK: - CollectionView DataSource
 extension DetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return PreviewModel.mockData.count
+        if collectionView == detailView.previewCollectionView {
+            return PreviewModel.mockData.count
+        }
+        
+        if collectionView == detailView.reviewCollectionView {
+            return ReviewModel.mockData.count
+        }
+        
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let previewPhotoCell = detailView.previewCollectionView.dequeueReusableCell(withReuseIdentifier: PreviewPhotoCell.cellIdentifier, for: indexPath) as? PreviewPhotoCell else { return UICollectionViewCell() }
-        previewPhotoCell.configure(PreviewModel.mockData[indexPath.row])
-        return previewPhotoCell
+        if collectionView == detailView.previewCollectionView {
+            guard let previewPhotoCell = detailView.previewCollectionView.dequeueReusableCell(withReuseIdentifier: PreviewPhotoCell.cellIdentifier, for: indexPath) as? PreviewPhotoCell else { return UICollectionViewCell() }
+            previewPhotoCell.configure(PreviewModel.mockData[indexPath.row])
+            return previewPhotoCell
+        }
+        
+        if collectionView == detailView.reviewCollectionView {
+            guard let reviewCell = detailView.reviewCollectionView.dequeueReusableCell(withReuseIdentifier: ReviewCell.cellIdentifier, for: indexPath) as? ReviewCell else { return UICollectionViewCell() }
+            reviewCell.configure(ReviewModel.mockData[indexPath.row])
+            return reviewCell
+        }
+        
+        return UICollectionViewCell()
     }
 }
 
 // MARK: - CollectionView Delegate FlowLayout
 extension DetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 210, height: collectionView.bounds.height)
-    }
-}
-
-// MARK: - WriteReviewViewController Delegate
-extension DetailViewController: WriteReviewViewControllerDelegate {
-    // writeReviewVC에게 "제출"버튼이 눌린 시점에 reviewModel을 받아옵니다.
-    func didSubmitReview(_ reviewModel: ReviewModel) {
-        print("시점 전달받음")
-        self.reviewModel = reviewModel
+        if collectionView == detailView.previewCollectionView {
+            return CGSize(width: 210, height: collectionView.bounds.height)
+        }
+        
+        if collectionView == detailView.reviewCollectionView {
+            return CGSize(width: collectionView.bounds.width - 40, height: collectionView.bounds.height)
+        }
+        
+        return CGSize(width: 0, height: 0)
     }
 }
