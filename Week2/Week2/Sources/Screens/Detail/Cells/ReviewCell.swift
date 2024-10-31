@@ -45,7 +45,7 @@ class ReviewCell: UICollectionViewCell {
         self.backgroundColor = .tertiarySystemBackground
         self.layer.cornerRadius = 15
         
-        self.addSubviews(titleLabel, fiveStarView, dateLabel, writerLabel, bodyLabel)
+        self.contentView.addSubviews(titleLabel, fiveStarView, dateLabel, writerLabel, bodyLabel)
         
     }
     
@@ -83,7 +83,7 @@ class ReviewCell: UICollectionViewCell {
             $0.bottom.lessThanOrEqualToSuperview().inset(20)
         }
     }
-
+    
     // MARK: - Configure
     public func configure(_ reviewModel: ReviewModel) {
         self.titleLabel.text = reviewModel.title

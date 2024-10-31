@@ -10,42 +10,22 @@ import SnapKit
 
 class AppView: UIView {
     // MARK: - UI Components
-    // 앱 이미지
-    private let appImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.image = UIImage(named: "appIcon")
-        iv.contentMode = .scaleAspectFill
-        iv.layer.masksToBounds = true
-        iv.layer.cornerRadius = 15
-        iv.layer.borderWidth = 1
-        iv.layer.borderColor = UIColor.systemGray5.cgColor
-        return iv
+    private let scrollView = UIScrollView()
+    private var contentView = UIView()
+    
+    lazy var topBannerCollectoinView: UICollectionView = {
+        let flowLayout = SnapFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.minimumLineSpacing = 10
+        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        cv.showsHorizontalScrollIndicator = false
+        cv.backgroundColor = .clear
+        cv.decelerationRate = .fast
+        cv.isPagingEnabled = false
+        return cv
     }()
     
-    // 앱 이름
-    private let appNameLabel = CustomLabel(text: "토스", color: .label, fontSize: 18)
-    
-    // 앱 부제
-    private let appSubTitleLabel = CustomLabel(text: "금융이 쉬워진다", color: .secondaryLabel, fontSize: 12)
-    
-    // 이름, 부제 스택 뷰
-    private lazy var titleStackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [appNameLabel, appSubTitleLabel])
-        sv.axis = .vertical
-        sv.alignment = .leading
-        sv.distribution = .fillProportionally
-        return sv
-    }()
-    
-    // 전체 스택뷰
-    lazy var mainStackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [appImageView, titleStackView])
-        sv.axis = .horizontal
-        sv.spacing = 10
-        sv.alignment = .center
-        sv.distribution = .fill
-        return sv
-    }()
 
     // MARK: - Init
     override init(frame: CGRect) {
@@ -62,26 +42,27 @@ class AppView: UIView {
     // MARK: - Set up UI
     private func setupUI() {
         self.backgroundColor = .systemBackground
-        self.addSubviews(mainStackView)
+        self.addSubviews(scrollView)
+        scrollView.addSubviews(contentView)
+        contentView.addSubviews(topBannerCollectoinView)
     }
     
     // MARK: - Set up Constraints
     private func setupConstraints() {
-        // 앱 이미지
-        appImageView.snp.makeConstraints {
-            $0.size.equalTo(65)
+        scrollView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
         
-        // 앱 이름, 부제 스택 뷰
-        titleStackView.snp.makeConstraints {
-            $0.height.equalTo(40)
+        contentView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.width.equalTo(scrollView)
+            $0.height.equalTo(1500)
         }
         
-        // 전체 스택뷰
-        mainStackView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
-            $0.height.equalTo(65)
+        topBannerCollectoinView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(300)
         }
     }
 }
