@@ -1,19 +1,19 @@
 //
-//  ReviewView.swift
+//  ReviewCell.swift
 //  Week2
 //
-//  Created by 김승원 on 10/18/24.
+//  Created by 김승원 on 10/31/24.
 //
 
 import UIKit
 import SnapKit
 
-class ReviewView: UIView {
-    // MARK: - UIComponents
-    let titleLabel = CustomLabel(text: "김승원 조금만 더 긴 타이틀", color: .label, fontSize: 15, fontWeight: .semibold)
+class ReviewCell: UICollectionViewCell {
+    // MARK: - UI Components
+    private let titleLabel = CustomLabel(text: "김승원 조금만 더 긴 타이틀", color: .label, fontSize: 15, fontWeight: .semibold)
     
     // 별
-    let fiveStarView: FiveStarView = {
+    private let fiveStarView: FiveStarView = {
         let sv = FiveStarView(color: .label)
         sv.setupStars(5)
         return sv
@@ -26,8 +26,8 @@ class ReviewView: UIView {
     private let writerLabel = CustomLabel(text: "INFP", color: .secondaryLabel, fontSize: 13)
     
     // 본문
-    let bodyLabel = CustomLabel(text: "동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리 나라만세 무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세.", color: .secondaryLabel, fontSize: 13)
-
+    private let bodyLabel = CustomLabel(text: "동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리 나라만세 무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세!", color: .secondaryLabel, fontSize: 13)
+    
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -83,4 +83,14 @@ class ReviewView: UIView {
             $0.bottom.lessThanOrEqualToSuperview().inset(20)
         }
     }
+
+    // MARK: - Configure
+    public func configure(_ reviewModel: ReviewModel) {
+        self.titleLabel.text = reviewModel.title
+        if let starCount = reviewModel.starCount {
+            self.fiveStarView.setupStars(starCount)
+        }
+        self.bodyLabel.text = reviewModel.contents
+    }
+    
 }
