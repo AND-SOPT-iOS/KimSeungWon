@@ -37,7 +37,18 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         
         setupScrollView()
+        setupCollectionView()
         setupActions()
+    }
+    
+    // MARK: - Set up CollectionView
+    private func setupCollectionView() {
+        // delegate
+        detailView.previewCollectionView.dataSource = self
+        detailView.previewCollectionView.delegate = self
+        
+        // register cells
+        detailView.previewCollectionView.register(PreviewPhotoCell.self, forCellWithReuseIdentifier: PreviewPhotoCell.cellIdentifier)
     }
     
     // MARK: - Set up Actions
@@ -94,51 +105,73 @@ class DetailViewController: UIViewController {
 // MARK: - UIScrollView Delegate
 extension DetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // 로고이미지가 뷰에서 사라지는 위치를 계산
-        let openButtonFrame = detailView.openButton.convert(detailView.openButton.bounds, to: view)
-        
-        // 로고이미지가 뷰에서 스크롤되어 사라지면?
-        if openButtonFrame.minY < navigationController?.navigationBar.frame.maxY ?? 0 {
-            // 네비바에서 titleView, rightBarButtonitem 설정
-            if navigationItem.titleView == nil {
-                let logoImageView = UIImageView(image: UIImage(named: "appIcon"))
-                logoImageView.contentMode = .scaleAspectFill
-                logoImageView.layer.borderWidth = 0.5
-                logoImageView.layer.borderColor = UIColor.systemGray5.cgColor
-                logoImageView.layer.cornerRadius = 8
-                logoImageView.layer.masksToBounds = true
-                
-                let logoContainerView = UIView()
-                logoContainerView.addSubview(logoImageView)
-                
-                logoImageView.snp.makeConstraints {
-                    $0.edges.equalToSuperview()
-                    $0.size.equalTo(30)
-                }
-                
-                let openButton = OpenButton(type: .system)
-                openButton.setTitleFont(.bold)
-                
-                openButton.snp.makeConstraints {
-                    $0.width.equalTo(70)
-                    $0.height.equalTo(30)
-                }
-                
-                // 애니메이션으로 추가
-                UIView.transition(with: navigationController!.navigationBar, duration: 0.3, options: .transitionCrossDissolve) {
-                    self.detailView.setTopViewsAlpha(0)
-                    self.navigationItem.titleView = logoContainerView
-                    self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: openButton)
-                }
-            }
+        if scrollView == detailView.scrollView {
+            // 로고이미지가 뷰에서 사라지는 위치를 계산
+            let openButtonFrame = detailView.openButton.convert(detailView.openButton.bounds, to: view)
             
-        } else if navigationItem.titleView != nil {
-            UIView.transition(with: navigationController!.navigationBar, duration: 0.3, options: .transitionCrossDissolve) {
-                self.detailView.setTopViewsAlpha(1)
-                self.navigationItem.titleView = nil
-                self.navigationItem.rightBarButtonItem = nil
+            // 로고이미지가 뷰에서 스크롤되어 사라지면?
+            if openButtonFrame.minY < navigationController?.navigationBar.frame.maxY ?? 0 {
+                // 네비바에서 titleView, rightBarButtonitem 설정
+                if navigationItem.titleView == nil {
+                    let logoImageView = UIImageView(image: UIImage(named: "appIcon"))
+                    logoImageView.contentMode = .scaleAspectFill
+                    logoImageView.layer.borderWidth = 0.5
+                    logoImageView.layer.borderColor = UIColor.systemGray5.cgColor
+                    logoImageView.layer.cornerRadius = 8
+                    logoImageView.layer.masksToBounds = true
+                    
+                    let logoContainerView = UIView()
+                    logoContainerView.addSubview(logoImageView)
+                    
+                    logoImageView.snp.makeConstraints {
+                        $0.edges.equalToSuperview()
+                        $0.size.equalTo(30)
+                    }
+                    
+                    let openButton = OpenButton(type: .system)
+                    openButton.setTitleFont(.bold)
+                    
+                    openButton.snp.makeConstraints {
+                        $0.width.equalTo(70)
+                        $0.height.equalTo(30)
+                    }
+                    
+                    // 애니메이션으로 추가
+                    UIView.transition(with: navigationController!.navigationBar, duration: 0.3, options: .transitionCrossDissolve) {
+                        self.detailView.setTopViewsAlpha(0)
+                        self.navigationItem.titleView = logoContainerView
+                        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: openButton)
+                    }
+                }
+                
+            } else if navigationItem.titleView != nil {
+                UIView.transition(with: navigationController!.navigationBar, duration: 0.3, options: .transitionCrossDissolve) {
+                    self.detailView.setTopViewsAlpha(1)
+                    self.navigationItem.titleView = nil
+                    self.navigationItem.rightBarButtonItem = nil
+                }
             }
         }
+    }
+}
+
+// MARK: - CollectionView DataSource
+extension DetailViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return PreviewModel.mockData.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let previewPhotoCell = detailView.previewCollectionView.dequeueReusableCell(withReuseIdentifier: PreviewPhotoCell.cellIdentifier, for: indexPath) as? PreviewPhotoCell else { return UICollectionViewCell() }
+        previewPhotoCell.configure(PreviewModel.mockData[indexPath.row])
+        return previewPhotoCell
+    }
+}
+
+// MARK: - CollectionView Delegate FlowLayout
+extension DetailViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 210, height: collectionView.bounds.height)
     }
 }
 

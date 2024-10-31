@@ -167,28 +167,17 @@ class DetailView: UIView {
     // 미리보기
     private let previewLabel = CustomLabel(text: "미리보기", color: .label, fontSize: 20, fontWeight: .semibold)
     
-    // 미리보기 이미지 1
-    private let previewImageView1: UIImageView = {
-        let iv = UIImageView()
-        iv.image = UIImage(named: "firstPreviewImage")
-        iv.contentMode = .scaleAspectFill
-        iv.layer.cornerRadius = 15
-        iv.layer.borderWidth = 1
-        iv.layer.borderColor = UIColor.systemGray5.cgColor
-        iv.layer.masksToBounds = true
-        return iv
-    }()
-    
-    // 미리보기 이미지 2
-    private let previewImageView2: UIImageView = {
-        let iv = UIImageView()
-        iv.image = UIImage(named: "secondPreviewImage")
-        iv.contentMode = .scaleAspectFill
-        iv.layer.cornerRadius = 15
-        iv.layer.borderWidth = 1
-        iv.layer.borderColor = UIColor.systemGray5.cgColor
-        iv.layer.masksToBounds = true
-        return iv
+    // 미리보기 콜렉션 뷰
+    let previewCollectionView: UICollectionView = {
+        let flowLayout = SnapLeadingFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.minimumLineSpacing = 10
+        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        cv.showsHorizontalScrollIndicator = false
+        cv.decelerationRate = .fast
+        cv.isPagingEnabled = false
+        return cv
     }()
     
     // 아이폰 아이콘 이미지 뷰
@@ -314,7 +303,7 @@ class DetailView: UIView {
         scrollView.addSubviews(contentView)
         contentView.addSubviews(appImageView, titleStackView, openButton, shareButton, separatorView1)
         contentView.addSubviews(evalStackView, horizontalSeparatorView1, awardStackView, horizontalSeparatorView2, ageStackView, separatorView2)
-        contentView.addSubviews(newsTitleView, versionLabel, dateLabel, descriptionLabel, previewLabel, previewImageView1, previewImageView2, iphoneIconImageView, iphoneLabel, separatorView3)
+        contentView.addSubviews(newsTitleView, versionLabel, dateLabel, descriptionLabel, previewLabel, previewCollectionView, iphoneIconImageView, iphoneLabel, separatorView3)
         contentView.addSubviews(additionalDescriptionLabel, moreLabel, developerStackView, developerChevronButton, reviewTitleView,rateNumberLabel, rateFiveStarView, howManyRateLabel, mostHelpfulReviewLabel, reviewView, tapToRateLabel, tapFiveStarView, buttonStackView)
     }
     
@@ -459,32 +448,23 @@ class DetailView: UIView {
             $0.leading.equalToSuperview().inset(20)
         }
         
-        // 미리보기 이미지 1
-        previewImageView1.snp.makeConstraints {
+        // 미리보기 콜렉션 뷰
+        previewCollectionView.snp.makeConstraints {
             $0.top.equalTo(previewLabel.snp.bottom).offset(15)
-            $0.leading.equalToSuperview().inset(20)
-            $0.width.equalTo(230)
             $0.height.equalTo(475)
-        }
-        
-        // 미리보기 이미지 2
-        previewImageView2.snp.makeConstraints {
-            $0.top.equalTo(previewLabel.snp.bottom).offset(15)
-            $0.leading.equalTo(previewImageView1.snp.trailing).offset(10)
-            $0.width.equalTo(230)
-            $0.height.equalTo(475)
+            $0.horizontalEdges.equalToSuperview()
         }
         
         // 아이폰 아이콘 이미지뷰
         iphoneIconImageView.snp.makeConstraints {
-            $0.top.equalTo(previewImageView1.snp.bottom).offset(10)
+            $0.top.equalTo(previewCollectionView.snp.bottom).offset(10)
             $0.leading.equalToSuperview().inset(20)
             $0.size.equalTo(18)
         }
         
         // iphone 레이블
         iphoneLabel.snp.makeConstraints {
-            $0.top.equalTo(previewImageView1.snp.bottom).offset(14)
+            $0.top.equalTo(previewCollectionView.snp.bottom).offset(14)
             $0.leading.equalTo(iphoneIconImageView.snp.trailing).offset(5)
         }
         
