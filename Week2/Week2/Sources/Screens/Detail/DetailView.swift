@@ -153,7 +153,7 @@ class DetailView: UIView {
     
     // 미리보기 콜렉션 뷰
     lazy var previewCollectionView: UICollectionView = {
-        let flowLayout = SnapLeadingFlowLayout()
+        let flowLayout = SnapFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.minimumLineSpacing = 10
         flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
@@ -243,29 +243,18 @@ class DetailView: UIView {
     
     // 리뷰 CollectionView
     lazy var reviewCollectionView: UICollectionView = {
-        let flowLayout = UICollectionViewFlowLayout()
+        let flowLayout = SnapFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.minimumLineSpacing = 10
         flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         let cv = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         cv.showsHorizontalScrollIndicator = false
         cv.backgroundColor = .clear
+        cv.decelerationRate = .fast
+        cv.isPagingEnabled = false
         cv.setShadow(opacity: 1, Radius: 7, offSet: CGSize(width: 0, height: 0))
         return cv
     }()
-    /*
-     
-     let flowLayout = SnapLeadingFlowLayout()
-     flowLayout.scrollDirection = .horizontal
-     flowLayout.minimumLineSpacing = 10
-     flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-     let cv = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-     cv.showsHorizontalScrollIndicator = false
-     cv.decelerationRate = .fast
-     cv.isPagingEnabled = false
-     return cv
-     */
-    
     
     // 탭하여 평가하기
     private let tapToRateLabel = CustomLabel(text: "탭하여 평가하기", color: .label, fontSize: 15, fontWeight: .bold, alignment: .center)
@@ -545,13 +534,6 @@ class DetailView: UIView {
             $0.top.equalTo(rateNumberLabel.snp.bottom).offset(13)
             $0.leading.equalToSuperview().inset(20)
         }
-        
-        // 리뷰 뷰
-//        reviewView.snp.makeConstraints {
-//            $0.top.equalTo(mostHelpfulReviewLabel.snp.bottom).offset(18)
-//            $0.horizontalEdges.equalToSuperview().inset(20)
-//            $0.height.equalTo(185)
-//        }
         
         reviewCollectionView.snp.makeConstraints {
             $0.top.equalTo(mostHelpfulReviewLabel.snp.bottom).offset(18)
