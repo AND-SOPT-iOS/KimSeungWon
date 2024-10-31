@@ -168,7 +168,7 @@ class DetailView: UIView {
     private let previewLabel = CustomLabel(text: "미리보기", color: .label, fontSize: 20, fontWeight: .semibold)
     
     // 미리보기 콜렉션 뷰
-    let previewCollectionView: UICollectionView = {
+    lazy var previewCollectionView: UICollectionView = {
         let flowLayout = SnapLeadingFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.minimumLineSpacing = 10
@@ -256,6 +256,7 @@ class DetailView: UIView {
     
     // 리뷰 뷰
     private let reviewView = ReviewView()
+    
     
     // 탭하여 평가하기
     private let tapToRateLabel = CustomLabel(text: "탭하여 평가하기", color: .label, fontSize: 15, fontWeight: .bold, alignment: .center)
