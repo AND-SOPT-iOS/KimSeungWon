@@ -44,7 +44,6 @@ class ReviewView: UIView {
     private func setupUI() {
         self.backgroundColor = .tertiarySystemBackground
         self.layer.cornerRadius = 15
-        self.setShadow(opacity: 1, Radius: 10, offSet: CGSize(width: 0, height: 0))
         
         self.addSubviews(titleLabel, fiveStarView, dateLabel, writerLabel, bodyLabel)
         
