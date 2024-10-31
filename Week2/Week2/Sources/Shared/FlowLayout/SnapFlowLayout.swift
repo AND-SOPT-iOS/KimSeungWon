@@ -1,5 +1,5 @@
 //
-//  SnapLeadingFlowLayout.swift
+//  SnapFlowLayout.swift
 //  Week2
 //
 //  Created by 김승원 on 10/31/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SnapLeadingFlowLayout: UICollectionViewFlowLayout {
+final class SnapFlowLayout: UICollectionViewFlowLayout {
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         guard let collectionView = collectionView else {
             return super.targetContentOffset(forProposedContentOffset: proposedContentOffset, withScrollingVelocity: velocity)
