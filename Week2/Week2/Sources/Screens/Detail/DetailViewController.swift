@@ -122,7 +122,7 @@ extension DetailViewController: UIScrollViewDelegate {
                         $0.size.equalTo(30)
                     }
                     
-                    let openButton = OpenButton(type: .system)
+                    let openButton = BlueOpenButton(type: .system)
                     openButton.setTitleFont(.bold)
                     
                     openButton.snp.makeConstraints {

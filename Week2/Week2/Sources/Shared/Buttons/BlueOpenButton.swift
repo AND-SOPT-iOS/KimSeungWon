@@ -1,5 +1,5 @@
 //
-//  OpenButton.swift
+//  BlueOpenButton.swift
 //  Week2
 //
 //  Created by 김승원 on 10/14/24.
@@ -8,7 +8,7 @@
 import UIKit
 
 /// 파란색 배경의 열기 버튼 컴포넌트입니다.
-class OpenButton: UIButton {
+class BlueOpenButton: UIButton {
 
     // MARK: - Init
     override init(frame: CGRect) {

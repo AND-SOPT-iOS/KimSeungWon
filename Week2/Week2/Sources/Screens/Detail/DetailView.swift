@@ -44,8 +44,8 @@ class DetailView: UIView {
     }()
     
     // 열기 버튼
-    lazy var openButton: OpenButton = {
-        let btn = OpenButton(type: .system)
+    lazy var openButton: BlueOpenButton = {
+        let btn = BlueOpenButton(type: .system)
         btn.setTitleFont(.bold)
         return btn
     }()
