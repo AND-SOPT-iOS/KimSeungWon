@@ -15,15 +15,17 @@ class CustomLabel: UILabel {
     let labelFontSize: CGFloat
     let labelFontWeight: UIFont.Weight
     let labelAlignment: NSTextAlignment
+    let labelNumberOfLines: Int
 
     // MARK: - Init
-    init(text: String, color: UIColor, fontSize: CGFloat, fontWeight: UIFont.Weight = .regular, alignment: NSTextAlignment = .left) {
+    init(text: String, color: UIColor, fontSize: CGFloat, fontWeight: UIFont.Weight = .regular, alignment: NSTextAlignment = .left, numberOfLines: Int = 0) {
         
         self.labelText = text
         self.labelTextColor = color
         self.labelFontSize = fontSize
         self.labelFontWeight = fontWeight
         self.labelAlignment = alignment
+        self.labelNumberOfLines = numberOfLines
         
         super.init(frame: .zero)
         
@@ -41,6 +43,5 @@ class CustomLabel: UILabel {
                                  weight: labelFontWeight)
         self.textColor = labelTextColor
         self.textAlignment = labelAlignment
-        self.numberOfLines = 0
     }
 }
