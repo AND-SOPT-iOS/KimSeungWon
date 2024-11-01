@@ -57,6 +57,21 @@ class AppView: UIView {
         return cv
     }()
     
+    lazy var selectedAppButtonView = SemiBoldTitleWithButtonView(title: "에디터의 선택 시리즈")
+    
+    lazy var selectedAppCollectionView: UICollectionView = {
+        let flowLayout = SnapFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.minimumLineSpacing = 10
+        flowLayout.minimumInteritemSpacing = 0
+        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        cv.showsHorizontalScrollIndicator = false
+        cv.decelerationRate = .fast
+        cv.isPagingEnabled = false
+        return cv
+    }()
+    
 
     // MARK: - Init
     override init(frame: CGRect) {
@@ -75,7 +90,7 @@ class AppView: UIView {
         self.backgroundColor = .systemBackground
         self.addSubviews(scrollView)
         scrollView.addSubviews(contentView)
-        contentView.addSubviews(topBannerCollectionView, essentialAppButtonView, essentialSubTitleLabel, essentialAppCollectionView, focusAppButtonView, focusSubTitleLabel, focusAppCollectionView)
+        contentView.addSubviews(topBannerCollectionView, essentialAppButtonView, essentialSubTitleLabel, essentialAppCollectionView, focusAppButtonView, focusSubTitleLabel, focusAppCollectionView, selectedAppButtonView, selectedAppCollectionView)
     }
     
     // MARK: - Set up Constraints
@@ -87,7 +102,7 @@ class AppView: UIView {
         contentView.snp.makeConstraints {
             $0.edges.equalToSuperview()
             $0.width.equalTo(scrollView)
-            $0.bottom.equalTo(focusAppCollectionView.snp.bottom).offset(20)
+            $0.bottom.equalTo(selectedAppCollectionView.snp.bottom).offset(20)
         }
         
         topBannerCollectionView.snp.makeConstraints {
@@ -134,6 +149,18 @@ class AppView: UIView {
         
         focusAppCollectionView.snp.makeConstraints {
             $0.top.equalTo(focusSubTitleLabel.snp.bottom).offset(12)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(216)
+        }
+        
+        selectedAppButtonView.snp.makeConstraints {
+            $0.top.equalTo(focusAppCollectionView.snp.bottom).offset(35)
+            $0.horizontalEdges.equalToSuperview().inset(20)
+            $0.height.equalTo(20)
+        }
+        
+        selectedAppCollectionView.snp.makeConstraints {
+            $0.top.equalTo(selectedAppButtonView.snp.bottom).offset(12)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(216)
         }

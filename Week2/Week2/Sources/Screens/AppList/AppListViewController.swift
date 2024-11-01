@@ -10,6 +10,7 @@ import UIKit
 class AppListViewController: UIViewController {
     // MARK: - Properties
     private let appListView = AppListView()
+    private var appModels: [AppModel] = []
 
     // MARK: - Life Cycle
     override func loadView() {
@@ -26,6 +27,11 @@ class AppListViewController: UIViewController {
         super.viewDidLoad()
 
         setupTableView()
+    }
+    
+    // MARK: - dataBind
+    func dataBind(_ appModels: [AppModel]) {
+        self.appModels = appModels
     }
     
     // MARK: - Set up TableView
@@ -63,7 +69,7 @@ extension AppListViewController: UITableViewDataSource {
         ) as? AppTableViewCell else {
             return UITableViewCell()
         }
-        appTableViewCell.configure(AppModel.mockData[indexPath.row])
+        appTableViewCell.configure(appModels[indexPath.row])
         return appTableViewCell
     }
 }
@@ -72,5 +78,9 @@ extension AppListViewController: UITableViewDataSource {
 extension AppListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 108
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
     }
 }

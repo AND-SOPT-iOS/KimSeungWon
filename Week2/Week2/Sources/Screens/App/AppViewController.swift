@@ -52,10 +52,14 @@ class AppViewController: UIViewController {
         appView.focusAppCollectionView.dataSource = self
         appView.focusAppCollectionView.delegate = self
         
+        appView.selectedAppCollectionView.dataSource = self
+        appView.selectedAppCollectionView.delegate = self
+        
         // register Cells
         appView.topBannerCollectionView.register(TopBannerCell.self, forCellWithReuseIdentifier: TopBannerCell.cellIdentifier)
         appView.essentialAppCollectionView.register(AppCollectionViewCell.self, forCellWithReuseIdentifier: AppCollectionViewCell.cellIdentifier)
         appView.focusAppCollectionView.register(AppCollectionViewCell.self, forCellWithReuseIdentifier: AppCollectionViewCell.cellIdentifier)
+        appView.selectedAppCollectionView.register(AppCollectionViewCell.self, forCellWithReuseIdentifier: AppCollectionViewCell.cellIdentifier)
     }
     
     // MARK: - Set up NavigationBar
@@ -69,6 +73,8 @@ class AppViewController: UIViewController {
     private func didTapEssentialButton() {
         let appListVC = AppListViewController()
         appListVC.setupTitle("iPhone 필수 앱")
+//        appListVC.appModel = AppModel.mockData
+        appListVC.dataBind(AppModel.mockData)
         self.navigationController?.pushViewController(appListVC, animated: true)
     }
     
@@ -76,6 +82,8 @@ class AppViewController: UIViewController {
     private func didtapFocusButton() {
         let appListVC = AppListViewController()
         appListVC.setupTitle("지금 주목해야 할 앱")
+//        appListVC.appModel = AppModel.mockData.reversed()
+        appListVC.dataBind(AppModel.mockData.reversed())
         self.navigationController?.pushViewController(appListVC, animated: true)
     }
 }
@@ -92,6 +100,10 @@ extension AppViewController: UICollectionViewDataSource {
         }
         
         if collectionView == appView.focusAppCollectionView {
+            return AppModel.mockData.count
+        }
+        
+        if collectionView == appView.selectedAppCollectionView {
             return AppModel.mockData.count
         }
         
@@ -112,7 +124,7 @@ extension AppViewController: UICollectionViewDataSource {
             return topBannerCell
         }
         
-        if collectionView == appView.essentialAppCollectionView {
+        if collectionView == appView.essentialAppCollectionView || collectionView == appView.selectedAppCollectionView {
             guard let appCollectionViewCell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: AppCollectionViewCell.cellIdentifier,
                 for: indexPath
@@ -134,6 +146,7 @@ extension AppViewController: UICollectionViewDataSource {
             return appCollectionViewCell
         }
         
+        
         return UICollectionViewCell()
     }
 }
@@ -145,7 +158,7 @@ extension AppViewController: UICollectionViewDelegateFlowLayout {
             return CGSize(width: collectionView.bounds.width - 40, height: collectionView.bounds.height)
         }
         
-        if collectionView == appView.essentialAppCollectionView || collectionView == appView.focusAppCollectionView {
+        if collectionView == appView.essentialAppCollectionView || collectionView == appView.focusAppCollectionView || collectionView == appView.selectedAppCollectionView {
             return CGSize(width: collectionView.bounds.width - 40, height: collectionView.bounds.height/3)
         }
         
@@ -153,7 +166,7 @@ extension AppViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == appView.essentialAppCollectionView {
+        if collectionView == appView.essentialAppCollectionView || collectionView == appView.selectedAppCollectionView {
             if indexPath.row == AppModel.mockData.count - 1 {
                 let detailVC = DetailViewController()
                 self.navigationController?.pushViewController(detailVC, animated: true)
