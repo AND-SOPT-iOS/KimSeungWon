@@ -31,13 +31,17 @@ class AppViewController: UIViewController {
     
     // MARK: - Set up Actions
     private func setupActions() {
-        appView.essentialAppButtonView.isUserInteractionEnabled = true
         let essentialTapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapEssentialButton))
+        appView.essentialAppButtonView.isUserInteractionEnabled = true
         appView.essentialAppButtonView.addGestureRecognizer(essentialTapGesture)
         
-        appView.focusAppButtonView.isUserInteractionEnabled = true
         let focusTapGesture = UITapGestureRecognizer(target: self, action: #selector(didtapFocusButton))
+        appView.focusAppButtonView.isUserInteractionEnabled = true
         appView.focusAppButtonView.addGestureRecognizer(focusTapGesture)
+        
+        let selectedTapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapSelectedButton))
+        appView.selectedAppButtonView.isUserInteractionEnabled = true
+        appView.selectedAppButtonView.addGestureRecognizer(selectedTapGesture)
     }
     
     // MARK: - Set up CollectionView
@@ -84,6 +88,15 @@ class AppViewController: UIViewController {
         appListVC.setupTitle("지금 주목해야 할 앱")
 //        appListVC.appModel = AppModel.mockData.reversed()
         appListVC.dataBind(AppModel.mockData.reversed())
+        self.navigationController?.pushViewController(appListVC, animated: true)
+    }
+    
+    @objc
+    private func didTapSelectedButton() {
+        let appListVC = AppListViewController()
+        appListVC.setupTitle("에디터의 선택 시리즈")
+//        appListVC.appModel = AppModel.mockData
+        appListVC.dataBind(AppModel.mockData)
         self.navigationController?.pushViewController(appListVC, animated: true)
     }
 }
@@ -166,6 +179,7 @@ extension AppViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // mockData를 활용하기 때문에 임시로 index로 화면 이동
         if collectionView == appView.essentialAppCollectionView || collectionView == appView.selectedAppCollectionView {
             if indexPath.row == AppModel.mockData.count - 1 {
                 let detailVC = DetailViewController()

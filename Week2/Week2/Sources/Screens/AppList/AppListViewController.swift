@@ -81,6 +81,9 @@ extension AppListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        if appModels[indexPath.row].title == "토스" {
+            let detailVC = DetailViewController()
+            self.navigationController?.pushViewController(detailVC, animated: true)
+        }
     }
 }
