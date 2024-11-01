@@ -29,6 +29,7 @@ class AppButton: UIButton {
             buttonConfiguration.image = buttonImage
             buttonConfiguration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 14)
             
+            self.backgroundColor = .clear
         } else {
             buttonConfiguration.title = appButtonType.rawValue
             buttonConfiguration.baseForegroundColor = .systemBlue
@@ -44,10 +45,5 @@ class AppButton: UIButton {
         }
         
         self.configuration = buttonConfiguration
-        
-        self.snp.makeConstraints {
-            $0.height.equalTo(30)
-            $0.width.equalTo(appButtonType == .update ? 80 : 70)
-        }
     }
 }

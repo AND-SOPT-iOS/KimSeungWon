@@ -16,7 +16,7 @@ class AppTableViewCell: UITableViewCell {
         iv.contentMode = .scaleAspectFill
         iv.layer.borderWidth = 1
         iv.layer.borderColor = UIColor.systemGray5.cgColor
-        iv.layer.cornerRadius = 10
+        iv.layer.cornerRadius = 17
         iv.layer.masksToBounds = true
         return iv
     }()
@@ -64,8 +64,8 @@ class AppTableViewCell: UITableViewCell {
     
     // MARK: - Set up UI
     private func setupUI() {
-        self.addSubviews(appImageView, titleStackView, appButton, separatorView)
-        
+        self.contentView.addSubviews(appImageView, titleStackView, appButton, separatorView)
+        self.selectionStyle = .none
     }
     
     // MARK: - Set up Constraints
@@ -93,7 +93,8 @@ class AppTableViewCell: UITableViewCell {
         appButton.snp.makeConstraints {
             $0.bottom.equalTo(appImageView.snp.bottom)
             $0.leading.equalTo(appImageView.snp.trailing).offset(14)
-            
+            $0.height.equalTo(30)
+            $0.width.greaterThanOrEqualTo(70)
         }
         
         separatorView.snp.makeConstraints {
@@ -103,6 +104,12 @@ class AppTableViewCell: UITableViewCell {
             $0.height.equalTo(0.3)
         }
     }
-
     
+    // MARK: - Configure
+    func configure(_ appModel: AppModel) {
+        self.appImageView.image = appModel.appIconImage
+        self.titleLabel.text = appModel.title
+        self.subTitleLabel.text = appModel.subTitle
+        self.appButton.setupButtonConfigure(appModel.buttonState)
+    }
 }

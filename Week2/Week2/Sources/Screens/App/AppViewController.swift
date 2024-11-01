@@ -88,11 +88,11 @@ extension AppViewController: UICollectionViewDataSource {
         }
         
         if collectionView == appView.essentialAppCollectionView {
-            return 16
+            return AppModel.mockData.count
         }
         
         if collectionView == appView.focusAppCollectionView {
-            return 16
+            return AppModel.mockData.count
         }
         
         return 0
@@ -119,7 +119,7 @@ extension AppViewController: UICollectionViewDataSource {
             ) as? AppCollectionViewCell else {
                 return UICollectionViewCell()
             }
-            appCollectionViewCell.configure(with: indexPath.row)
+            appCollectionViewCell.configure(with: indexPath.row, appModel: AppModel.mockData[indexPath.row])
             return appCollectionViewCell
         }
         
@@ -130,7 +130,7 @@ extension AppViewController: UICollectionViewDataSource {
             ) as? AppCollectionViewCell else {
                 return UICollectionViewCell()
             }
-            appCollectionViewCell.configure(with: indexPath.row)
+            appCollectionViewCell.configure(with: indexPath.row, appModel: AppModel.mockData[indexPath.row])
             return appCollectionViewCell
         }
         

@@ -14,7 +14,7 @@ class AppCollectionViewCell: UICollectionViewCell {
         let iv = UIImageView()
         iv.image = .temp
         iv.contentMode = .scaleAspectFill
-        iv.layer.borderWidth = 1
+        iv.layer.borderWidth = 0.3
         iv.layer.borderColor = UIColor.systemGray5.cgColor
         iv.layer.cornerRadius = 10
         iv.layer.masksToBounds = true
@@ -22,7 +22,7 @@ class AppCollectionViewCell: UICollectionViewCell {
     }()
     
     private let titleLabel: CustomLabel = {
-        let lb = CustomLabel(text: "앱 타이틀\n두줄 테스트 입니다.", color: .label, fontSize: 14, fontWeight: .medium)
+        let lb = CustomLabel(text: "앱 타이틀\n두 줄 테스트 입니다.", color: .label, fontSize: 15, fontWeight: .regular)
         lb.numberOfLines = 2
         return lb
     }()
@@ -36,7 +36,7 @@ class AppCollectionViewCell: UICollectionViewCell {
     private lazy var titleStackView: UIStackView = {
         let sv = UIStackView(arrangedSubviews: [titleLabel, subTitleLabel])
         sv.axis = .vertical
-        sv.spacing = 6
+        sv.spacing = 5
         sv.alignment = .leading
         sv.distribution = .equalSpacing
         return sv
@@ -88,6 +88,8 @@ class AppCollectionViewCell: UICollectionViewCell {
         appButton.snp.makeConstraints {
             $0.centerY.equalTo(appImageView)
             $0.trailing.equalToSuperview()
+            $0.height.equalTo(30)
+            $0.width.greaterThanOrEqualTo(70)
         }
         
         separatorView.snp.makeConstraints {
@@ -99,7 +101,13 @@ class AppCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Configure
-    public func configure(with index: Int) {
+    public func configure(with index: Int, appModel: AppModel) {
+        self.appImageView.image = appModel.appIconImage
+        self.titleLabel.text = appModel.title
+        self.subTitleLabel.text = appModel.subTitle
+        self.appButton.setupButtonConfigure(appModel.buttonState)
+        
+        // separatorView
         self.separatorView.isHidden = false
         if (index + 1) % 3 == 0 {
             self.separatorView.isHidden = true

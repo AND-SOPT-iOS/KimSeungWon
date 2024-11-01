@@ -53,7 +53,7 @@ class AppListViewController: UIViewController {
 // MARK: - UITableView DataSource
 extension AppListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return AppModel.mockData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -63,7 +63,7 @@ extension AppListViewController: UITableViewDataSource {
         ) as? AppTableViewCell else {
             return UITableViewCell()
         }
-
+        appTableViewCell.configure(AppModel.mockData[indexPath.row])
         return appTableViewCell
     }
 }
