@@ -74,7 +74,3 @@ extension AppListViewController: UITableViewDelegate {
         return 108
     }
 }
-
-#Preview {
-    AppListViewController()
-}

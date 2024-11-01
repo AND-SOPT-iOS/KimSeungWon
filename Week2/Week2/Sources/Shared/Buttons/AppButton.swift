@@ -9,14 +9,6 @@ import UIKit
 import SnapKit
 
 class AppButton: UIButton {
-    // MARK: - Properties
-    enum AppButtonType: String {
-        case open = "열기"
-        case download = "받기"
-        case update = "업데이트"
-        case cloud
-    }
-
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
