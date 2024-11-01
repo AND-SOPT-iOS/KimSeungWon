@@ -18,7 +18,7 @@ class DetailView: UIView {
     // 앱 이미지
     let appImageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(named: "appIcon")
+        iv.image = .toss
         iv.contentMode = .scaleAspectFill
         iv.layer.masksToBounds = true
         iv.layer.cornerRadius = 20

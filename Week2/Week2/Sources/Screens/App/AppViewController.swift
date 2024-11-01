@@ -26,12 +26,18 @@ class AppViewController: UIViewController {
         super.viewDidLoad()
         
         setupCollectionView()
-        setupGesture()
+        setupActions()
     }
     
-    // MARK: - Set Gesture
-    private func setupGesture() {
+    // MARK: - Set up Actions
+    private func setupActions() {
+        appView.essentialAppButtonView.isUserInteractionEnabled = true
+        let essentialTapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapEssentialButton))
+        appView.essentialAppButtonView.addGestureRecognizer(essentialTapGesture)
         
+        appView.focusAppButtonView.isUserInteractionEnabled = true
+        let focusTapGesture = UITapGestureRecognizer(target: self, action: #selector(didtapFocusButton))
+        appView.focusAppButtonView.addGestureRecognizer(focusTapGesture)
     }
     
     // MARK: - Set up CollectionView
@@ -56,6 +62,21 @@ class AppViewController: UIViewController {
     private func setupNavigationBar() {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.title = "앱"
+    }
+    
+    // MARK: - Selectors
+    @objc
+    private func didTapEssentialButton() {
+        let appListVC = AppListViewController()
+        appListVC.setupTitle("iPhone 필수 앱")
+        self.navigationController?.pushViewController(appListVC, animated: true)
+    }
+    
+    @objc
+    private func didtapFocusButton() {
+        let appListVC = AppListViewController()
+        appListVC.setupTitle("지금 주목해야 할 앱")
+        self.navigationController?.pushViewController(appListVC, animated: true)
     }
 }
 
@@ -130,10 +151,4 @@ extension AppViewController: UICollectionViewDelegateFlowLayout {
         
         return CGSize(width: 0, height: 0)
     }
-}
-
-
-
-#Preview {
-    AppViewController()
 }

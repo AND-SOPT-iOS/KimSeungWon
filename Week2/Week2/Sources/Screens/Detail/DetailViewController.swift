@@ -50,11 +50,13 @@ class DetailViewController: UIViewController {
     private func setupActions() {
         // 새로운 소식
         detailView.newsTitleView.isUserInteractionEnabled = true
-        detailView.newsTitleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapNewsTitleView)))
+        let newsTapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapNewsTitleView))
+        detailView.newsTitleView.addGestureRecognizer(newsTapGesture)
         
         // 평가 및 리뷰 (버전 기록)
         detailView.reviewTitleView.isUserInteractionEnabled = true
-        detailView.reviewTitleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapReviewTitleView)))
+        let reviewTapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapReviewButton))
+        detailView.reviewTitleView.addGestureRecognizer(reviewTapGesture)
         
         // 리뷰 작성
         detailView.reviewButton.addTarget(self, action: #selector(didTapReviewButton), for: .touchUpInside)
@@ -107,7 +109,7 @@ extension DetailViewController: UIScrollViewDelegate {
             if openButtonFrame.minY < navigationController?.navigationBar.frame.maxY ?? 0 {
                 // 네비바에서 titleView, rightBarButtonitem 설정
                 if navigationItem.titleView == nil {
-                    let logoImageView = UIImageView(image: UIImage(named: "appIcon"))
+                    let logoImageView = UIImageView(image: .toss)
                     logoImageView.contentMode = .scaleAspectFill
                     logoImageView.layer.borderWidth = 0.5
                     logoImageView.layer.borderColor = UIColor.systemGray5.cgColor
