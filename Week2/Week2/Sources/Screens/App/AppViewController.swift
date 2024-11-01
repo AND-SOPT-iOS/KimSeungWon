@@ -130,7 +130,7 @@ extension AppViewController: UICollectionViewDataSource {
             ) as? AppCollectionViewCell else {
                 return UICollectionViewCell()
             }
-            appCollectionViewCell.configure(with: indexPath.row, appModel: AppModel.mockData[indexPath.row])
+            appCollectionViewCell.configure(with: indexPath.row, appModel: AppModel.mockData.reversed()[indexPath.row])
             return appCollectionViewCell
         }
         
@@ -150,5 +150,21 @@ extension AppViewController: UICollectionViewDelegateFlowLayout {
         }
         
         return CGSize(width: 0, height: 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == appView.essentialAppCollectionView {
+            if indexPath.row == AppModel.mockData.count - 1 {
+                let detailVC = DetailViewController()
+                self.navigationController?.pushViewController(detailVC, animated: true)
+            }
+        }
+        
+        if collectionView == appView.focusAppCollectionView {
+            if indexPath.row == 0 {
+                let detailVC = DetailViewController()
+                self.navigationController?.pushViewController(detailVC, animated: true)
+            }
+        }
     }
 }
