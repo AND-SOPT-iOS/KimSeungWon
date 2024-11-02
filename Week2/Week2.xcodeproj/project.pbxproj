@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E319B27D2CD609B400DB58A8 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E319B27C2CD609B400DB58A8 /* Config.xcconfig */; };
 		E3564D832CBA642900AC22C0 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E3564D822CBA642900AC22C0 /* SnapKit */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E319B27C2CD609B400DB58A8 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		E3564D3B2CBA5C2000AC22C0 /* Week2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Week2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3564D512CBA5C2200AC22C0 /* Week2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Week2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3564D5B2CBA5C2200AC22C0 /* Week2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Week2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,6 +105,7 @@
 		E3564D322CBA5C2000AC22C0 = {
 			isa = PBXGroup;
 			children = (
+				E319B27C2CD609B400DB58A8 /* Config.xcconfig */,
 				E3564D3D2CBA5C2000AC22C0 /* Week2 */,
 				E3564D3C2CBA5C2000AC22C0 /* Products */,
 			);
@@ -236,6 +239,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E319B27D2CD609B400DB58A8 /* Config.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

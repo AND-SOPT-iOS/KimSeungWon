@@ -1,5 +1,5 @@
 //
-//  ApiView.swift
+//  ServerView.swift
 //  Week2
 //
 //  Created by 김승원 on 11/2/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ApiView: UIView {
+class ServerView: UIView {
 
     // MARK: - Init
     override init(frame: CGRect) {
@@ -23,7 +23,7 @@ class ApiView: UIView {
     
     // MARK: - Set up UI
     private func setupUI() {
-        self.backgroundColor = .white
+        self.backgroundColor = .yellow
         
     }
     

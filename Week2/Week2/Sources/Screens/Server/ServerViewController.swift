@@ -1,5 +1,5 @@
 //
-//  ApiViewController.swift
+//  ServerViewController.swift
 //  Week2
 //
 //  Created by 김승원 on 11/2/24.
@@ -7,13 +7,13 @@
 
 import UIKit
 
-class ApiViewController: UIViewController {
+class ServerViewController: UIViewController {
     // MARK: - Properties
-    private let appView = ApiView()
+    private let serverView = ServerView()
 
     // MARK: - Life Cycle
     override func loadView() {
-        self.view = appView
+        self.view = serverView
     }
     
     override func viewDidLoad() {

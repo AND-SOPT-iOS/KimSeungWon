@@ -38,7 +38,7 @@ class RootTabBarController: UITabBarController {
         
         func viewController() -> UIViewController {
             switch self {
-            case .today: return UINavigationController(rootViewController: ApiViewController())
+            case .today: return UINavigationController(rootViewController: ServerViewController())
             case .game: return UIViewController()
             case .app: return UINavigationController(rootViewController: AppViewController())
             case .arcade: return UIViewController()
