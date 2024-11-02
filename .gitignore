@@ -60,3 +60,20 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+
+### Configuration files ###
+*.xcconfig
+
+### Xcode Patch ###
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcworkspace/contents.xcworkspacedata
+/*.gcno
+
+### Projects ###
+*.xcodeproj
+*.xcworkspace
+
+## User settings
+xcuserdata/
