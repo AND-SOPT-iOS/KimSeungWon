@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E319B27D2CD609B400DB58A8 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E319B27C2CD609B400DB58A8 /* Config.xcconfig */; };
+		E319B2AD2CD6113A00DB58A8 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E319B2AC2CD6113A00DB58A8 /* Alamofire */; };
 		E3564D832CBA642900AC22C0 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E3564D822CBA642900AC22C0 /* SnapKit */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +83,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3564D832CBA642900AC22C0 /* SnapKit in Frameworks */,
+				E319B2AD2CD6113A00DB58A8 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,6 +144,7 @@
 			name = Week2;
 			packageProductDependencies = (
 				E3564D822CBA642900AC22C0 /* SnapKit */,
+				E319B2AC2CD6113A00DB58A8 /* Alamofire */,
 			);
 			productName = Week2;
 			productReference = E3564D3B2CBA5C2000AC22C0 /* Week2.app */;
@@ -221,6 +224,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				E3564D812CBA642900AC22C0 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				E319B2AB2CD6113A00DB58A8 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E3564D3C2CBA5C2000AC22C0 /* Products */;
@@ -299,6 +303,7 @@
 /* Begin XCBuildConfiguration section */
 		E3564D652CBA5C2200AC22C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E319B27C2CD609B400DB58A8 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -327,6 +332,7 @@
 		};
 		E3564D662CBA5C2200AC22C0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E319B27C2CD609B400DB58A8 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -355,6 +361,7 @@
 		};
 		E3564D672CBA5C2200AC22C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E319B27C2CD609B400DB58A8 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -418,6 +425,7 @@
 		};
 		E3564D682CBA5C2200AC22C0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E319B27C2CD609B400DB58A8 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -586,6 +594,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E319B2AB2CD6113A00DB58A8 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.1;
+			};
+		};
 		E3564D812CBA642900AC22C0 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -597,6 +613,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E319B2AC2CD6113A00DB58A8 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E319B2AB2CD6113A00DB58A8 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		E3564D822CBA642900AC22C0 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E3564D812CBA642900AC22C0 /* XCRemoteSwiftPackageReference "SnapKit" */;

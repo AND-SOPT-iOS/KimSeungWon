@@ -8,6 +8,7 @@
 import UIKit
 
 class ServerView: UIView {
+    // MARK: - UI Components
 
     // MARK: - Init
     override init(frame: CGRect) {
