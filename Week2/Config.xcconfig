@@ -1,0 +1,11 @@
+//
+//  Config.xcconfig
+//  Week2
+//
+//  Created by 김승원 on 11/2/24.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+BASE_URL = http:/$()/211.188.53.75:8080
