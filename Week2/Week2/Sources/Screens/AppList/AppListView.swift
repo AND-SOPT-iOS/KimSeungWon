@@ -10,7 +10,7 @@ import SnapKit
 
 class AppListView: UIView {
     // MARK: - UI Components
-    lazy var tableView = UITableView()
+    let tableView = UITableView()
 
     // MARK: - Init
     override init(frame: CGRect) {

@@ -77,8 +77,7 @@ class AppViewController: UIViewController {
     private func didTapEssentialButton() {
         let appListVC = AppListViewController()
         appListVC.setupTitle("iPhone 필수 앱")
-//        appListVC.appModel = AppModel.mockData
-        appListVC.dataBind(AppModel.mockData)
+        appListVC.dataBind(App.mockData)
         self.navigationController?.pushViewController(appListVC, animated: true)
     }
     
@@ -86,8 +85,7 @@ class AppViewController: UIViewController {
     private func didtapFocusButton() {
         let appListVC = AppListViewController()
         appListVC.setupTitle("지금 주목해야 할 앱")
-//        appListVC.appModel = AppModel.mockData.reversed()
-        appListVC.dataBind(AppModel.mockData.reversed())
+        appListVC.dataBind(App.mockData.reversed())
         self.navigationController?.pushViewController(appListVC, animated: true)
     }
     
@@ -95,8 +93,7 @@ class AppViewController: UIViewController {
     private func didTapSelectedButton() {
         let appListVC = AppListViewController()
         appListVC.setupTitle("에디터의 선택 시리즈")
-//        appListVC.appModel = AppModel.mockData
-        appListVC.dataBind(AppModel.mockData)
+        appListVC.dataBind(App.mockData)
         self.navigationController?.pushViewController(appListVC, animated: true)
     }
 }
@@ -105,19 +102,19 @@ class AppViewController: UIViewController {
 extension AppViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == appView.topBannerCollectionView {
-            return TopBannerModel.mockData.count
+            return TopBanner.mockData.count
         }
         
         if collectionView == appView.essentialAppCollectionView {
-            return AppModel.mockData.count
+            return App.mockData.count
         }
         
         if collectionView == appView.focusAppCollectionView {
-            return AppModel.mockData.count
+            return App.mockData.count
         }
         
         if collectionView == appView.selectedAppCollectionView {
-            return AppModel.mockData.count
+            return App.mockData.count
         }
         
         return 0
@@ -132,7 +129,7 @@ extension AppViewController: UICollectionViewDataSource {
                 return UICollectionViewCell()
             }
             topBannerCell.configure(
-                TopBannerModel.mockData[indexPath.row]
+                TopBanner.mockData[indexPath.row]
             )
             return topBannerCell
         }
@@ -144,7 +141,7 @@ extension AppViewController: UICollectionViewDataSource {
             ) as? AppCollectionViewCell else {
                 return UICollectionViewCell()
             }
-            appCollectionViewCell.configure(with: indexPath.row, appModel: AppModel.mockData[indexPath.row])
+            appCollectionViewCell.configure(with: indexPath.row, appModel: App.mockData[indexPath.row])
             return appCollectionViewCell
         }
         
@@ -155,10 +152,9 @@ extension AppViewController: UICollectionViewDataSource {
             ) as? AppCollectionViewCell else {
                 return UICollectionViewCell()
             }
-            appCollectionViewCell.configure(with: indexPath.row, appModel: AppModel.mockData.reversed()[indexPath.row])
+            appCollectionViewCell.configure(with: indexPath.row, appModel: App.mockData.reversed()[indexPath.row])
             return appCollectionViewCell
         }
-        
         
         return UICollectionViewCell()
     }
@@ -181,7 +177,7 @@ extension AppViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // mockData를 활용하기 때문에 임시로 index로 화면 이동
         if collectionView == appView.essentialAppCollectionView || collectionView == appView.selectedAppCollectionView {
-            if indexPath.row == AppModel.mockData.count - 1 {
+            if indexPath.row == App.mockData.count - 1 {
                 let detailVC = DetailViewController()
                 self.navigationController?.pushViewController(detailVC, animated: true)
             }

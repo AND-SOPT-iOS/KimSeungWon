@@ -10,7 +10,7 @@ import UIKit
 class AppListViewController: UIViewController {
     // MARK: - Properties
     private let appListView = AppListView()
-    private var appModels: [AppModel] = []
+    private var appModels: [App] = []
 
     // MARK: - Life Cycle
     override func loadView() {
@@ -30,7 +30,7 @@ class AppListViewController: UIViewController {
     }
     
     // MARK: - dataBind
-    func dataBind(_ appModels: [AppModel]) {
+    func dataBind(_ appModels: [App]) {
         self.appModels = appModels
     }
     
@@ -59,7 +59,7 @@ class AppListViewController: UIViewController {
 // MARK: - UITableView DataSource
 extension AppListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return AppModel.mockData.count
+        return App.mockData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

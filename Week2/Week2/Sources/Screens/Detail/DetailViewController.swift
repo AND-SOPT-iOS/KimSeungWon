@@ -155,11 +155,11 @@ extension DetailViewController: UIScrollViewDelegate {
 extension DetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == detailView.previewCollectionView {
-            return PreviewModel.mockData.count
+            return Preview.mockData.count
         }
         
         if collectionView == detailView.reviewCollectionView {
-            return ReviewModel.mockData.count
+            return Review.mockData.count
         }
         
         return 0
@@ -168,13 +168,13 @@ extension DetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == detailView.previewCollectionView {
             guard let previewPhotoCell = detailView.previewCollectionView.dequeueReusableCell(withReuseIdentifier: PreviewPhotoCell.cellIdentifier, for: indexPath) as? PreviewPhotoCell else { return UICollectionViewCell() }
-            previewPhotoCell.configure(PreviewModel.mockData[indexPath.row])
+            previewPhotoCell.configure(Preview.mockData[indexPath.row])
             return previewPhotoCell
         }
         
         if collectionView == detailView.reviewCollectionView {
             guard let reviewCell = detailView.reviewCollectionView.dequeueReusableCell(withReuseIdentifier: ReviewCell.cellIdentifier, for: indexPath) as? ReviewCell else { return UICollectionViewCell() }
-            reviewCell.configure(ReviewModel.mockData[indexPath.row])
+            reviewCell.configure(Review.mockData[indexPath.row])
             return reviewCell
         }
         

@@ -101,8 +101,8 @@ class AppCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Configure
-    public func configure(with index: Int, appModel: AppModel) {
-        self.appImageView.image = appModel.appIconImage
+    public func configure(with index: Int, appModel: App) {
+        self.appImageView.image = appModel.appIcon
         self.titleLabel.text = appModel.title
         self.subTitleLabel.text = appModel.subTitle
         self.appButton.setupButtonConfigure(appModel.buttonState)

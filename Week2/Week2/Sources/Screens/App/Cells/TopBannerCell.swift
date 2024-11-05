@@ -70,7 +70,7 @@ class TopBannerCell: UICollectionViewCell {
     }
 
     // MARK: - Configure
-    public func configure(_ topBannerModel: TopBannerModel) {
+    public func configure(_ topBannerModel: TopBanner) {
         self.appStateLabel.text = topBannerModel.appState.rawValue
         self.titleLabel.text = topBannerModel.title
         self.subTitleLabel.text = topBannerModel.subTitle
