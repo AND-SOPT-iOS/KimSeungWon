@@ -156,7 +156,6 @@ extension AppViewController: UICollectionViewDataSource {
             return appCollectionViewCell
         }
         
-        
         return UICollectionViewCell()
     }
 }
