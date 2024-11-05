@@ -10,6 +10,8 @@ import UIKit
 class ServerViewController: UIViewController {
     // MARK: - Properties
     private let serverView = ServerView()
+    
+    private let userManager = UserManager.shared
 
     // MARK: - Life Cycle
     override func loadView() {
@@ -18,7 +20,6 @@ class ServerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
     }
 }
