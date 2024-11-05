@@ -10,6 +10,7 @@
 		E319B27D2CD609B400DB58A8 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E319B27C2CD609B400DB58A8 /* Config.xcconfig */; };
 		E319B2AD2CD6113A00DB58A8 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E319B2AC2CD6113A00DB58A8 /* Alamofire */; };
 		E3564D832CBA642900AC22C0 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E3564D822CBA642900AC22C0 /* SnapKit */; };
+		E38EAB242CD9F798007412FC /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = E38EAB232CD9F798007412FC /* Then */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3564D832CBA642900AC22C0 /* SnapKit in Frameworks */,
+				E38EAB242CD9F798007412FC /* Then in Frameworks */,
 				E319B2AD2CD6113A00DB58A8 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -145,6 +147,7 @@
 			packageProductDependencies = (
 				E3564D822CBA642900AC22C0 /* SnapKit */,
 				E319B2AC2CD6113A00DB58A8 /* Alamofire */,
+				E38EAB232CD9F798007412FC /* Then */,
 			);
 			productName = Week2;
 			productReference = E3564D3B2CBA5C2000AC22C0 /* Week2.app */;
@@ -225,6 +228,7 @@
 			packageReferences = (
 				E3564D812CBA642900AC22C0 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				E319B2AB2CD6113A00DB58A8 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				E38EAB222CD9F798007412FC /* XCRemoteSwiftPackageReference "Then" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E3564D3C2CBA5C2000AC22C0 /* Products */;
@@ -610,6 +614,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		E38EAB222CD9F798007412FC /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -622,6 +634,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E3564D812CBA642900AC22C0 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		E38EAB232CD9F798007412FC /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E38EAB222CD9F798007412FC /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
