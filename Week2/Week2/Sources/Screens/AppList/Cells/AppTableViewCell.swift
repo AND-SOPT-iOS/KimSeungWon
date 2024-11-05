@@ -106,8 +106,8 @@ class AppTableViewCell: UITableViewCell {
     }
     
     // MARK: - Configure
-    func configure(_ appModel: AppModel) {
-        self.appImageView.image = appModel.appIconImage
+    func configure(_ appModel: App) {
+        self.appImageView.image = appModel.appIcon
         self.titleLabel.text = appModel.title
         self.subTitleLabel.text = appModel.subTitle
         self.appButton.setupButtonConfigure(appModel.buttonState)

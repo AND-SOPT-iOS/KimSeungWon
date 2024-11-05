@@ -8,7 +8,7 @@
 import UIKit
 
 protocol WriteReviewViewControllerDelegate: AnyObject {
-    func didSubmitReview(_ reviewModel: ReviewModel)
+    func didSubmitReview(_ reviewModel: Review)
 }
 
 class WriteReviewViewController: UIViewController {
@@ -17,7 +17,7 @@ class WriteReviewViewController: UIViewController {
     
     weak var delegate: WriteReviewViewControllerDelegate?
     
-    var reviewModel: ReviewModel?
+    var reviewModel: Review?
     
     // MARK: - Life Cycle
     override func loadView() {
@@ -53,7 +53,7 @@ class WriteReviewViewController: UIViewController {
         let contents = writeReviewView.reviewTextField.text ?? ""
         
         // writeView의 textField에 작성된 text값으로 reviewModel을 만들어 대리자에게 전달합니다.
-        reviewModel = ReviewModel(starCount: starCount, title: title, contents: contents)
+        reviewModel = Review(starCount: starCount, title: title, contents: contents)
         
         if let reviewModel = self.reviewModel {
             delegate?.didSubmitReview(reviewModel)

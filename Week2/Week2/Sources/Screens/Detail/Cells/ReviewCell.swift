@@ -85,7 +85,7 @@ class ReviewCell: UICollectionViewCell {
     }
     
     // MARK: - Configure
-    public func configure(_ reviewModel: ReviewModel) {
+    public func configure(_ reviewModel: Review) {
         self.titleLabel.text = reviewModel.title
         if let starCount = reviewModel.starCount {
             self.fiveStarView.setupStars(starCount)
