@@ -24,4 +24,17 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        presentLoginView()
+    }
+    
+    // MARK: - present LoginView
+    private func presentLoginView() {
+        let loginViewController = UINavigationController(rootViewController: LoginViewController())
+        loginViewController.modalPresentationStyle = .fullScreen
+        self.present(loginViewController, animated: true, completion: nil)
+    }
 }

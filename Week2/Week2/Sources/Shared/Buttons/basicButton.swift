@@ -1,5 +1,5 @@
 //
-//  SimpleButton.swift
+//  basicButton.swift
 //  Week2
 //
 //  Created by 김승원 on 11/5/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SimpleButton: UIButton {
+class basicButton: UIButton {
     // MARK: - Properties
     let buttonTitle: String
 

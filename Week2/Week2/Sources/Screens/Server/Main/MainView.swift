@@ -7,18 +7,19 @@
 
 import UIKit
 import SnapKit
-import Then
 
 class MainView: UIView {
     // MARK: - UI Components
-    private let iOSImageView = UIImageView().then {
-        $0.image = .iOSIcon
-        $0.contentMode = .scaleAspectFit
-    }
+    private let iOSImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = .iOSIcon
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
     
-    lazy var myPageButton = SimpleButton("마이 페이지")
+    lazy var myPageButton = basicButton("마이 페이지")
     
-    lazy var searchPageButton = SimpleButton("검색 페이지")
+    lazy var searchPageButton = basicButton("검색 페이지")
 
     // MARK: - Init
     override init(frame: CGRect) {
@@ -51,13 +52,13 @@ class MainView: UIView {
         myPageButton.snp.makeConstraints {
             $0.top.equalTo(iOSImageView.snp.bottom).offset(25)
             $0.horizontalEdges.equalToSuperview().inset(20)
-            $0.height.equalTo(55)
+            $0.height.equalTo(52)
         }
         
         searchPageButton.snp.makeConstraints {
             $0.top.equalTo(myPageButton.snp.bottom).offset(10)
             $0.horizontalEdges.equalToSuperview().inset(20)
-            $0.height.equalTo(55)
+            $0.height.equalTo(52)
         }
     }
 
