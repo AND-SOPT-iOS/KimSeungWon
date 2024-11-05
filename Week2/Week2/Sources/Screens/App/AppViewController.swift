@@ -77,7 +77,6 @@ class AppViewController: UIViewController {
     private func didTapEssentialButton() {
         let appListVC = AppListViewController()
         appListVC.setupTitle("iPhone 필수 앱")
-//        appListVC.appModel = AppModel.mockData
         appListVC.dataBind(App.mockData)
         self.navigationController?.pushViewController(appListVC, animated: true)
     }
@@ -86,7 +85,6 @@ class AppViewController: UIViewController {
     private func didtapFocusButton() {
         let appListVC = AppListViewController()
         appListVC.setupTitle("지금 주목해야 할 앱")
-//        appListVC.appModel = AppModel.mockData.reversed()
         appListVC.dataBind(App.mockData.reversed())
         self.navigationController?.pushViewController(appListVC, animated: true)
     }
@@ -95,7 +93,6 @@ class AppViewController: UIViewController {
     private func didTapSelectedButton() {
         let appListVC = AppListViewController()
         appListVC.setupTitle("에디터의 선택 시리즈")
-//        appListVC.appModel = AppModel.mockData
         appListVC.dataBind(App.mockData)
         self.navigationController?.pushViewController(appListVC, animated: true)
     }
