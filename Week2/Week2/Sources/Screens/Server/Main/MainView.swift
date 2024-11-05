@@ -17,9 +17,9 @@ class MainView: UIView {
         return imageView
     }()
     
-    lazy var myPageButton = basicButton("마이 페이지")
-    
     lazy var searchPageButton = basicButton("검색 페이지")
+    
+    lazy var myPageButton = basicButton("마이 페이지")
 
     // MARK: - Init
     override init(frame: CGRect) {
@@ -37,26 +37,25 @@ class MainView: UIView {
     private func setupUI() {
         self.backgroundColor = .systemBackground
         
-        self.addSubviews(iOSImageView, myPageButton, searchPageButton)
+        self.addSubviews(iOSImageView, searchPageButton, myPageButton)
         
     }
     
     // MARK: - Set up Constraints
     private func setupConstraints() {
         iOSImageView.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
-            $0.centerX.equalToSuperview()
+            $0.center.equalToSuperview()
             $0.size.equalTo(70)
         }
         
-        myPageButton.snp.makeConstraints {
-            $0.top.equalTo(iOSImageView.snp.bottom).offset(25)
+        searchPageButton.snp.makeConstraints {
+            $0.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-20)
             $0.horizontalEdges.equalToSuperview().inset(20)
             $0.height.equalTo(52)
         }
         
-        searchPageButton.snp.makeConstraints {
-            $0.top.equalTo(myPageButton.snp.bottom).offset(10)
+        myPageButton.snp.makeConstraints {
+            $0.bottom.equalTo(searchPageButton.snp.top).offset(-10)
             $0.horizontalEdges.equalToSuperview().inset(20)
             $0.height.equalTo(52)
         }

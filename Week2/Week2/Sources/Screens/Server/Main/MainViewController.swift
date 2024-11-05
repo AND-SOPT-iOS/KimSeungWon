@@ -28,12 +28,12 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        presentLoginView()
+//        presentLoginView()
     }
     
     // MARK: - present LoginView
     private func presentLoginView() {
-        let loginViewController = UINavigationController(rootViewController: LoginViewController())
+        let loginViewController = UINavigationController(rootViewController: CreateAccountViewController())
         loginViewController.modalPresentationStyle = .fullScreen
         self.present(loginViewController, animated: true, completion: nil)
     }
