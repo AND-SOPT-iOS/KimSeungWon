@@ -11,9 +11,8 @@ class MainViewController: UIViewController {
     // MARK: - Properties
     private let mainView = MainView()
     
-    var isLogin: Bool = false
-    
-    private let userManager = UserService.shared
+    private let userService = UserService.shared
+    private let tokenManager = TokenManager.shared
 
     // MARK: - Life Cycle
     override func loadView() {
@@ -29,7 +28,9 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        presentLoginView()
+        if !isUserLoggedIn() {
+            presentLoginView()
+        }
     }
     
     // MARK: - set up Actions
@@ -49,6 +50,15 @@ class MainViewController: UIViewController {
         let loginViewController = UINavigationController(rootViewController: LoginViewController())
         loginViewController.modalPresentationStyle = .fullScreen
         self.present(loginViewController, animated: true, completion: nil)
+    }
+    
+    // MARK: - is User Logged in
+    private func isUserLoggedIn() -> Bool {
+        if let token  = tokenManager.getToken(), !token.isEmpty {
+            return true
+        } else {
+            return false
+        }
     }
     
     // MARK: - Selectors

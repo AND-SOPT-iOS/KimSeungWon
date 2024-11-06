@@ -10,6 +10,8 @@ import UIKit
 class LoginViewController: UIViewController {
     // MARK: - Properties
     private let loginView = LoginView()
+    private let userService = UserService.shared
+    private let tokenManager = TokenManager.shared
     
     // MARK: - Life Cycle
     override func loadView() {
@@ -45,6 +47,26 @@ class LoginViewController: UIViewController {
     
     @objc
     private func didTapLoginButton() {
-        self.dismiss(animated: true, completion: nil)
+        guard
+            let username = loginView.usernameTextField.text, !(username.isEmpty),
+            let password = loginView.passwordTextField.text, !(password.isEmpty)
+                
+        else {
+            AlertManager.showAlert(on: self, title: "잠깐!", message: "모든 정보를 입력해 주세요", needsCancelButton: false, confirmHandler: nil)
+            return
+        }
+        
+        userService.login(username: username, password: password) { [weak self] result in
+            guard let self else { return }
+            
+            switch result {
+            case .success(let response):
+                print("LoginViewController: 로그인 성공")
+                tokenManager.saveToken(response.result.token)
+                self.dismiss(animated: true, completion: nil)
+            case .failure(let error):
+                print(error.errorMessage)
+            }
+        }
     }
 }

@@ -51,32 +51,21 @@ class CreateAccountViewController: UIViewController {
             let hobby = createAccountView.hobbyTextField.text, !(hobby.isEmpty)
                 
         else {
-            AlertManager.showAlert(
-                on: self,
-                title: "어허!",
-                message: "모든 정보를 입력해 주세요",
-                needsCancelButton: false,
-                confirmHandler: nil
-            )
-            
+            AlertManager.showAlert(on: self, title: "어허!", message: "모든 정보를 입력해 주세요", needsCancelButton: false, confirmHandler: nil)
             return
         }
         
-        userService
-            .register(
-                username: username,
-                password: password,
-                hobby: hobby
-            ) { result in
-                switch result {
-                case .success:
-                    print("등록 성공")
-                case .failure(let error):
-                    print(error.errorMessage)
-                }
+        userService.register(username: username, password: password, hobby: hobby) { [weak self] result in
+            guard let self else { return }
+            
+            switch result {
+            case .success:
+                print("CreateAccountViewController: 회원등록 성공")
+                self.navigationController?.popViewController(animated: true)
+            case .failure(let error):
+                print(error.errorMessage)
             }
-        
-        self.navigationController?.popViewController(animated: true)
+        }
     }
     
 }
