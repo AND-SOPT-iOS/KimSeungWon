@@ -30,7 +30,15 @@ class MyPageView: UIView {
         return textField
     }()
     
-    lazy var saveButton = BasicButton("변경사항 저장하기")
+    lazy var logOutButton: BasicButton = {
+        let button = BasicButton("로그아웃")
+        button.backgroundColor = .systemGray
+        button.setTitleColor(.white, for: .normal)
+        return button
+    }()
+    
+    lazy var saveButton = BasicButton("저장하기")
+
     
     // MARK: - Init
     override init(frame: CGRect) {
@@ -48,7 +56,7 @@ class MyPageView: UIView {
     private func setupUI() {
         self.backgroundColor = .systemBackground
         
-        self.addSubviews(titleLabel, hobbyLabel, hobbyTextField, passwordLabel, passwordTextField, saveButton)
+        self.addSubviews(titleLabel, hobbyLabel, hobbyTextField, passwordLabel, passwordTextField, logOutButton, saveButton)
     }
     
     // MARK: - Set up Constraints
@@ -80,9 +88,17 @@ class MyPageView: UIView {
             $0.height.equalTo(52)
         }
         
+        logOutButton.snp.makeConstraints {
+            $0.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-20)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.width.equalTo(100)
+            $0.height.equalTo(52)
+        }
+        
         saveButton.snp.makeConstraints {
             $0.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-20)
-            $0.horizontalEdges.equalToSuperview().inset(20)
+            $0.leading.equalToSuperview().inset(20)
+            $0.trailing.equalTo(self.logOutButton.snp.leading).offset(-7)
             $0.height.equalTo(52)
         }
     }

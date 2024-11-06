@@ -13,7 +13,7 @@ class MainViewController: UIViewController {
     
     var isLogin: Bool = false
     
-    private let userManager = UserManager.shared
+    private let userManager = UserService.shared
 
     // MARK: - Life Cycle
     override func loadView() {
@@ -29,7 +29,7 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-//        presentLoginView()
+        presentLoginView()
     }
     
     // MARK: - set up Actions
@@ -46,7 +46,7 @@ class MainViewController: UIViewController {
     
     // MARK: - present LoginView
     private func presentLoginView() {
-        let loginViewController = UINavigationController(rootViewController: CreateAccountViewController())
+        let loginViewController = UINavigationController(rootViewController: LoginViewController())
         loginViewController.modalPresentationStyle = .fullScreen
         self.present(loginViewController, animated: true, completion: nil)
     }

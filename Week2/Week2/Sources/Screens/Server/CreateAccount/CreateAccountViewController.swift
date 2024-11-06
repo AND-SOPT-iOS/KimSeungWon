@@ -10,6 +10,7 @@ import UIKit
 class CreateAccountViewController: UIViewController {
     // MARK: - Properties
     private let createAccountView = CreateAccountView()
+    private let userService = UserService.shared
 
     // MARK: - Life Cycle
     override func loadView() {
@@ -18,12 +19,64 @@ class CreateAccountViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupNavigationBar()
+        setupActions()
+    }
+    
+    // MARK: - Set up Actions
+    private func setupActions() {
+        let alreadyHaveAccountGesture = UITapGestureRecognizer(target: self, action: #selector(didTapAlreadyHaveAccountLabel))
+        createAccountView.alreadyHaveAccountLabel.addGestureRecognizer(alreadyHaveAccountGesture)
+        createAccountView.alreadyHaveAccountLabel.isUserInteractionEnabled = true
+        
+        createAccountView.createAccountButton.addTarget(self, action: #selector(didTapCreateAccountButton), for: .touchUpInside)
     }
     
     // MARK: - Set up NavigationBar
     private func setupNavigationBar() {
         self.navigationController?.isNavigationBarHidden = true
     }
+    
+    // MARK: - Selectors
+    @objc
+    private func didTapAlreadyHaveAccountLabel() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc
+    private func didTapCreateAccountButton() {
+        guard
+            let username = createAccountView.usernameTextField.text, !(username.isEmpty),
+            let password = createAccountView.passwordTextField.text, !(password.isEmpty),
+            let hobby = createAccountView.hobbyTextField.text, !(hobby.isEmpty)
+                
+        else {
+            AlertManager.showAlert(
+                on: self,
+                title: "어허!",
+                message: "모든 정보를 입력해 주세요",
+                needsCancelButton: false,
+                confirmHandler: nil
+            )
+            
+            return
+        }
+        
+        userService
+            .register(
+                username: username,
+                password: password,
+                hobby: hobby
+            ) { result in
+                switch result {
+                case .success:
+                    print("등록 성공")
+                case .failure(let error):
+                    print(error.errorMessage)
+                }
+            }
+        
+        self.navigationController?.popViewController(animated: true)
+    }
+    
 }

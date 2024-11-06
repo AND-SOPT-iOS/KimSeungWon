@@ -30,11 +30,11 @@ class CreateAccountView: UIView {
         return label
     }()
     
-    lazy var idTextField = BasicTextField("아이디를 입력해 주세요")
+    lazy var usernameTextField = BasicTextField("이름을 입력해 주세요")
     lazy var hobbyTextField = BasicTextField("취미를 입력해 주세요")
     lazy var passwordTextField = BasicTextField("비밀번호를 입력해 주세요")
-    lazy var loginButton = BasicButton("계정 만들기")
-    let firstVisitLabel = LineLabel(grayText: "계정이 있으신가요?", blueText: "로그인하기", isLined: true)
+    lazy var createAccountButton = BasicButton("계정 만들기")
+    let alreadyHaveAccountLabel = LineLabel(grayText: "계정이 있으신가요?", blueText: "로그인하기", isLined: true)
 
     // MARK: - Init
     override init(frame: CGRect) {
@@ -51,7 +51,7 @@ class CreateAccountView: UIView {
     // MARK: - Set up UI
     private func setupUI() {
         self.backgroundColor = .systemBackground
-        self.addSubviews(iOSImageView, titleLabel, subTitleLabel, idTextField, hobbyTextField, passwordTextField, loginButton, firstVisitLabel)
+        self.addSubviews(iOSImageView, titleLabel, subTitleLabel, usernameTextField, hobbyTextField, passwordTextField, createAccountButton, alreadyHaveAccountLabel)
     }
     
     // MARK: - Set up Constraints
@@ -72,14 +72,14 @@ class CreateAccountView: UIView {
             $0.horizontalEdges.equalToSuperview().inset(20)
         }
         
-        idTextField.snp.makeConstraints {
+        usernameTextField.snp.makeConstraints {
             $0.top.equalTo(subTitleLabel.snp.bottom).offset(50)
             $0.horizontalEdges.equalToSuperview().inset(20)
             $0.height.equalTo(52)
         }
         
         hobbyTextField.snp.makeConstraints {
-            $0.top.equalTo(idTextField.snp.bottom).offset(10)
+            $0.top.equalTo(usernameTextField.snp.bottom).offset(10)
             $0.horizontalEdges.equalToSuperview().inset(20)
             $0.height.equalTo(52)
         }
@@ -90,14 +90,14 @@ class CreateAccountView: UIView {
             $0.height.equalTo(52)
         }
         
-        loginButton.snp.makeConstraints {
+        createAccountButton.snp.makeConstraints {
             $0.top.equalTo(passwordTextField.snp.bottom).offset(10)
             $0.horizontalEdges.equalToSuperview().inset(20)
             $0.height.equalTo(52)
         }
         
-        firstVisitLabel.snp.makeConstraints {
-            $0.top.equalTo(loginButton.snp.bottom).offset(10)
+        alreadyHaveAccountLabel.snp.makeConstraints {
+            $0.top.equalTo(createAccountButton.snp.bottom).offset(10)
             $0.horizontalEdges.equalToSuperview().inset(20)
         }
     }

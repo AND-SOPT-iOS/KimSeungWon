@@ -33,7 +33,7 @@ class MainView: UIView {
         return label
     }()
     
-    let myPageLabel = LineLabel(grayText: "",blueText: "내 취미가 뭐였지?" , isLined: true)
+    let myPageLabel = LineLabel(grayText: "",blueText: "마이 페이지" , isLined: true)
 
     // MARK: - Init
     override init(frame: CGRect) {

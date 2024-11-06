@@ -33,7 +33,7 @@ class LoginView: UIView {
     lazy var idTextField = BasicTextField("아이디를 입력해 주세요")
     lazy var passwordTextField = BasicTextField("비밀번호를 입력해 주세요")
     lazy var loginButton = BasicButton("로그인")
-    let firstVisitLabel = LineLabel(grayText: "처음이신가요?", blueText: "계정 만들기", isLined: true)
+    let createAccountLabel = LineLabel(grayText: "처음이신가요?", blueText: "계정 만들기", isLined: true)
 
     // MARK: - Init
     override init(frame: CGRect) {
@@ -50,7 +50,7 @@ class LoginView: UIView {
     // MARK: - Set up UI
     private func setupUI() {
         self.backgroundColor = .systemBackground
-        self.addSubviews(iOSImageView, titleLabel, subTitleLabel, idTextField, passwordTextField, loginButton, firstVisitLabel)
+        self.addSubviews(iOSImageView, titleLabel, subTitleLabel, idTextField, passwordTextField, loginButton, createAccountLabel)
     }
     
     // MARK: - Set up Constraints
@@ -89,7 +89,7 @@ class LoginView: UIView {
             $0.height.equalTo(52)
         }
         
-        firstVisitLabel.snp.makeConstraints {
+        createAccountLabel.snp.makeConstraints {
             $0.top.equalTo(loginButton.snp.bottom).offset(10)
             $0.horizontalEdges.equalToSuperview().inset(20)
         }

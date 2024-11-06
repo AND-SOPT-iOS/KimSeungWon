@@ -1,5 +1,5 @@
 //
-//  UserManager.swift
+//  UserService.swift
 //  Week2
 //
 //  Created by 김승원 on 11/2/24.
@@ -8,21 +8,18 @@
 import Foundation
 import Alamofire
 
-class UserManager {
-    static let shared = UserManager()
+class UserService {
+    static let shared = UserService()
     private init() {}
     
     typealias RegisterNetworkCompletion = (Result<Bool, NetworkError>) -> Void
     
     // 회원 가입
     func register(username: String, password: String, hobby: String, completion: @escaping (RegisterNetworkCompletion)) {
-        
         let url = Environment.baseURL + "/user"
-
         let parameters = RegisterRequest(username: username, password: password, hobby: hobby)
         
         AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default).validate().response { [weak self] response in
-            
             guard let statusCode = response.response?.statusCode, let data = response.data, let self else {
                 completion(.failure(.unknownError))
                 return
