@@ -24,6 +24,18 @@ class LoginViewController: UIViewController {
         setupActions()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setupTextField()
+    }
+    
+    // MARK: - Set up TextField
+    private func setupTextField() {
+        self.loginView.usernameTextField.text = ""
+        self.loginView.passwordTextField.text = ""
+    }
+    
     // MARK: - Set up Actions
     private func setupActions() {
         let createAccountGesture = UITapGestureRecognizer(target: self, action: #selector(didTapCreateAccountLabel))
@@ -65,6 +77,7 @@ class LoginViewController: UIViewController {
                 tokenManager.saveToken(response.result.token)
                 self.dismiss(animated: true, completion: nil)
             case .failure(let error):
+                AlertManager.showAlert(on: self, title: "앗찻차!", message: "입력된 정보를 확인해 주세요", needsCancelButton: false, confirmHandler: nil)
                 print(error.errorMessage)
             }
         }

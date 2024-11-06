@@ -7,9 +7,8 @@
 
 import UIKit
 
-protocol UpdateInfoControllerDelegate: AnyObject {
+protocol UpdateInfoViewControllerDelegate: AnyObject {
     func didTapLogOutButton()
-    func didInfoUpdated()
 }
 
 class UpdateInfoViewController: UIViewController {
@@ -19,7 +18,7 @@ class UpdateInfoViewController: UIViewController {
     private let userService = UserService.shared
     private let tokenManager = TokenManager.shared
     
-    weak var delegate: UpdateInfoControllerDelegate?
+    weak var delegate: UpdateInfoViewControllerDelegate?
     
     // MARK: - Life Cycle
     override func loadView() {
@@ -51,7 +50,6 @@ class UpdateInfoViewController: UIViewController {
                 switch result {
                 case .success:
                     print("UpdateInfoViewController: 정보 수정 성공")
-                    self.delegate?.didInfoUpdated()
                     self.navigationController?.popViewController(animated: true)
                 case .failure(let error):
                     print(error.errorMessage)

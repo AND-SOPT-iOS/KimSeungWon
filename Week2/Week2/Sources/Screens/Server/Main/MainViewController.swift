@@ -21,9 +21,13 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupData()
         setupActions()
         setupNavigationBar()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -119,11 +123,7 @@ class MainViewController: UIViewController {
 }
 
 // MARK: - MyPageViewController Delegate
-extension MainViewController: UpdateInfoControllerDelegate {
-    func didInfoUpdated() {
-        setupData()
-    }
-    
+extension MainViewController: UpdateInfoViewControllerDelegate {
     func didTapLogOutButton() {
         tokenManager.deleteToken()
         print("MainViewController: 로그아웃")

@@ -41,7 +41,7 @@ class MainView: UIView {
     lazy var searchButton = BasicButton("검색")
     let resultLabel: UILabel = {
         let label = UILabel()
-        label.text = "다른 사람의 취미는?"
+        label.text = "두구두구"
         label.textColor = .label
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 16, weight: .semibold)

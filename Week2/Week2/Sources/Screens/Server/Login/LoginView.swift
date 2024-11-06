@@ -30,7 +30,7 @@ class LoginView: UIView {
         return label
     }()
     
-    lazy var usernameTextField = BasicTextField("아이디를 입력해 주세요")
+    lazy var usernameTextField = BasicTextField("이름를 입력해 주세요")
     lazy var passwordTextField = BasicTextField("비밀번호를 입력해 주세요")
     lazy var loginButton = BasicButton("로그인")
     let createAccountLabel = LineLabel(grayText: "처음이신가요?", blueText: "계정 만들기", isLined: true)
