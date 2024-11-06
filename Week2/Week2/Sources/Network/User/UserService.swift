@@ -12,11 +12,13 @@ class UserService {
     static let shared = UserService()
     private init() {}
     
-    typealias UserNetworkCompletion = (Result<Bool, NetworkError>) -> Void
+    typealias RegisterNetworkCompletion = (Result<Bool, NetworkError>) -> Void
     typealias LoginNetworkCompletion = (Result<LoginResponse, NetworkError>) -> Void
+    typealias UpdateUserInfoNetworkCompletion = (Result<Bool, NetworkError>) -> Void
+    typealias GetHobbyNetworkCompletion = (Result<HobbyResponse, NetworkError>) -> Void
     
     // 회원 가입
-    func register(username: String, password: String, hobby: String, completion: @escaping (UserNetworkCompletion)) {
+    func register(username: String, password: String, hobby: String, completion: @escaping (RegisterNetworkCompletion)) {
         let url = Environment.baseURL + "/user"
         let parameters = RegisterRequest(username: username, password: password, hobby: hobby)
         
@@ -28,6 +30,7 @@ class UserService {
             switch response.result {
             case .success:
                 completion(.success(true))
+                
             case .failure:
                 let error = self.handleStatusCode(statusCode, data: data)
                 completion(.failure(error))
@@ -49,10 +52,59 @@ class UserService {
             case .success:
                 if let loginResponse = try? JSONDecoder().decode(LoginResponse.self, from: data) {
                     completion(.success(loginResponse))
-                    
                 } else {
                     completion(.failure(.decodingError))
-                    
+                }
+                
+            case .failure:
+                let error = self.handleStatusCode(statusCode, data: data)
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    // 유저 정보 변경
+    func updateUserInfo(token: String, hobby: String, password: String, completion: @escaping (UpdateUserInfoNetworkCompletion)) {
+        let url = Environment.baseURL + "/user"
+        let headers: HTTPHeaders = ["token": token]
+        let parameters = UpdateUserInfoRequest(hobby: hobby, password: password)
+        
+        AF.request(url, method: .put, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers).validate().response { [weak self] response in
+            guard let statusCode = response.response?.statusCode, let self else {
+                completion(.failure(.unknownError))
+                return
+            }
+            
+            switch response.result {
+            case .success:
+                completion(.success(true))
+                
+            case .failure:
+                if let data = response.data {
+                    let error = self.handleStatusCode(statusCode, data: data)
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+    
+    // 내 취미 조회
+    func getMyHobby(token: String, completion: @escaping (GetHobbyNetworkCompletion)) {
+        let url = Environment.baseURL + "/user/my-hobby"
+        let headers: HTTPHeaders = ["token": token]
+        
+        AF.request(url, method: .get, headers: headers).validate().response { [weak self] response in
+            guard let statusCode = response.response?.statusCode, let data = response.data, let self else {
+                completion(.failure(.unknownError))
+                return
+            }
+            
+            switch response.result {
+            case .success:
+                if let hobbyResponse = try? JSONDecoder().decode(HobbyResponse.self, from: data) {
+                    completion(.success(hobbyResponse))
+                } else {
+                    completion(.failure(.decodingError))
                 }
                 
             case .failure:

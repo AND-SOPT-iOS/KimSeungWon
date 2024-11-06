@@ -9,6 +9,7 @@ import UIKit
 
 protocol UpdateInfoControllerDelegate: AnyObject {
     func didTapLogOutButton()
+    func didInfoUpdated()
 }
 
 class UpdateInfoViewController: UIViewController {
@@ -44,13 +45,13 @@ class UpdateInfoViewController: UIViewController {
             
         } else {
             guard let token = tokenManager.getToken(), let hobby = updateInfoView.hobbyTextField.text, let password = updateInfoView.passwordTextField.text else { return }
-            print(token)
             userService.updateUserInfo(token: token, hobby: hobby, password: password) { [weak self] result in
                 guard let self else { return }
                 
                 switch result {
                 case .success:
                     print("UpdateInfoViewController: 정보 수정 성공")
+                    self.delegate?.didInfoUpdated()
                     self.navigationController?.popViewController(animated: true)
                 case .failure(let error):
                     print(error.errorMessage)

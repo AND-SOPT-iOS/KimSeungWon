@@ -21,6 +21,7 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupData()
         setupActions()
         setupNavigationBar()
     }
@@ -32,6 +33,23 @@ class MainViewController: UIViewController {
             presentLoginView()
         } else {
             print("MainViewController: 로그인 상태")
+        }
+    }
+    
+    // MARK: - Set up Data
+    private func setupData() {
+        guard let token = tokenManager.getToken() else { return }
+        userService.getMyHobby(token: token) { [weak self] result in
+            guard let self else { return }
+            
+            switch result {
+            case .success(let response):
+                print("MainViewController: 내 취미 불러오기 성공")
+                print(response.result.hobby)
+                self.mainView.myHobbyLabel.text = response.result.hobby + "입니다"
+            case .failure(let error):
+                print(error.errorMessage)
+            }
         }
     }
     
@@ -74,6 +92,10 @@ class MainViewController: UIViewController {
 
 // MARK: - MyPageViewController Delegate
 extension MainViewController: UpdateInfoControllerDelegate {
+    func didInfoUpdated() {
+        setupData()
+    }
+    
     func didTapLogOutButton() {
         tokenManager.deleteToken()
         print("MainViewController: 로그아웃")
