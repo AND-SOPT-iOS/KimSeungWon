@@ -17,6 +17,26 @@ class MainView: UIView {
         return imageView
     }()
     
+    private let hobbyTitleLabel: CustomLabel = {
+        let label = CustomLabel(text: "나의 취미는", color: .label, fontSize: 30, fontWeight: .bold, alignment: .center)
+        label.numberOfLines = 1
+        return label
+    }()
+    
+    let myHobbyLabel: CustomLabel = {
+        let label = CustomLabel(text: "없습니다", color: .label, fontSize: 30, fontWeight: .bold, alignment: .center)
+        label.numberOfLines = 1
+        return label
+    }()
+    
+    private let separatorView = SeparatorView()
+    
+    private let searchTitleLabel: CustomLabel = {
+        let label = CustomLabel(text: "취미 검색하기", color: .label, fontSize: 25, fontWeight: .bold, alignment: .center)
+        label.numberOfLines = 1
+        return label
+    }()
+    
     lazy var searchTextField = BasicTextField("검색")
     lazy var searchButton = BasicButton("검색")
     let resultLabel: UILabel = {
@@ -51,7 +71,7 @@ class MainView: UIView {
     private func setupUI() {
         self.backgroundColor = .systemBackground
         
-        self.addSubviews(iOSImageView, searchTextField, searchButton, resultLabel, myPageLabel)
+        self.addSubviews(iOSImageView, hobbyTitleLabel, myHobbyLabel, separatorView, searchTitleLabel, searchTextField, searchButton, resultLabel, myPageLabel)
         
     }
     
@@ -63,12 +83,32 @@ class MainView: UIView {
             $0.size.equalTo(70)
         }
         
-        searchTextField.snp.makeConstraints {
+        hobbyTitleLabel.snp.makeConstraints {
             $0.top.equalTo(iOSImageView.snp.bottom).offset(20)
+            $0.horizontalEdges.equalToSuperview().inset(20)
+        }
+        
+        myHobbyLabel.snp.makeConstraints {
+            $0.top.equalTo(hobbyTitleLabel.snp.bottom)
+            $0.horizontalEdges.equalToSuperview().inset(20)
+        }
+        
+        separatorView.snp.makeConstraints {
+            $0.top.equalTo(myHobbyLabel.snp.bottom).offset(30)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(1)
+        }
+        
+        searchTitleLabel.snp.makeConstraints {
+            $0.top.equalTo(separatorView.snp.bottom).offset(30)
+            $0.horizontalEdges.equalToSuperview().inset(20)
+        }
+        
+        searchTextField.snp.makeConstraints {
+            $0.top.equalTo(searchTitleLabel.snp.bottom).offset(15)
             $0.leading.equalToSuperview().inset(20)
             $0.trailing.equalTo(searchButton.snp.leading).offset(-7)
             $0.height.equalTo(52)
-            
         }
         
         searchButton.snp.makeConstraints {
