@@ -114,6 +114,32 @@ class UserService {
         }
     }
     
+    // 다른 사람 취미 조회
+    func getOtherHobby(token: String, userNumber: String, completion: @escaping (GetHobbyNetworkCompletion)) {
+        let url = Environment.baseURL + "/user/\(userNumber)/hobby"
+        let headers: HTTPHeaders = ["token": token]
+        
+        AF.request(url, method: .get, headers: headers).validate().response { [weak self] response in
+            guard let statusCode = response.response?.statusCode, let data = response.data, let self else {
+                completion(.failure(.unknownError))
+                return
+            }
+            
+            switch response.result {
+            case .success:
+                if let hobbyResponse = try? JSONDecoder().decode(HobbyResponse.self, from: data) {
+                    completion(.success(hobbyResponse))
+                } else {
+                    completion(.failure(.decodingError))
+                }
+                
+            case .failure:
+                let error = self.handleStatusCode(statusCode, data: data)
+                completion(.failure(error))
+            }
+        }
+    }
+    
     func handleStatusCode(_ statusCode: Int, data: Data) -> NetworkError {
         let errorCode = decodeError(data: data)
         switch (statusCode, errorCode) {

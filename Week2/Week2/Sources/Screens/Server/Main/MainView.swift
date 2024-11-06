@@ -37,11 +37,11 @@ class MainView: UIView {
         return label
     }()
     
-    lazy var searchTextField = BasicTextField("검색")
+    lazy var searchTextField = BasicTextField("유저 번호를 입력해 주세요")
     lazy var searchButton = BasicButton("검색")
     let resultLabel: UILabel = {
         let label = UILabel()
-        label.text = "아니 없어요 그냥"
+        label.text = "다른 사람의 취미는?"
         label.textColor = .label
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 16, weight: .semibold)

@@ -58,6 +58,8 @@ class MainViewController: UIViewController {
         let myPageGesture = UITapGestureRecognizer(target: self, action: #selector(didTapMyPageLabel))
         mainView.updateInfoLabel.addGestureRecognizer(myPageGesture)
         mainView.updateInfoLabel.isUserInteractionEnabled = true
+        
+        mainView.searchButton.addTarget(self, action: #selector(didTapSearchButton), for: .touchUpInside)
     }
     
     // MARK: - Set up NavigationBar
@@ -87,6 +89,32 @@ class MainViewController: UIViewController {
         let myPageViewController = UpdateInfoViewController()
         myPageViewController.delegate = self
         self.navigationController?.pushViewController(myPageViewController, animated: true)
+    }
+    
+    @objc
+    private func didTapSearchButton() {
+        guard let userNumber = mainView.searchTextField.text,
+              !(userNumber.isEmpty),
+              Int(userNumber) != nil,
+              let token = tokenManager.getToken()
+        else {
+            AlertManager.showAlert(on: self, title: "잠깐!", message: "정확한 숫자를 입력해 주세요!", needsCancelButton: false, confirmHandler: nil)
+            return
+        }
+        
+        userService.getOtherHobby(token: token, userNumber: userNumber) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let response):
+                print("MainViewController: 다른 사람 취미 조회 성공")
+                self.mainView.resultLabel.text = response.result.hobby
+            case .failure(let error):
+                print(error.errorMessage)
+                self.mainView.resultLabel.text = "다시 검색해 보세요"
+                AlertManager.showAlert(on: self, title: "아쉽게도!", message: "검색에 실패했습니다ㅠ", needsCancelButton: false, confirmHandler: nil)
+            }
+        }
+        print(userNumber)
     }
 }
 
