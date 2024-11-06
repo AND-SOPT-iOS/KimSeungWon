@@ -30,6 +30,8 @@ class MainViewController: UIViewController {
         
         if !isUserLoggedIn() {
             presentLoginView()
+        } else {
+            print("MainViewController: 로그인 상태")
         }
     }
     
@@ -65,6 +67,15 @@ class MainViewController: UIViewController {
     @objc
     private func didTapMyPageLabel() {
         let myPageViewController = MyPageViewController()
+        myPageViewController.delegate = self
         self.navigationController?.pushViewController(myPageViewController, animated: true)
+    }
+}
+
+// MARK: - MyPageViewController Delegate
+extension MainViewController: MyPageViewControllerDelegate {
+    func didTapLogOutButton() {
+        tokenManager.deleteToken()
+        print("MainViewController: 로그아웃")
     }
 }
