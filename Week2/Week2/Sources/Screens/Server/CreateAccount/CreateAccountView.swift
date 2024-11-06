@@ -30,50 +30,10 @@ class CreateAccountView: UIView {
         return label
     }()
     
-    lazy var idTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "아이디를 입력해 주세요"
-        textField.layer.cornerRadius = 15
-        textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor.secondaryLabel.cgColor
-        textField.layer.masksToBounds = true
-        
-        let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
-        textField.leftView = leftView
-        textField.leftViewMode = .always
-        return textField
-    }()
-    
-    lazy var hobbyTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "취미를 입력해 주세요"
-        textField.layer.cornerRadius = 15
-        textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor.secondaryLabel.cgColor
-        textField.layer.masksToBounds = true
-        
-        let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
-        textField.leftView = leftView
-        textField.leftViewMode = .always
-        return textField
-    }()
-    
-    lazy var passwordTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "비밀번호를 입력해 주세요"
-        textField.layer.cornerRadius = 15
-        textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor.secondaryLabel.cgColor
-        textField.layer.masksToBounds = true
-        
-        let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
-        textField.leftView = leftView
-        textField.leftViewMode = .always
-        return textField
-    }()
-    
-    lazy var loginButton = basicButton("계정 만들기")
-    
+    lazy var idTextField = BasicTextField("아이디를 입력해 주세요")
+    lazy var hobbyTextField = BasicTextField("취미를 입력해 주세요")
+    lazy var passwordTextField = BasicTextField("비밀번호를 입력해 주세요")
+    lazy var loginButton = BasicButton("계정 만들기")
     let firstVisitLabel = LineLabel(grayText: "계정이 있으신가요?", blueText: "로그인하기", isLined: true)
 
     // MARK: - Init

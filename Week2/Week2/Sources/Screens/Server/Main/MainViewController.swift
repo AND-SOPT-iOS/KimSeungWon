@@ -22,7 +22,8 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupActions()
+        setupNavigationBar()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -31,10 +32,29 @@ class MainViewController: UIViewController {
 //        presentLoginView()
     }
     
+    // MARK: - set up Actions
+    private func setupActions() {
+        let myPageGesture = UITapGestureRecognizer(target: self, action: #selector(didTapMyPageLabel))
+        mainView.myPageLabel.addGestureRecognizer(myPageGesture)
+        mainView.myPageLabel.isUserInteractionEnabled = true
+    }
+    
+    // MARK: - Set up NavigationBar
+    private func setupNavigationBar() {
+        self.navigationController?.isNavigationBarHidden = false
+    }
+    
     // MARK: - present LoginView
     private func presentLoginView() {
         let loginViewController = UINavigationController(rootViewController: CreateAccountViewController())
         loginViewController.modalPresentationStyle = .fullScreen
         self.present(loginViewController, animated: true, completion: nil)
+    }
+    
+    // MARK: - Selectors
+    @objc
+    private func didTapMyPageLabel() {
+        let myPageViewController = MyPageViewController()
+        self.navigationController?.pushViewController(myPageViewController, animated: true)
     }
 }

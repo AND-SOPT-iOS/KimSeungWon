@@ -17,9 +17,23 @@ class MainView: UIView {
         return imageView
     }()
     
-    lazy var searchPageButton = basicButton("검색 페이지")
+    lazy var searchTextField = BasicTextField("검색")
+    lazy var searchButton = BasicButton("검색")
+    let resultLabel: UILabel = {
+        let label = UILabel()
+        label.text = "아니 없어요 그냥"
+        label.textColor = .label
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.numberOfLines = 1
+        label.layer.borderWidth = 1
+        label.layer.borderColor = UIColor.systemBlue.cgColor
+        label.layer.cornerRadius = 15
+        label.layer.masksToBounds = true
+        return label
+    }()
     
-    lazy var myPageButton = basicButton("마이 페이지")
+    let myPageLabel = LineLabel(grayText: "",blueText: "내 취미가 뭐였지?" , isLined: true)
 
     // MARK: - Init
     override init(frame: CGRect) {
@@ -37,27 +51,42 @@ class MainView: UIView {
     private func setupUI() {
         self.backgroundColor = .systemBackground
         
-        self.addSubviews(iOSImageView, searchPageButton, myPageButton)
+        self.addSubviews(iOSImageView, searchTextField, searchButton, resultLabel, myPageLabel)
         
     }
     
     // MARK: - Set up Constraints
     private func setupConstraints() {
         iOSImageView.snp.makeConstraints {
-            $0.center.equalToSuperview()
+            $0.top.equalTo(self.safeAreaLayoutGuide.snp.top)
+            $0.centerX.equalToSuperview()
             $0.size.equalTo(70)
         }
         
-        searchPageButton.snp.makeConstraints {
-            $0.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-20)
+        searchTextField.snp.makeConstraints {
+            $0.top.equalTo(iOSImageView.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().inset(20)
+            $0.trailing.equalTo(searchButton.snp.leading).offset(-7)
+            $0.height.equalTo(52)
+            
+        }
+        
+        searchButton.snp.makeConstraints {
+            $0.top.equalTo(searchTextField.snp.top)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.width.equalTo(62)
+            $0.height.equalTo(52)
+        }
+        
+        resultLabel.snp.makeConstraints {
+            $0.top.equalTo(searchButton.snp.bottom).offset(10)
             $0.horizontalEdges.equalToSuperview().inset(20)
             $0.height.equalTo(52)
         }
         
-        myPageButton.snp.makeConstraints {
-            $0.bottom.equalTo(searchPageButton.snp.top).offset(-10)
+        myPageLabel.snp.makeConstraints {
+            $0.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-20)
             $0.horizontalEdges.equalToSuperview().inset(20)
-            $0.height.equalTo(52)
         }
     }
 
