@@ -32,7 +32,7 @@ class MainView: UIView {
     private let separatorView = SeparatorView()
     
     private let searchTitleLabel: CustomLabel = {
-        let label = CustomLabel(text: "취미 검색하기", color: .label, fontSize: 25, fontWeight: .bold, alignment: .center)
+        let label = CustomLabel(text: "🔍 취미 검색하기 🔎", color: .label, fontSize: 25, fontWeight: .bold, alignment: .center)
         label.numberOfLines = 1
         return label
     }()
@@ -53,7 +53,7 @@ class MainView: UIView {
         return label
     }()
     
-    let updateInfoLabel = LineLabel(grayText: "",blueText: "정보 수정하기" , isLined: true)
+    let updateInfoLabel = LineLabel(grayText: "",blueText: "내 정보 수정하기" , isLined: true)
 
     // MARK: - Init
     override init(frame: CGRect) {
