@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ChageInformationView: UIView {
+class UpdateInfoView: UIView {
     // MARK: - UI Components
     private let titleLabel: CustomLabel = {
         let label = CustomLabel(text: "내 정보 변경", color: .label, fontSize: 30, fontWeight: .bold)

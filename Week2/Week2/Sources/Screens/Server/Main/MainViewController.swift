@@ -38,8 +38,8 @@ class MainViewController: UIViewController {
     // MARK: - set up Actions
     private func setupActions() {
         let myPageGesture = UITapGestureRecognizer(target: self, action: #selector(didTapMyPageLabel))
-        mainView.myPageLabel.addGestureRecognizer(myPageGesture)
-        mainView.myPageLabel.isUserInteractionEnabled = true
+        mainView.updateInfoLabel.addGestureRecognizer(myPageGesture)
+        mainView.updateInfoLabel.isUserInteractionEnabled = true
     }
     
     // MARK: - Set up NavigationBar
@@ -66,14 +66,14 @@ class MainViewController: UIViewController {
     // MARK: - Selectors
     @objc
     private func didTapMyPageLabel() {
-        let myPageViewController = ChangeInformationViewController()
+        let myPageViewController = UpdateInfoViewController()
         myPageViewController.delegate = self
         self.navigationController?.pushViewController(myPageViewController, animated: true)
     }
 }
 
 // MARK: - MyPageViewController Delegate
-extension MainViewController: ChangeInformationControllerDelegate {
+extension MainViewController: UpdateInfoControllerDelegate {
     func didTapLogOutButton() {
         tokenManager.deleteToken()
         print("MainViewController: 로그아웃")

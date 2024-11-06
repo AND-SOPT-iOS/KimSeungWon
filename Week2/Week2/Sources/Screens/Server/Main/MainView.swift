@@ -53,7 +53,7 @@ class MainView: UIView {
         return label
     }()
     
-    let myPageLabel = LineLabel(grayText: "",blueText: "마이 페이지" , isLined: true)
+    let updateInfoLabel = LineLabel(grayText: "",blueText: "정보 수정하기" , isLined: true)
 
     // MARK: - Init
     override init(frame: CGRect) {
@@ -71,7 +71,7 @@ class MainView: UIView {
     private func setupUI() {
         self.backgroundColor = .systemBackground
         
-        self.addSubviews(iOSImageView, hobbyTitleLabel, myHobbyLabel, separatorView, searchTitleLabel, searchTextField, searchButton, resultLabel, myPageLabel)
+        self.addSubviews(iOSImageView, hobbyTitleLabel, myHobbyLabel, separatorView, searchTitleLabel, searchTextField, searchButton, resultLabel, updateInfoLabel)
         
     }
     
@@ -124,7 +124,7 @@ class MainView: UIView {
             $0.height.equalTo(52)
         }
         
-        myPageLabel.snp.makeConstraints {
+        updateInfoLabel.snp.makeConstraints {
             $0.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-20)
             $0.horizontalEdges.equalToSuperview().inset(20)
         }
