@@ -1,5 +1,5 @@
 //
-//  MyPageViewController.swift
+//  ChangeInformationViewController.swift
 //  Week2
 //
 //  Created by 김승원 on 11/6/24.
@@ -7,18 +7,18 @@
 
 import UIKit
 
-protocol MyPageViewControllerDelegate: AnyObject {
+protocol ChangeInformationControllerDelegate: AnyObject {
     func didTapLogOutButton()
 }
 
-class MyPageViewController: UIViewController {
+class ChangeInformationViewController: UIViewController {
     // MARK: - Properties
-    private let myPageView = MyPageView()
-    weak var delegate: MyPageViewControllerDelegate?
+    private let changeInformationView = ChageInformationView()
+    weak var delegate: ChangeInformationControllerDelegate?
     
     // MARK: - Life Cycle
     override func loadView() {
-        self.view = myPageView
+        self.view = changeInformationView
     }
     
     override func viewDidLoad() {
@@ -28,8 +28,8 @@ class MyPageViewController: UIViewController {
     
     // MARK: - Set up Actions
     private func setupActions() {
-        myPageView.saveButton.addTarget(self, action: #selector (didTapSaveButton), for: .touchUpInside)
-        myPageView.logOutButton.addTarget(self, action: #selector (didTapLogOutButton), for: .touchUpInside)
+        changeInformationView.saveButton.addTarget(self, action: #selector (didTapSaveButton), for: .touchUpInside)
+        changeInformationView.logOutButton.addTarget(self, action: #selector (didTapLogOutButton), for: .touchUpInside)
     }
     
     // MARK: - Selectors

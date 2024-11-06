@@ -1,5 +1,5 @@
 //
-//  MyPageView.swift
+//  ChageInformationView.swift
 //  Week2
 //
 //  Created by 김승원 on 11/6/24.
@@ -8,27 +8,19 @@
 import UIKit
 import SnapKit
 
-class MyPageView: UIView {
+class ChageInformationView: UIView {
     // MARK: - UI Components
     private let titleLabel: CustomLabel = {
-        let label = CustomLabel(text: "마이 페이지", color: .label, fontSize: 30, fontWeight: .bold)
+        let label = CustomLabel(text: "내 정보 변경", color: .label, fontSize: 30, fontWeight: .bold)
         label.numberOfLines = 1
         return label
     }()
     
-    private let hobbyLabel = CustomLabel(text: "내 취미", color: .label, fontSize: 16, fontWeight: .semibold)
-    lazy var hobbyTextField: BasicTextField = {
-        let textField = BasicTextField()
-        textField.text = "내 취미입니당"
-        return textField
-    }()
+    private let hobbyLabel = CustomLabel(text: "취미 변경", color: .label, fontSize: 16, fontWeight: .semibold)
+    lazy var hobbyTextField = BasicTextField("새 취미를 입력하세요")
     
-    private let passwordLabel = CustomLabel(text: "내 비밀번호", color: .label, fontSize: 16, fontWeight: .semibold)
-    lazy var passwordTextField: BasicTextField = {
-        let textField = BasicTextField()
-        textField.text = "1234"
-        return textField
-    }()
+    private let passwordLabel = CustomLabel(text: "비밀번호 변경", color: .label, fontSize: 16, fontWeight: .semibold)
+    lazy var passwordTextField = BasicTextField("새 비밀번호를 입력하세요")
     
     lazy var logOutButton: BasicButton = {
         let button = BasicButton("로그아웃")

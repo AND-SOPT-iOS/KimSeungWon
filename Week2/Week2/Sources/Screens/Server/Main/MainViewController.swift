@@ -66,14 +66,14 @@ class MainViewController: UIViewController {
     // MARK: - Selectors
     @objc
     private func didTapMyPageLabel() {
-        let myPageViewController = MyPageViewController()
+        let myPageViewController = ChangeInformationViewController()
         myPageViewController.delegate = self
         self.navigationController?.pushViewController(myPageViewController, animated: true)
     }
 }
 
 // MARK: - MyPageViewController Delegate
-extension MainViewController: MyPageViewControllerDelegate {
+extension MainViewController: ChangeInformationControllerDelegate {
     func didTapLogOutButton() {
         tokenManager.deleteToken()
         print("MainViewController: 로그아웃")
