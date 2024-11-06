@@ -12,10 +12,11 @@ class UserService {
     static let shared = UserService()
     private init() {}
     
-    typealias RegisterNetworkCompletion = (Result<Bool, NetworkError>) -> Void
+    typealias UserNetworkCompletion = (Result<Bool, NetworkError>) -> Void
+    typealias LoginNetworkCompletion = (Result<LoginResponse, NetworkError>) -> Void
     
     // 회원 가입
-    func register(username: String, password: String, hobby: String, completion: @escaping (RegisterNetworkCompletion)) {
+    func register(username: String, password: String, hobby: String, completion: @escaping (UserNetworkCompletion)) {
         let url = Environment.baseURL + "/user"
         let parameters = RegisterRequest(username: username, password: password, hobby: hobby)
         
@@ -27,6 +28,33 @@ class UserService {
             switch response.result {
             case .success:
                 completion(.success(true))
+            case .failure:
+                let error = self.handleStatusCode(statusCode, data: data)
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    // 로그인
+    func login(username: String, password: String, completion: @escaping (LoginNetworkCompletion)) {
+        let url = Environment.baseURL + "/login"
+        let parameters = LoginRequest(username: username, password: password)
+        
+        AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default).validate().response { [weak self] response in
+            guard let statusCode = response.response?.statusCode, let data = response.data, let self else {
+                completion(.failure(.unknownError))
+                return
+            }
+            switch response.result {
+            case .success:
+                if let loginResponse = try? JSONDecoder().decode(LoginResponse.self, from: data) {
+                    completion(.success(loginResponse))
+                    
+                } else {
+                    completion(.failure(.decodingError))
+                    
+                }
+                
             case .failure:
                 let error = self.handleStatusCode(statusCode, data: data)
                 completion(.failure(error))
