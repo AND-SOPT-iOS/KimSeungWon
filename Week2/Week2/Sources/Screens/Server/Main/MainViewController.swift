@@ -49,7 +49,6 @@ class MainViewController: UIViewController {
             switch result {
             case .success(let response):
                 print("MainViewController: 내 취미 불러오기 성공")
-                print(response.result.hobby)
                 self.mainView.myHobbyLabel.text = response.result.hobby + "입니다"
             case .failure(let error):
                 print(error.errorMessage)
