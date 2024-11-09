@@ -49,7 +49,9 @@ class MainViewController: UIViewController {
             switch result {
             case .success(let response):
                 print("MainViewController: 내 취미 불러오기 성공")
-                self.mainView.myHobbyLabel.text = response.result.hobby + "입니다"
+                DispatchQueue.main.async {
+                    self.mainView.myHobbyLabel.text = response.result.hobby + "입니다"
+                }
             case .failure(let error):
                 print(error.errorMessage)
             }
@@ -110,7 +112,9 @@ class MainViewController: UIViewController {
             switch result {
             case .success(let response):
                 print("MainViewController: 다른 사람 취미 조회 성공")
-                self.mainView.resultLabel.text = response.result.hobby
+                DispatchQueue.main.async {
+                    self.mainView.resultLabel.text = response.result.hobby
+                }
             case .failure(let error):
                 print(error.errorMessage)
                 self.mainView.resultLabel.text = "다시 검색해 보세요"
