@@ -121,7 +121,6 @@ class MainViewController: UIViewController {
                 AlertManager.showAlert(on: self, title: "아쉽게도!", message: "검색에 실패했습니다ㅠ", needsCancelButton: false, confirmHandler: nil)
             }
         }
-        print(userNumber)
     }
 }
 
