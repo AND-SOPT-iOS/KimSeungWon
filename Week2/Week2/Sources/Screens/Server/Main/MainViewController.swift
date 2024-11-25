@@ -33,11 +33,13 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        /*
         if !isUserLoggedIn() {
             presentLoginView()
         } else {
             print("MainViewController: 로그인 상태")
         }
+         */
     }
     
     // MARK: - Set up Data
