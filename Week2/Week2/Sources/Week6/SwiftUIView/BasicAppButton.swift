@@ -15,10 +15,10 @@ struct BasicAppButton: View {
         } label: {
             switch app.buttonState {
             case .open:
-                buttonText("열기", horizontalPadding: 25)
+                buttonText("열기", horizontalPadding: 22)
                 
             case .download:
-                buttonText("받기", horizontalPadding: 25)
+                buttonText("받기", horizontalPadding: 22)
                 
             case .update:
                 buttonText("업데이트", horizontalPadding: 12)
@@ -34,7 +34,7 @@ struct BasicAppButton: View {
             .foregroundStyle(.blue)
             .font(.system(size: 16, weight: .bold))
             .padding(.horizontal, horizontalPadding)
-            .padding(.vertical, 8)
+            .padding(.vertical, 6)
             .background(Color(hex: "EEEEF0"))
             .clipShape(RoundedRectangle(cornerRadius: 25))
     }
