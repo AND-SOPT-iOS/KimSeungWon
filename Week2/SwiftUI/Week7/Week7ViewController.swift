@@ -1,5 +1,5 @@
 //
-//  Week6ViewController.swift
+//  Week7ViewController.swift
 //  Week2
 //
 //  Created by 김승원 on 11/28/24.
@@ -10,11 +10,11 @@ import SwiftUI
 
 import SnapKit
 
-class Week6ViewController: UIViewController {
+class Week7ViewController: UIViewController {
     
     // MARK: - Properties
     
-    let hostingController = UIHostingController(rootView: Week6View())
+    let hostingController = UIHostingController(rootView: Week7View())
     
     // MARK: - Life Cycle
     

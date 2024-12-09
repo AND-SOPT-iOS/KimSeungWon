@@ -13,6 +13,9 @@ struct AppHorizontalList: View {
     
     @Binding var apps: [AppStoreApplication]
     
+    var title: String
+    var subTitle: String
+    
     let rows = [
         GridItem(.fixed(72)),
         GridItem(.fixed(72)),
@@ -31,24 +34,24 @@ struct AppHorizontalList: View {
     // MARK: - UI Components
     
     private var titleButton: some View {
-        Button {
-            print("앱 리스트 이동 버튼")
+        NavigationLink {
+            Week6View(title: title)
         } label: {
             VStack(alignment: .leading, spacing: 2) {
-                HStack(spacing: 5) {
-                    Text("iPhone 필수 앱")
+                HStack(spacing: 10) {
+                    Text(title)
                         .font(.system(size: 20, weight: .bold))
                         .foregroundStyle(Color(hex: "000000"))
                     Image(systemName: "chevron.right")
                         .resizable()
-                        .frame(width: 10, height: 16)
+                        .frame(width: 9, height: 15)
                         .font(.system(size: 16, weight: .semibold))
                         .foregroundStyle(Color(hex: "737373"))
                     
                     Spacer()
                 }
                 
-                Text("에디터가 직접 고른 추천 앱으로 시작하세요")
+                Text(subTitle)
                     .font(.system(size: 14))
                     .foregroundStyle(Color(hex: "A5A5A5"))
             }
@@ -58,7 +61,7 @@ struct AppHorizontalList: View {
     
     private var appList: some View {
         
-        ScrollView(.horizontal) {
+        ScrollView(.horizontal, showsIndicators: false) {
             LazyHGrid(rows: rows, spacing: 10) {
                 ForEach(apps.indices, id: \.self) { index in
                     AppHorizontalListCell(app: apps[index], index: index)
@@ -66,8 +69,5 @@ struct AppHorizontalList: View {
             }
             .padding(.horizontal, 20)
         }
-
-        .scrollIndicators(.hidden)
     }
-    
 }
