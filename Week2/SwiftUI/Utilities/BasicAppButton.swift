@@ -44,5 +44,6 @@ struct BasicAppButton: View {
             .resizable()
             .foregroundStyle(.blue)
             .frame(width: 25, height: 25)
+            .padding(.trailing, 22)
     }
 }

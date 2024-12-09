@@ -10,14 +10,16 @@ import SwiftUI
 struct Week7View: View {
     
     @State private var banners: [Banner] = []
+    @State private var apps: [AppStoreApplication] = []
     
     // MARK: - Hierarchy
     
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack(spacing: 0) {
-                    bannerList
+                VStack(spacing: 40) {
+                    BannerList(banners: $banners)
+                    AppHorizontalList(apps: $apps)
                     Spacer()
                 }
             }
@@ -25,28 +27,18 @@ struct Week7View: View {
         }
         .onAppear {
             getBanners()
+            getApps()
         }
-    }
-    
-    // MARK: - UI Components
-    
-    var bannerList: some View {
-        ScrollView(.horizontal) {
-            HStack(spacing: 10) {
-                ForEach(banners) { banner in
-                    BannerCell(banner: banner)
-                }
-            }
-            .padding(.top, 10)
-            .padding(.horizontal, 20)
-        }
-        .scrollIndicators(.hidden)
     }
     
     // MARK: - Funcs
     
     private func getBanners() {
         banners = Banner.mockData
+    }
+    
+    private func getApps() {
+        apps = AppStoreApplication.mockData
     }
 }
 
