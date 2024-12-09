@@ -9,11 +9,11 @@ import SwiftUI
 
 struct Week6View: View {
     
-    @State private var apps: [AppStoreApplication] = []
-    
+    @StateObject private var viewModel = Week6ViewModel()
+
     var body: some View {
         NavigationView {
-            List(apps) { app in
+            List(viewModel.apps) { app in
                 AppRow(app: app)
             }
             
@@ -30,7 +30,7 @@ struct Week6View: View {
             )
         }
         .onAppear {
-            getAppStoreApplications()
+            viewModel.getAppStoreApplications()
         }
     }
     
@@ -41,13 +41,7 @@ struct Week6View: View {
             Image(systemName: "chevron.left")
         }
     }
-    
-    // MARK: - Funcs
-    
-    private func getAppStoreApplications() {
-        // MVVM 적용하기 위해 api 호출하는 것처럼 mockData를 불러옵니다.
-        apps = AppStoreApplication.mockData
-    }
+
 }
 
 #Preview {
