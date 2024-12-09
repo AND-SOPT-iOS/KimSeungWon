@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct Week6View: View {
-    var apps: [AppStoreApplication] = AppStoreApplication.mockData
+    
+    @State private var apps: [AppStoreApplication] = []
+    
     var body: some View {
         NavigationView {
             List(apps) { app in
@@ -27,6 +29,9 @@ struct Week6View: View {
                     }
             )
         }
+        .onAppear {
+            getAppStoreApplications()
+        }
     }
     
     var backButton: some View {
@@ -35,6 +40,13 @@ struct Week6View: View {
         } label: {
             Image(systemName: "chevron.left")
         }
+    }
+    
+    // MARK: - Funcs
+    
+    private func getAppStoreApplications() {
+        // MVVM 적용하기 위해 api 호출하는 것처럼 mockData를 불러옵니다.
+        apps = AppStoreApplication.mockData
     }
 }
 

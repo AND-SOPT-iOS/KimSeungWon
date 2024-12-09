@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+final class Week6ViewModel: ObservableObject {
+    
+}
