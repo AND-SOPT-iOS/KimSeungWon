@@ -15,41 +15,41 @@ enum BannerState: String {
 
 struct Banner: Identifiable {
     let id: UUID
-    let appState: BannerState
+    let bannerState: BannerState
     let title: String
     let subTitle: String
-    let image: UIImage
+    let image: Image
 }
 
 extension Banner {
     static let mockData: [Banner] = [
         Banner(
             id: UUID(),
-            appState: .nowAvailable,
+            bannerState: .nowAvailable,
             title: "스포티비 나우",
             subTitle: "MLB 월드 시리즈",
-            image: .topBanner1
+            image: Image(.topBanner1)
         ),
         Banner(
             id: UUID(),
-            appState: .inProgress,
+            bannerState: .inProgress,
             title: "ZEPETO",
             subTitle: "마법 학교에 입학해 특별한 선물을 받으세요",
-            image: .topBanner2
+            image: Image(.topBanner2)
         ),
         Banner(
             id: UUID(),
-            appState: .nowAvailable,
+            bannerState: .nowAvailable,
             title: "논리 퍼즐에 도전하세요",
             subTitle: "매일 즐기는 신작 게임!",
-            image: .topBanner3
+            image: Image(.topBanner3)
         ),
         Banner(
             id: UUID(),
-            appState: .newSeason,
+            bannerState: .newSeason,
             title: "Wavve",
             subTitle: "전현무계획 시즌2",
-            image: .topBanner4
+            image: Image(.topBanner4)
         ),
     ]
 }
