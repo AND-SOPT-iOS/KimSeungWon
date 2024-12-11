@@ -1,5 +1,5 @@
 //
-//  AppDetailView.swift
+//  AppDetailTitlesAndButtonView.swift
 //  Week2
 //
 //  Created by 김승원 on 12/11/24.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct AppDetailView: View {
+struct AppDetailTitlesAndButtonView: View {
     
-    @State var app: AppStoreApplication
+    var app: AppStoreApplication
     
     // MARK: - Hierarchy
     
@@ -32,19 +32,6 @@ struct AppDetailView: View {
             .padding(.horizontal, 16)
             
             Spacer()
-        }
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                app.appIcon
-                    .resizable()
-                    .frame(width: 30, height: 30)
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color(hex: "F4F4F4"), lineWidth: 1)
-                    )
-            }
         }
     }
     
@@ -87,18 +74,8 @@ struct AppDetailView: View {
                 .foregroundStyle(Color(hex: "007BFF"))
         }
     }
-    
 }
 
-
-#Preview {
-    AppDetailView(app:
-                    AppStoreApplication(
-                        id: UUID(),
-                        appIcon: Image(.toss),
-                        title: "현대카드",
-                        subTitle: "카드 생활을 넘어 자산 관리까지 하나의 앱으로!",
-                        buttonState: .download
-                    )
-    )
-}
+//#Preview {
+//    AppDetailTitlesAndButtonView()
+//}
