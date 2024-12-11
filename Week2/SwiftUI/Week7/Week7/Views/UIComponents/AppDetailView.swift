@@ -14,8 +14,15 @@ struct AppDetailView: View {
     // MARK: - Hierarchy
     
     var body: some View {
-        VStack(spacing: 0) {
-            AppDetailTitlesAndButtonView(app: app)
+        ScrollView {
+            VStack(spacing: 15) {
+                AppDetailTitlesAndButtonView(app: app)
+                AppInformationView()
+                NewsView()
+                PreviewView()
+                
+                Spacer()
+            }
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {

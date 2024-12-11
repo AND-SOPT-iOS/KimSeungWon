@@ -30,8 +30,6 @@ struct AppDetailTitlesAndButtonView: View {
             .frame(height: 115)
             .padding(.top, 10)
             .padding(.horizontal, 16)
-            
-            Spacer()
         }
     }
     
