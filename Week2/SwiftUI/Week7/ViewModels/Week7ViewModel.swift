@@ -11,7 +11,6 @@ final class Week7ViewModel: ObservableObject {
     
     @Published var banners: [Banner] = []
     @Published var apps: [AppStoreApplication] = []
-    @Published var reversedApps: [AppStoreApplication] = []
     
     // MVVM 적용하기 위해 api 호출하는 것처럼 mockData를 불러옵니다.
     func getBanners() {
@@ -20,7 +19,6 @@ final class Week7ViewModel: ObservableObject {
     
     func getApps() {
         apps = AppStoreApplication.mockData
-        reversedApps = AppStoreApplication.mockData.reversed()
     }
     
 }

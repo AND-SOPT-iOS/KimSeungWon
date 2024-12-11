@@ -15,7 +15,12 @@ struct Week6View: View {
     
     var body: some View {
         List(viewModel.apps) { app in
-            AppRow(app: app)
+            NavigationLink {
+                // 토스 디테일 뷰
+                AppDetailView(app: app)
+            } label: {
+                AppRow(app: app)
+            }
         }
         
         .listStyle(.plain)

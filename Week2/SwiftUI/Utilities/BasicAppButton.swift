@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct BasicAppButton: View {
-    var app: AppStoreApplication
+    var appButtonType: AppButtonType
     var body: some View {
         Button {
             
         } label: {
-            switch app.buttonState {
+            switch appButtonType {
             case .open:
                 buttonText("열기", horizontalPadding: 22)
                 

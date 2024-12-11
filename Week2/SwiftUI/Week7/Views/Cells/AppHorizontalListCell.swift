@@ -20,7 +20,7 @@ struct AppHorizontalListCell: View {
                 appImage
                 titles
                 Spacer()
-                BasicAppButton(app: app)
+                BasicAppButton(appButtonType: app.buttonState)
             }
             .padding(.bottom, 10)
             

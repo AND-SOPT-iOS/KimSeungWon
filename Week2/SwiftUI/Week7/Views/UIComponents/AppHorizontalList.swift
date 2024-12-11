@@ -67,7 +67,7 @@ struct AppHorizontalList: View {
                     ForEach(apps.indices, id: \.self) { index in
                         NavigationLink {
                             // 토스 디테일 뷰
-                            EmptyView()
+                            AppDetailView(app: apps[index])
                         } label: {
                             AppHorizontalListCell(app: apps[index], index: index)
                         }

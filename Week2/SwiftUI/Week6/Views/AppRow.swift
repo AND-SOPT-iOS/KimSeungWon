@@ -18,7 +18,7 @@ struct AppRow: View {
             VStack(alignment: .leading, spacing: 0) {
                 titles
                 Spacer()
-                BasicAppButton(app: app)
+                BasicAppButton(appButtonType: app.buttonState)
             }
             Spacer()
         }

@@ -26,7 +26,7 @@ struct Week7View: View {
                         subTitle: "에디터가 직접 고른 추천 앱으로 시작하세요"
                     )
                     AppHorizontalList(
-                        apps: $viewModel.reversedApps,
+                        apps: $viewModel.apps,
                         title: "지금 주목해야 할 앱",
                         subTitle: "가위 아니고 보자기도 아니고 주목하세요"
                     )
