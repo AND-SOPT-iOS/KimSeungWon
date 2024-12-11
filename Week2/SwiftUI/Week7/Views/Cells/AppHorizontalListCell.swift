@@ -16,13 +16,13 @@ struct AppHorizontalListCell: View {
     
     var body: some View {
         VStack(alignment: .trailing, spacing: 0) {
-            HStack(spacing: 5) {
+            HStack(spacing: 10) {
                 appImage
                 titles
                 Spacer()
                 BasicAppButton(appButtonType: app.buttonState)
             }
-            .padding(.bottom, 10)
+            .padding(.bottom, 4)
             
             separator()
         }

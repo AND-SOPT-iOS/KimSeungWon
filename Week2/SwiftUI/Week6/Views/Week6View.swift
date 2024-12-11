@@ -15,10 +15,14 @@ struct Week6View: View {
     
     var body: some View {
         List(viewModel.apps) { app in
-            NavigationLink {
-                // 토스 디테일 뷰
-                AppDetailView(app: app)
-            } label: {
+            ZStack {
+                NavigationLink {
+                    AppDetailView(app: app)
+                } label: {
+                    EmptyView()
+                }
+                .opacity(0)
+                
                 AppRow(app: app)
             }
         }

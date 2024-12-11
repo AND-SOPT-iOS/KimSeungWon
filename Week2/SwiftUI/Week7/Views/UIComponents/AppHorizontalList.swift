@@ -17,15 +17,15 @@ struct AppHorizontalList: View {
     var subTitle: String
     
     let rows = [
-        GridItem(.fixed(72)),
-        GridItem(.fixed(72)),
-        GridItem(.fixed(72))
+        GridItem(.fixed(62)),
+        GridItem(.fixed(62)),
+        GridItem(.fixed(62))
     ]
     
     // MARK: - Hierarchy
     
     var body: some View {
-        VStack(spacing: 15) {
+        VStack(spacing: 5) {
             titleButton
             appList
         }
