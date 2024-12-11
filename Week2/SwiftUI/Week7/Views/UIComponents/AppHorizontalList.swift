@@ -64,7 +64,12 @@ struct AppHorizontalList: View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHGrid(rows: rows, spacing: 10) {
                 ForEach(apps.indices, id: \.self) { index in
-                    AppHorizontalListCell(app: apps[index], index: index)
+                    NavigationLink {
+                        // 토스 디테일 뷰 
+                        EmptyView()
+                    } label: {
+                        AppHorizontalListCell(app: apps[index], index: index)
+                    }
                 }
             }
             .padding(.horizontal, 20)
