@@ -9,18 +9,25 @@ import SwiftUI
 
 struct BannerList: View {
     
+    let rows = [
+        GridItem()
+    ]
     @Binding var banners: [Banner]
     
     var body: some View {
-        ScrollView(.horizontal) {
-            HStack(spacing: 10) {
-                ForEach(banners) { banner in
-                    BannerCell(banner: banner)
+        ScrollViewReader { proxy in
+            ScrollView(.horizontal) {
+                LazyHGrid(rows: rows, spacing: 10) {
+                    ForEach(banners) { banner in
+                        BannerCell(banner: banner)
+                    }
                 }
+                .padding(.horizontal, 20)
+                .padding(.top, 10)
             }
-            .padding(.top, 10)
-            .padding(.horizontal, 20)
+            .scrollIndicators(.hidden)
+            .scrollTargetLayout()
         }
-        .scrollIndicators(.hidden)
+        .scrollTargetBehavior(.viewAligned)
     }
 }

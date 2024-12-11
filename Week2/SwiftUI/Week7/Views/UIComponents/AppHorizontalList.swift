@@ -61,18 +61,22 @@ struct AppHorizontalList: View {
     
     private var appList: some View {
         
-        ScrollView(.horizontal, showsIndicators: false) {
-            LazyHGrid(rows: rows, spacing: 10) {
-                ForEach(apps.indices, id: \.self) { index in
-                    NavigationLink {
-                        // 토스 디테일 뷰 
-                        EmptyView()
-                    } label: {
-                        AppHorizontalListCell(app: apps[index], index: index)
+        ScrollViewReader { proxy in
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHGrid(rows: rows, spacing: 10) {
+                    ForEach(apps.indices, id: \.self) { index in
+                        NavigationLink {
+                            // 토스 디테일 뷰
+                            EmptyView()
+                        } label: {
+                            AppHorizontalListCell(app: apps[index], index: index)
+                        }
                     }
                 }
+                .padding(.horizontal, 20)
             }
-            .padding(.horizontal, 20)
+            .scrollTargetLayout()
         }
+        .scrollTargetBehavior(.viewAligned)
     }
 }
