@@ -66,6 +66,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		E351633C2D06DDA8008F9612 /* SwiftUI */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
 		E3564D3D2CBA5C2000AC22C0 /* Week2 */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -112,6 +117,7 @@
 				E319B27C2CD609B400DB58A8 /* Config.xcconfig */,
 				E3564D3D2CBA5C2000AC22C0 /* Week2 */,
 				E3564D3C2CBA5C2000AC22C0 /* Products */,
+				E351633C2D06DDA8008F9612 /* SwiftUI */,
 			);
 			sourceTree = "<group>";
 		};
@@ -141,6 +147,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				E351633C2D06DDA8008F9612 /* SwiftUI */,
 				E3564D3D2CBA5C2000AC22C0 /* Week2 */,
 			);
 			name = Week2;

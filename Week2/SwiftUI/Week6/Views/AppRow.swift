@@ -18,7 +18,7 @@ struct AppRow: View {
             VStack(alignment: .leading, spacing: 0) {
                 titles
                 Spacer()
-                BasicAppButton(app: app)
+                BasicAppButton(appButtonType: app.buttonState)
             }
             Spacer()
         }
@@ -32,6 +32,10 @@ struct AppRow: View {
             .resizable()
             .frame(width: 85, height: 85)
             .clipShape(RoundedRectangle(cornerRadius: 17))
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color(hex: "F4F4F4"), lineWidth: 1)
+            )
     }
     
     var titles: some View {
